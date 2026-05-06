@@ -1,0 +1,327 @@
+/* ============================================================
+   PALETTE (placeholder — swap in real lemon palette here)
+   ============================================================ */
+:root {
+  /* lemon palette — placeholders; replace when real palette lands */
+  --lemon-rind:   #ffd400;   /* primary accent, brightest yellow */
+  --lemon-flesh:  #fff9b1;   /* soft pale yellow for highlights */
+  --lemon-pith:   #fff5d6;   /* near-white, off-yellow */
+  --lemon-leaf:   #cbe04f;   /* yellow-green accent */
+  --lemon-zest:   #ffaa00;   /* deeper amber */
+
+  /* dark base */
+  --bg:           #0c0c0e;
+  --bg-2:         #14141a;
+  --bg-3:         #1c1d24;
+  --fg:           #ece6d6;
+  --fg-dim:       #9c958a;
+  --fg-mute:      #5e5a52;
+  --rule:         #26252b;
+
+  /* category palette — colors for each failure-mode theme */
+  --c-rate:       var(--lemon-rind);
+  --c-regress:    #ff7a59;
+  --c-refusal:    #c084fc;
+  --c-code:       #5cd1c5;
+  --c-reason:     #88a8ff;
+  --c-tool:       #cbe04f;
+
+  /* valence */
+  --c-defection:  #ff5b6c;
+  --c-loyalty:    #6ce389;
+  --c-cond:       #ffaa00;
+
+  /* spacing scale */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 20px;
+  --space-5: 32px;
+  --space-6: 48px;
+
+  /* type scale */
+  --font-mono: "JetBrains Mono", "Berkeley Mono", "IBM Plex Mono", "SF Mono",
+               "Menlo", "Consolas", monospace;
+}
+
+/* ============================================================
+   RESET + BASE
+   ============================================================ */
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: var(--font-mono);
+  font-size: 14px;
+  line-height: 1.55;
+  background: var(--bg);
+  color: var(--fg);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+a { color: var(--lemon-rind); text-decoration: none; border-bottom: 1px solid currentColor; }
+a:hover { color: var(--lemon-zest); }
+
+strong { color: var(--lemon-flesh); font-weight: 600; }
+em { color: var(--lemon-leaf); font-style: normal; text-decoration: underline; text-underline-offset: 3px; }
+
+h1, h2, h3 { font-weight: 600; }
+
+/* ============================================================
+   STICKY BANNER (selection-bias disclosure, co-equal UI)
+   ============================================================ */
+.banner {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: var(--bg-2);
+  border-bottom: 1px solid var(--rule);
+  padding: var(--space-2) var(--space-4);
+  display: flex;
+  gap: var(--space-3);
+  align-items: center;
+  font-size: 12px;
+  flex-wrap: wrap;
+}
+.banner-mark {
+  background: var(--lemon-rind);
+  color: var(--bg);
+  font-weight: 700;
+  padding: 2px 8px;
+  border-radius: 3px;
+  letter-spacing: 0.04em;
+}
+.banner-msg { color: var(--fg-dim); flex: 1; }
+.banner-msg a { font-size: inherit; }
+
+/* ============================================================
+   MASTHEAD
+   ============================================================ */
+.masthead {
+  padding: var(--space-6) var(--space-4) var(--space-4);
+  max-width: 1200px;
+  margin: 0 auto;
+}
+.masthead h1 {
+  font-size: clamp(36px, 5vw, 64px);
+  letter-spacing: -0.02em;
+  line-height: 1.05;
+  margin-bottom: var(--space-3);
+}
+.masthead h1::after {
+  content: "·";
+  color: var(--lemon-rind);
+  margin-left: var(--space-2);
+}
+.tagline {
+  color: var(--fg-dim);
+  max-width: 60ch;
+  margin-bottom: var(--space-3);
+}
+.meta {
+  font-size: 12px;
+  color: var(--fg-mute);
+}
+
+/* ============================================================
+   CONTROLS
+   ============================================================ */
+.controls {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: var(--space-3) var(--space-4);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: var(--space-4);
+  flex-wrap: wrap;
+  border-top: 1px solid var(--rule);
+  border-bottom: 1px solid var(--rule);
+}
+.toggle-group {
+  display: inline-flex;
+  border: 1px solid var(--rule);
+  border-radius: 4px;
+  overflow: hidden;
+}
+.toggle {
+  background: transparent;
+  color: var(--fg-dim);
+  font-family: inherit;
+  font-size: 12px;
+  padding: 6px 14px;
+  border: none;
+  cursor: pointer;
+  border-right: 1px solid var(--rule);
+}
+.toggle:last-child { border-right: none; }
+.toggle:hover { color: var(--fg); background: var(--bg-2); }
+.toggle.active {
+  background: var(--lemon-rind);
+  color: var(--bg);
+  font-weight: 600;
+}
+
+.legend {
+  display: flex;
+  gap: var(--space-4);
+  flex-wrap: wrap;
+  font-size: 11px;
+  color: var(--fg-dim);
+}
+.legend-dot {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  margin-right: 4px;
+  vertical-align: middle;
+}
+.dot-rate    { background: var(--c-rate); }
+.dot-regress { background: var(--c-regress); }
+.dot-refusal { background: var(--c-refusal); }
+.dot-code    { background: var(--c-code); }
+.dot-reason  { background: var(--c-reason); }
+.dot-tool    { background: var(--c-tool); }
+
+/* ============================================================
+   DASHBOARD GRID
+   ============================================================ */
+.dashboard {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: var(--space-4);
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-5);
+}
+@media (max-width: 1024px) {
+  .dashboard { grid-template-columns: 1fr; }
+}
+
+.model-panel {
+  background: var(--bg-2);
+  border: 1px solid var(--rule);
+  border-radius: 6px;
+  padding: var(--space-4);
+}
+.model-panel[data-model="claude"]  { border-top: 3px solid var(--lemon-rind); }
+.model-panel[data-model="openai"]  { border-top: 3px solid var(--c-reason); }
+
+.panel-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  border-bottom: 1px solid var(--rule);
+  padding-bottom: var(--space-2);
+  margin-bottom: var(--space-3);
+}
+.panel-head h2 {
+  font-size: 22px;
+  letter-spacing: -0.01em;
+}
+.panel-totals {
+  font-size: 12px;
+  color: var(--fg-mute);
+}
+
+.chart-block { margin-bottom: var(--space-5); }
+.chart-block:last-child { margin-bottom: 0; }
+.chart-block h3 {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--fg);
+  margin-bottom: var(--space-2);
+  letter-spacing: 0.02em;
+}
+.chart-sub {
+  color: var(--fg-mute);
+  font-weight: 400;
+}
+
+/* chart shell */
+.chart {
+  width: 100%;
+  background: var(--bg);
+  border-radius: 4px;
+  position: relative;
+}
+.chart.timeseries { height: 240px; }
+.chart.valence    { height: 140px; }
+.chart.bars       { height: 220px; }
+
+/* SVG chart styling */
+.chart svg { display: block; width: 100%; height: 100%; }
+.chart .axis text {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  fill: var(--fg-mute);
+}
+.chart .axis line, .chart .axis path {
+  stroke: var(--rule);
+  shape-rendering: crispEdges;
+}
+.chart .release-line {
+  stroke: var(--lemon-flesh);
+  stroke-dasharray: 2 3;
+  opacity: 0.5;
+}
+.chart .release-label {
+  fill: var(--lemon-flesh);
+  font-size: 9px;
+  opacity: 0.7;
+}
+
+/* ============================================================
+   METHODOLOGY
+   ============================================================ */
+.methodology {
+  max-width: 800px;
+  margin: var(--space-6) auto;
+  padding: var(--space-4);
+}
+.methodology h2 {
+  font-size: 28px;
+  letter-spacing: -0.01em;
+  margin-bottom: var(--space-3);
+  border-bottom: 2px solid var(--lemon-rind);
+  padding-bottom: var(--space-1);
+  display: inline-block;
+}
+.methodology .lead {
+  font-size: 16px;
+  color: var(--fg);
+  margin-bottom: var(--space-5);
+  padding: var(--space-3);
+  border-left: 3px solid var(--lemon-rind);
+  background: var(--bg-2);
+}
+.caveat {
+  margin-bottom: var(--space-4);
+  padding-bottom: var(--space-4);
+  border-bottom: 1px dashed var(--rule);
+}
+.caveat:last-child { border-bottom: none; }
+.caveat h3 {
+  font-size: 14px;
+  color: var(--lemon-flesh);
+  margin-bottom: var(--space-2);
+}
+.caveat p {
+  color: var(--fg-dim);
+  max-width: 60ch;
+}
+
+/* ============================================================
+   FOOTER
+   ============================================================ */
+.footer {
+  border-top: 1px solid var(--rule);
+  padding: var(--space-4);
+  text-align: center;
+  color: var(--fg-mute);
+  font-size: 11px;
+  margin-top: var(--space-6);
+}

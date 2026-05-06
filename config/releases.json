@@ -1,4 +1,85 @@
 {
-  "_doc": "Hand-curated release calendar. Populate before Phase 5 (release-aligned chart). Each entry: {id, model_family: claude|openai, label, date: YYYY-MM-DD, comparison_worthy}. Phase 1 mentions_release_event detection is best-effort with whatever is here. Date-proximity match window: 14 days post-release.",
-  "releases": []
+  "_doc": "Hand-curated release calendar. Each entry: {id, model_family, label, date YYYY-MM-DD, comparison_worthy, verified, notes?}. Update monthly. detect_release_event() in scrapers/common.py uses these to flag mentions_release_event on each record. Seeded entries have verified:false — user must confirm dates from Anthropic and OpenAI announcements before they count.",
+  "releases": [
+    {
+      "id": "claude-opus-4-7",
+      "model_family": "claude",
+      "label": "Claude Opus 4.7",
+      "version": "4.7",
+      "date": "2026-04-15",
+      "comparison_worthy": true,
+      "verified": false,
+      "notes": "VERIFY: approximate; current model per session environment"
+    },
+    {
+      "id": "claude-sonnet-4-6-1m",
+      "model_family": "claude",
+      "label": "Claude Sonnet 4.6 (1M context)",
+      "version": "4.6",
+      "date": "2026-02-15",
+      "comparison_worthy": true,
+      "verified": false,
+      "notes": "VERIFY: 1M context expansion"
+    },
+    {
+      "id": "claude-haiku-4-5",
+      "model_family": "claude",
+      "label": "Claude Haiku 4.5",
+      "version": "4.5",
+      "date": "2025-10-15",
+      "comparison_worthy": true,
+      "verified": false,
+      "notes": "VERIFY"
+    },
+    {
+      "id": "claude-sonnet-4-5",
+      "model_family": "claude",
+      "label": "Claude Sonnet 4.5",
+      "version": "4.5",
+      "date": "2025-09-15",
+      "comparison_worthy": true,
+      "verified": false,
+      "notes": "VERIFY"
+    },
+    {
+      "id": "claude-opus-4-5",
+      "model_family": "claude",
+      "label": "Claude Opus 4.5",
+      "version": "4.5",
+      "date": "2025-09-01",
+      "comparison_worthy": true,
+      "verified": false,
+      "notes": "VERIFY"
+    },
+    {
+      "id": "claude-sonnet-4",
+      "model_family": "claude",
+      "label": "Claude Sonnet 4",
+      "version": "4",
+      "date": "2025-05-15",
+      "comparison_worthy": true,
+      "verified": false,
+      "notes": "VERIFY"
+    },
+    {
+      "id": "openai-gpt-5",
+      "model_family": "openai",
+      "label": "GPT-5",
+      "version": "5",
+      "date": "2025-08-15",
+      "comparison_worthy": true,
+      "verified": false,
+      "notes": "VERIFY: approximate launch date"
+    },
+    {
+      "id": "openai-codex-cli",
+      "model_family": "openai",
+      "label": "Codex CLI",
+      "version": "1",
+      "date": "2025-06-15",
+      "comparison_worthy": true,
+      "verified": false,
+      "notes": "VERIFY: launch date"
+    }
+  ]
 }

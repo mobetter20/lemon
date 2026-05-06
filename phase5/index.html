@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>lemon — claimed/observed</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="banner">
+  <span class="banner-mark">lemon</span>
+  <span class="banner-msg">
+    Tracking <strong>rhetoric</strong>, not behavior. Selection-biased by complaint forums.
+    <a href="#methodology">methodology</a>
+  </span>
+</header>
+
+<section class="masthead">
+  <h1>claimed / observed</h1>
+  <p class="tagline">
+    What they claim vs what people report breaking.
+    What users say in public, normalized per 1k mentions.
+  </p>
+  <p class="meta" id="meta-line">corpus: <span id="meta-count">…</span> records · last updated <span id="meta-updated">…</span> · taxonomy v<span id="meta-tax">…</span></p>
+</section>
+
+<section class="controls">
+  <div class="toggle-group" role="radiogroup" aria-label="X-axis">
+    <button class="toggle active" data-axis="wall" aria-pressed="true">wall-clock</button>
+    <button class="toggle" data-axis="release" aria-pressed="false">weeks since release</button>
+  </div>
+  <div class="legend">
+    <span class="legend-dot dot-rate"></span>rate / capacity
+    <span class="legend-dot dot-regress"></span>regression
+    <span class="legend-dot dot-refusal"></span>refusal
+    <span class="legend-dot dot-code"></span>code-specific
+    <span class="legend-dot dot-reason"></span>reasoning
+    <span class="legend-dot dot-tool"></span>tool / integration
+  </div>
+</section>
+
+<main class="dashboard">
+
+  <section class="model-panel" data-model="claude">
+    <header class="panel-head">
+      <h2>Claude</h2>
+      <span class="panel-totals" id="totals-claude">— mentions / — complaints</span>
+    </header>
+    <div class="chart-block">
+      <h3>complaints per 1k mentions <span class="chart-sub">(by category, weekly)</span></h3>
+      <div class="chart timeseries" id="ts-claude" aria-label="Claude failure-mode time series"></div>
+    </div>
+    <div class="chart-block">
+      <h3>rhetoric markers <span class="chart-sub">(defection / loyalty / conditional, per 1k)</span></h3>
+      <div class="chart valence" id="val-claude" aria-label="Claude valence markers"></div>
+    </div>
+    <div class="chart-block">
+      <h3>this week <span class="chart-sub">(category breakdown)</span></h3>
+      <div class="chart bars" id="bars-claude" aria-label="Claude category breakdown"></div>
+    </div>
+  </section>
+
+  <section class="model-panel" data-model="openai">
+    <header class="panel-head">
+      <h2>ChatGPT / GPT-5 / Codex</h2>
+      <span class="panel-totals" id="totals-openai">— mentions / — complaints</span>
+    </header>
+    <div class="chart-block">
+      <h3>complaints per 1k mentions <span class="chart-sub">(by category, weekly)</span></h3>
+      <div class="chart timeseries" id="ts-openai" aria-label="OpenAI failure-mode time series"></div>
+    </div>
+    <div class="chart-block">
+      <h3>rhetoric markers <span class="chart-sub">(defection / loyalty / conditional, per 1k)</span></h3>
+      <div class="chart valence" id="val-openai" aria-label="OpenAI valence markers"></div>
+    </div>
+    <div class="chart-block">
+      <h3>this week <span class="chart-sub">(category breakdown)</span></h3>
+      <div class="chart bars" id="bars-openai" aria-label="OpenAI category breakdown"></div>
+    </div>
+  </section>
+
+</main>
+
+<section id="methodology" class="methodology">
+  <h2>methodology &amp; limits</h2>
+  <p class="lead">
+    Benchmarks measure ceiling under controlled conditions. This measures
+    <strong>what users post when they're upset</strong> in public forums. They are
+    not the same thing.
+  </p>
+
+  <article class="caveat">
+    <h3>1. Selection-biased by construction</h3>
+    <p>
+      The dataset is mentions on Hacker News, r/ClaudeAI, r/OpenAI, r/ChatGPT,
+      r/LocalLLaMA, and r/singularity. People who are angry post; people who are
+      satisfied don't. The chart is a complaint distribution, not a satisfaction
+      metric. The headline <em>cannot</em> be "users hate model X" — it can only be
+      "this is what the loudest critics report this week."
+    </p>
+  </article>
+
+  <article class="caveat">
+    <h3>2. Defection language is rhetoric, not behavior</h3>
+    <p>
+      "Cancelled," "switching to," "done with" are tracked because they're
+      high-signal sentiment. They do <em>not</em> measure who actually churned.
+      People announce departures and stay. We have no usage-data ground truth.
+      The chart label says "% of mentions used defection language," not
+      "% of users defected."
+    </p>
+  </article>
+
+  <article class="caveat">
+    <h3>3. Two-horse race tracks release calendars</h3>
+    <p>
+      Most short-term variation in this chart is "days since the last contentious
+      release." When OpenAI ships GPT-N, r/OpenAI explodes. Same for Claude. To
+      compare across models without launch confounding, toggle the x-axis to
+      <strong>weeks since release</strong>.
+    </p>
+  </article>
+
+  <article class="caveat">
+    <h3>4. Same regex, both models</h3>
+    <p>
+      The classifier applies identical patterns to claude and openai content. No
+      per-model tuning. The taxonomy was clustered by Claude and Codex independently
+      and reconciled, with a third-vendor model checking for blind spots.
+    </p>
+  </article>
+
+  <article class="caveat">
+    <h3>5. Twitter/X is missing</h3>
+    <p>
+      Free-tier API access closed in 2023 and the paid tier doesn't fit the
+      project's zero-recurring-cost rule. Bluesky covers a sliver of similar
+      discourse but is journalist-skewed. This is the loudest gap in the dataset.
+    </p>
+  </article>
+
+  <article class="caveat">
+    <h3>6. The corpus volume is asymmetric</h3>
+    <p>
+      ChatGPT/Codex are mentioned far more than Claude. All numbers on this chart
+      are <em>per 1k mentions</em> — never raw counts. Compare the rates, not
+      the bars' absolute heights.
+    </p>
+  </article>
+</section>
+
+<footer class="footer">
+  <p>
+    lemon · <a href="https://github.com/mobetter20/lemon">source</a> ·
+    benchmarks measure ceiling, this measures what gets posted when it breaks
+  </p>
+</footer>
+
+<script src="dashboard.js" defer></script>
+</body>
+</html>
