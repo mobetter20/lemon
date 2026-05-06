@@ -26,6 +26,11 @@ on:
         description: "Override incremental window (default 1 = ~30 days)"
         required: false
         default: "1"
+  # TEMPORARY — triggers the workflow on push to phase4/cron so we can verify
+  # the YAML before merging to main. Remove this `push:` block before merge.
+  push:
+    branches:
+      - phase4/cron
 
 permissions:
   contents: write
@@ -97,6 +102,12 @@ jobs:
           git push origin HEAD:${GITHUB_REF_NAME}
 
       - name: Verify GH Pages serves new data
+        # The cron's job is to refresh data — Pages availability is a separate
+        # concern. Don't fail the job if the curl-check times out: data has
+        # already been committed and pushed by the previous step. The job-level
+        # status will go red on real Pages-deploy failures, but a slow CDN
+        # propagation won't block tomorrow's cron run.
+        continue-on-error: true
         if: steps.commit.outputs.no_change != 'true'
         env:
           EXPECTED_GEN_AT: ${{ steps.commit.outputs.new_generated_at }}
