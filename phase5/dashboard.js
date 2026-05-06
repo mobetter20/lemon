@@ -29,13 +29,35 @@ async function loadData() {
 async function boot() {
   DATA = await loadData();
   if (!DATA) {
-    const meta = document.getElementById("meta-count");
-    if (meta) meta.textContent = "(no data — run scripts/v0_classify.py)";
+    showEmptyState();
     return;
   }
   renderMeta();
   renderAll();
   wireToggles();
+}
+
+function showEmptyState() {
+  const meta = document.getElementById("meta-count");
+  if (meta) meta.textContent = "(awaiting classifier output)";
+
+  const hint = "Run scripts/v0_classify.py to populate phase5/data.json.";
+  for (const family of ["claude", "openai"]) {
+    const rate = document.getElementById(`rate-${family}`);
+    if (rate) rate.textContent = "—";
+    const totals = document.getElementById(`totals-${family}`);
+    if (totals) totals.textContent = "no data yet";
+    const delta = document.getElementById(`delta-${family}`);
+    if (delta) delta.textContent = hint;
+    const bySource = document.getElementById(`by-source-${family}`);
+    if (bySource) bySource.textContent = "";
+    for (const id of [`trend-${family}`, `def-${family}`]) {
+      const host = document.getElementById(id);
+      if (host) host.innerHTML = `<p class="chart-empty">no data</p>`;
+    }
+    const terms = document.getElementById(`terms-${family}`);
+    if (terms) terms.innerHTML = `<li class="terms-empty">no data</li>`;
+  }
 }
 document.addEventListener("DOMContentLoaded", boot);
 
@@ -103,6 +125,16 @@ function renderBigNumber(family, s) {
   if (!s) return;
   const ratePct = (s.this_week.rate * 100);
   document.getElementById(`rate-${family}`).textContent = ratePct.toFixed(0) + "%";
+
+  // Per-source split (HN vs Reddit) — small line beneath the big number
+  const bs = s.this_week.by_source || {};
+  const sourceEl = document.getElementById(`by-source-${family}`);
+  if (sourceEl) {
+    const parts = [];
+    if (bs.hn) parts.push(`HN ${(bs.hn.rate * 100).toFixed(0)}%`);
+    if (bs.reddit) parts.push(`Reddit ${(bs.reddit.rate * 100).toFixed(0)}%`);
+    sourceEl.textContent = parts.length ? parts.join(" · ") : "";
+  }
 
   const delta = s.delta_pts;
   const el = document.getElementById(`delta-${family}`);
@@ -293,21 +325,69 @@ function renderTopTerms(hostId, top) {
   host.innerHTML = "";
   const items = top.this_week || [];
   const max = items.reduce((m, it) => Math.max(m, it.count), 0) || 1;
-  for (const it of items.slice(0, 10)) {
-    const li = document.createElement("li");
+
+  const buildRow = () => {
     const term = document.createElement("span");
     term.className = "term";
-    term.textContent = it.term;
     const bar = document.createElement("span");
     bar.className = "bar";
     const fill = document.createElement("span");
     fill.className = "bar-fill";
-    fill.style.width = `${(it.count / max) * 100}%`;
     bar.appendChild(fill);
     const count = document.createElement("span");
     count.className = "count";
+    return { term, bar, fill, count };
+  };
+
+  const KIND_LABEL = {
+    top_scored: "top-scored",
+    newest: "most recent",
+    oldest: "earliest",
+  };
+
+  for (const it of items.slice(0, 10)) {
+    const li = document.createElement("li");
+    const hasExamples = Array.isArray(it.examples) && it.examples.length > 0;
+    const { term, bar, fill, count } = buildRow();
+    term.textContent = it.term;
+    fill.style.width = `${(it.count / max) * 100}%`;
     count.textContent = `${it.count}×`;
-    li.append(term, bar, count);
+
+    if (hasExamples) {
+      li.classList.add("has-examples");  // explicit fallback when :has() unsupported
+      // <details> gives free expand/collapse keyboard accessibility
+      const det = document.createElement("details");
+      det.className = "term-details";
+      const summary = document.createElement("summary");
+      summary.className = "term-summary";
+      bar.setAttribute("aria-hidden", "true");  // decorative; don't announce
+      summary.append(term, bar, count);
+      det.appendChild(summary);
+
+      const exUl = document.createElement("ul");
+      exUl.className = "term-examples";
+      for (const ex of it.examples) {
+        const exli = document.createElement("li");
+        const kind = document.createElement("span");
+        kind.className = "ex-kind";
+        kind.textContent = KIND_LABEL[ex._kind] || ex._kind || "example";
+        const a = document.createElement("a");
+        a.href = ex.permalink;
+        a.target = "_blank";
+        a.rel = "noopener noreferrer";
+        a.className = "ex-link";
+        const date = (ex.date || "").slice(0, 10);
+        const src = ex.source || "?";
+        const score = ex.score != null && ex.score > 0 ? ` · score ${ex.score}` : "";
+        a.textContent = `${date} · ${src}${score}`;
+        exli.append(kind, a);
+        exUl.appendChild(exli);
+      }
+      det.appendChild(exUl);
+      li.appendChild(det);
+    } else {
+      li.append(term, bar, count);
+    }
     host.appendChild(li);
   }
 }

@@ -10,14 +10,38 @@
   "summary": {
     "claude": {
       "this_week_label": "2026-W18",
-      "this_week": {"all_mentions": 4280, "complaints": 1789, "rate": 0.418},
-      "last_week":  {"all_mentions": 3950, "complaints": 1224, "rate": 0.310},
+      "this_week": {
+        "all_mentions": 4280, "complaints": 1789, "rate": 0.418,
+        "by_source": {
+          "hn":     {"all_mentions": 1184, "complaints": 422,  "rate": 0.356},
+          "reddit": {"all_mentions": 3096, "complaints": 1367, "rate": 0.441}
+        }
+      },
+      "last_week": {
+        "all_mentions": 3950, "complaints": 1224, "rate": 0.310,
+        "by_source": {
+          "hn":     {"all_mentions": 1112, "complaints": 320, "rate": 0.288},
+          "reddit": {"all_mentions": 2838, "complaints": 904, "rate": 0.319}
+        }
+      },
       "delta_pts": 10.8
     },
     "openai": {
       "this_week_label": "2026-W18",
-      "this_week": {"all_mentions": 11240, "complaints": 4271, "rate": 0.380},
-      "last_week":  {"all_mentions": 10812, "complaints": 4757, "rate": 0.440},
+      "this_week": {
+        "all_mentions": 11240, "complaints": 4271, "rate": 0.380,
+        "by_source": {
+          "hn":     {"all_mentions": 4216, "complaints": 1432, "rate": 0.340},
+          "reddit": {"all_mentions": 7024, "complaints": 2839, "rate": 0.404}
+        }
+      },
+      "last_week": {
+        "all_mentions": 10812, "complaints": 4757, "rate": 0.440,
+        "by_source": {
+          "hn":     {"all_mentions": 4128, "complaints": 1614, "rate": 0.391},
+          "reddit": {"all_mentions": 6684, "complaints": 3143, "rate": 0.470}
+        }
+      },
       "delta_pts": -6.0
     }
   },
@@ -58,30 +82,34 @@
   "top_terms": {
     "claude": {
       "this_week": [
-        {"term": "rate limit",       "count": 287},
-        {"term": "broken",           "count": 198},
-        {"term": "refused",          "count": 156},
-        {"term": "lazy",             "count": 142},
-        {"term": "regression",       "count": 128},
-        {"term": "context window",   "count": 96},
-        {"term": "doesn't work",     "count": 78},
-        {"term": "lobotomized",      "count": 64},
-        {"term": "stuck in a loop",  "count": 51},
-        {"term": "hallucinated",     "count": 47}
+        {"term": "rate limit", "count": 287, "examples": [
+          {"permalink": "#mock-example-top-scored", "date": "2026-04-30T08:12:00+00:00", "score": 142, "source": "reddit", "_kind": "top_scored"},
+          {"permalink": "#mock-example-newest",     "date": "2026-05-05T22:40:00+00:00", "score": 18,  "source": "reddit", "_kind": "newest"},
+          {"permalink": "#mock-example-oldest",     "date": "2026-04-29T01:05:00+00:00", "score": 0,   "source": "hn",     "_kind": "oldest"}
+        ]},
+        {"term": "broken", "count": 198, "examples": []},
+        {"term": "refused", "count": 156, "examples": []},
+        {"term": "lazy", "count": 142, "examples": []},
+        {"term": "regression", "count": 128, "examples": []},
+        {"term": "context window", "count": 96, "examples": []},
+        {"term": "doesn't work", "count": 78, "examples": []},
+        {"term": "lobotomized", "count": 64, "examples": []},
+        {"term": "stuck in a loop", "count": 51, "examples": []},
+        {"term": "hallucinated", "count": 47, "examples": []}
       ]
     },
     "openai": {
       "this_week": [
-        {"term": "broken",           "count": 412},
-        {"term": "regression",       "count": 289},
-        {"term": "slow",             "count": 231},
-        {"term": "rate limit",       "count": 198},
-        {"term": "doesn't work",     "count": 174},
-        {"term": "got worse",        "count": 142},
-        {"term": "useless",          "count": 119},
-        {"term": "hallucinated",     "count": 98},
-        {"term": "neutered",         "count": 74},
-        {"term": "garbage",          "count": 61}
+        {"term": "broken", "count": 412, "examples": []},
+        {"term": "regression", "count": 289, "examples": []},
+        {"term": "slow", "count": 231, "examples": []},
+        {"term": "rate limit", "count": 198, "examples": []},
+        {"term": "doesn't work", "count": 174, "examples": []},
+        {"term": "got worse", "count": 142, "examples": []},
+        {"term": "useless", "count": 119, "examples": []},
+        {"term": "hallucinated", "count": 98, "examples": []},
+        {"term": "neutered", "count": 74, "examples": []},
+        {"term": "garbage", "count": 61, "examples": []}
       ]
     }
   },

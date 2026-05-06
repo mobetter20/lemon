@@ -120,6 +120,18 @@ def main(
     defections: dict[tuple[str, str], int] = defaultdict(int)
     phrase_counts: dict[tuple[str, str], Counter] = defaultdict(Counter)
 
+    # Per-source breakdown — keyed on (family, week, source).
+    # Sources are "hn" or "reddit" (whatever rec["source"] is).
+    mentions_by_source: dict[tuple[str, str, str], int] = defaultdict(int)
+    complaints_by_source: dict[tuple[str, str, str], int] = defaultdict(int)
+
+    # Phrase examples — for each (family, week, phrase) we keep the oldest,
+    # newest, and top-scored matching record. Audit-friendly: clicking a top
+    # phrase on the dashboard reveals 3 actual permalinks the user can read.
+    phrase_examples: dict[tuple[str, str, str], dict[str, dict]] = defaultdict(
+        lambda: {"oldest": None, "newest": None, "top_scored": None}
+    )
+
     total_records = 0
     skipped_unknown = 0
     skipped_no_text = 0
@@ -144,13 +156,46 @@ def main(
         c_hits = match_complaint(text_lower)
         d_hits = match_defection(text_lower)
 
+        source = rec.get("source") or "unknown"
+        rec_date = rec.get("date") or ""
+        rec_score = int(rec.get("score") or 0)
+        rec_permalink = rec.get("permalink") or ""
+
         for fam in fams:
             key = (fam, week)
             mentions[key] += 1
+            mentions_by_source[(fam, week, source)] += 1
             if c_hits:
                 complaints[key] += 1
+                complaints_by_source[(fam, week, source)] += 1
                 for h in c_hits:
                     phrase_counts[key][h] += 1
+                    # Track examples: keep oldest, newest, top-scored matches.
+                    # Skip if date is empty/missing — string comparison would
+                    # latch onto "" forever (plan-critic catch).
+                    if not rec_date or not rec_permalink:
+                        continue
+                    examples = phrase_examples[(fam, week, h)]
+                    candidate = {
+                        "permalink": rec_permalink,
+                        "date": rec_date,
+                        "score": rec_score,
+                        "source": source,
+                    }
+                    if examples["oldest"] is None or rec_date < examples["oldest"]["date"]:
+                        examples["oldest"] = candidate
+                    if examples["newest"] is None or rec_date > examples["newest"]["date"]:
+                        examples["newest"] = candidate
+                    # Top-scored: only consider records with positive score, so
+                    # an early score=0 HN comment doesn't win forever.
+                    if rec_score > 0:
+                        cur = examples["top_scored"]
+                        if (
+                            cur is None
+                            or rec_score > cur["score"]
+                            or (rec_score == cur["score"] and rec_date > cur["date"])
+                        ):
+                            examples["top_scored"] = candidate
             if d_hits:
                 defections[key] += 1
 
@@ -176,6 +221,21 @@ def main(
             )
             defection_trend[fam].append({"week": week, "rate": round(d / m, 4)})
 
+    def _by_source_block(fam: str, week: str) -> dict[str, dict]:
+        """Build a {source: {all_mentions, complaints, rate}} dict for a (fam, week)."""
+        block: dict[str, dict] = {}
+        for src in ("hn", "reddit"):
+            m = mentions_by_source.get((fam, week, src), 0)
+            if m == 0:
+                continue
+            c = complaints_by_source.get((fam, week, src), 0)
+            block[src] = {
+                "all_mentions": m,
+                "complaints": c,
+                "rate": round(c / m, 4),
+            }
+        return block
+
     summary: dict[str, dict] = {}
     for fam in ("claude", "openai"):
         series = trend[fam]
@@ -189,21 +249,43 @@ def main(
                     "all_mentions": this_w["all_mentions"],
                     "complaints": this_w["complaints"],
                     "rate": this_w["rate"],
+                    "by_source": _by_source_block(fam, this_w["week"]),
                 },
                 "last_week": {
                     "all_mentions": last_w["all_mentions"] if last_w else 0,
                     "complaints": last_w["complaints"] if last_w else 0,
                     "rate": last_w["rate"] if last_w else 0,
+                    "by_source": _by_source_block(fam, last_w["week"]) if last_w else {},
                 },
                 "delta_pts": round(delta, 1),
             }
         else:
             summary[fam] = {
                 "this_week_label": "—",
-                "this_week": {"all_mentions": 0, "complaints": 0, "rate": 0},
-                "last_week": {"all_mentions": 0, "complaints": 0, "rate": 0},
+                "this_week": {"all_mentions": 0, "complaints": 0, "rate": 0, "by_source": {}},
+                "last_week": {"all_mentions": 0, "complaints": 0, "rate": 0, "by_source": {}},
                 "delta_pts": 0,
             }
+
+    def _examples_for(fam: str, week: str, phrase: str) -> list[dict]:
+        """Return up to 3 distinct example records (oldest, newest, top-scored)
+        for a phrase. Dedupes by permalink so a single matching record doesn't
+        appear three times."""
+        slots = phrase_examples.get((fam, week, phrase))
+        if not slots:
+            return []
+        seen: set[str] = set()
+        out: list[dict] = []
+        for label in ("top_scored", "newest", "oldest"):
+            ex = slots.get(label)
+            if ex is None:
+                continue
+            pl = ex.get("permalink") or ""
+            if pl in seen:
+                continue
+            seen.add(pl)
+            out.append({**ex, "_kind": label})
+        return out
 
     top_terms: dict[str, dict] = {"claude": {"this_week": []}, "openai": {"this_week": []}}
     for fam in ("claude", "openai"):
@@ -212,7 +294,11 @@ def main(
             continue
         cnt = phrase_counts.get((fam, wk), Counter())
         top_terms[fam]["this_week"] = [
-            {"term": term, "count": count}
+            {
+                "term": term,
+                "count": count,
+                "examples": _examples_for(fam, wk, term),
+            }
             for term, count in cnt.most_common(10)
         ]
 

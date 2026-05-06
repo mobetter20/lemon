@@ -239,6 +239,14 @@ code {
   letter-spacing: 0.04em;
   text-transform: uppercase;
 }
+.by-source {
+  margin-top: var(--space-2);
+  font-size: 12px;
+  color: var(--fg-mute);
+  letter-spacing: 0.02em;
+}
+.by-source:empty { display: none; }
+
 .delta {
   margin-top: var(--space-3);
   font-size: 14px;
@@ -276,6 +284,22 @@ code {
 
 /* SVG chart styling */
 .chart svg { display: block; width: 100%; height: 100%; }
+.chart .chart-empty,
+.top-terms .terms-empty {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  color: var(--fg-mute);
+  font-size: 11px;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+.top-terms .terms-empty {
+  height: auto;
+  padding: var(--space-3) 0;
+  border-bottom: none;
+}
 .chart .axis text {
   font-family: var(--font-mono);
   font-size: 10px;
@@ -305,13 +329,40 @@ code {
   font-size: 13px;
 }
 .top-terms li {
-  display: flex;
-  justify-content: space-between;
-  align-items: baseline;
   padding: 4px 0;
   border-bottom: 1px dotted var(--rule);
 }
 .top-terms li:last-child { border-bottom: none; }
+
+/* Plain row (no examples) flexes directly inside <li>;
+   when examples exist we wrap in <details><summary>...row...</summary>...</details>.
+   .has-examples is set in JS as an explicit fallback for browsers without :has(). */
+.top-terms li:not(.has-examples) {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+}
+.top-terms .term-summary {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  cursor: pointer;
+  list-style: none;
+  outline: none;
+}
+.top-terms .term-summary::-webkit-details-marker { display: none; }
+.top-terms .term-summary::marker { content: ""; }
+.top-terms .term-summary::before {
+  content: "▸";
+  display: inline-block;
+  margin-right: 6px;
+  color: var(--fg-mute);
+  font-size: 10px;
+  transition: transform 0.12s;
+}
+.top-terms details[open] .term-summary::before { transform: rotate(90deg); }
+.top-terms .term-summary:hover { color: var(--lemon-flesh); }
+
 .top-terms .term {
   color: var(--fg);
 }
@@ -337,6 +388,41 @@ code {
 }
 .model-panel[data-model="openai"] .top-terms .bar-fill {
   background: var(--c-rate-2);
+}
+
+/* Expanded examples */
+.top-terms .term-examples {
+  list-style: none;
+  margin: 6px 0 6px 18px;
+  padding: 0;
+  font-size: 11px;
+}
+.top-terms .term-examples li {
+  display: flex;
+  gap: 8px;
+  align-items: baseline;
+  padding: 2px 0;
+  border-bottom: none;
+}
+.top-terms .ex-kind {
+  color: var(--fg-mute);
+  min-width: 88px;
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+.top-terms .ex-link {
+  color: var(--fg-dim);
+  border-bottom-color: transparent;
+  font-variant-numeric: tabular-nums;
+  flex: 1;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.top-terms .ex-link:hover {
+  color: var(--lemon-rind);
+  border-bottom-color: currentColor;
 }
 
 /* ============================================================
