@@ -77,6 +77,29 @@ function wireToggles() {
 }
 
 /* ----------------------------------------------------------
+   Staleness banner — read generated_at age, render yellow >8h, red >24h.
+   The cron refreshes every 4h; if 24h passes with no new data.json,
+   something is broken and the visitor should know rather than read stale numbers.
+   ---------------------------------------------------------- */
+function renderStalenessBanner() {
+  const host = document.getElementById("staleness-banner");
+  if (!host || !DATA.generated_at) return;
+  const ageH = (Date.now() - new Date(DATA.generated_at).getTime()) / 3.6e6;
+  if (!isFinite(ageH) || ageH < 8) {
+    host.hidden = true;
+    return;
+  }
+  host.hidden = false;
+  host.classList.toggle("stale-red", ageH >= 24);
+  host.classList.toggle("stale-yellow", ageH >= 8 && ageH < 24);
+  const fmt = ageH >= 24 ? `${Math.floor(ageH / 24)}d` : `${Math.floor(ageH)}h`;
+  host.textContent =
+    ageH >= 24
+      ? `data has not refreshed in ${fmt} — cron may be down`
+      : `data is ${fmt} old`;
+}
+
+/* ----------------------------------------------------------
    Meta line
    ---------------------------------------------------------- */
 function renderMeta() {
@@ -84,6 +107,8 @@ function renderMeta() {
   document.getElementById("meta-count").textContent = totalRecords.toLocaleString();
   document.getElementById("meta-updated").textContent = (DATA.generated_at || "").slice(0, 10);
   document.getElementById("meta-cls").textContent = DATA.classifier_version || "v0";
+
+  renderStalenessBanner();
 
   // Mock data carries a _note field with "MOCK" — flag it so it's never
   // confused with the live numbers

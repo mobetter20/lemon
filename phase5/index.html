@@ -23,6 +23,8 @@
 </head>
 <body>
 
+<div id="staleness-banner" hidden></div>
+
 <header class="banner">
   <span class="banner-mark">lemon</span>
   <span class="banner-msg">
@@ -174,7 +176,21 @@
   </article>
 
   <article class="caveat">
-    <h3>6. Twitter/X is missing</h3>
+    <h3>6. Reddit data lags ~24–48 hours</h3>
+    <p>
+      GitHub Actions runner IPs are blocked by Reddit's unauth JSON endpoint
+      (verified empirically on 2026-05-07: HTTP 403 from Azure ranges). The
+      authenticated Reddit API (PRAW) is also unavailable to this project per
+      Reddit's post-2024 Responsible Builder Policy. As a result, Reddit data
+      flows in via the third-party arctic-shift archive, which has typical
+      indexing latency of one to two days. HN data is real-time. The headline
+      week's Reddit numbers are therefore conservative until that week ages
+      another day or two — read the trend, not the most-recent point.
+    </p>
+  </article>
+
+  <article class="caveat">
+    <h3>7. Twitter/X is missing</h3>
     <p>
       Free-tier API access closed in 2023 and the paid tier doesn't fit the
       project's zero-recurring-cost rule. Bluesky covers a sliver of similar
@@ -184,7 +200,7 @@
   </article>
 
   <article class="caveat">
-    <h3>7. Volume is asymmetric</h3>
+    <h3>8. Volume is asymmetric</h3>
     <p>
       ChatGPT/Codex are mentioned far more than Claude. All numbers are
       <em>per 1k mentions</em>, never raw counts. Compare the rates, not the

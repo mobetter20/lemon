@@ -1,0 +1,116 @@
+name: refresh
+
+# Phase 4 cron — every 4 hours, run incremental scrape (HN Algolia +
+# Reddit historical via arctic_shift) and re-classify, then commit
+# phase5/data.json. Skips reddit_recent: GH Actions runner IPs are 403'd
+# by Reddit's unauth JSON path (verified 2026-05-07, run 25455800152) and
+# PRAW is blocked account-side. We accept arctic_shift's ~24-48h lag.
+#
+# Self-healing: corpus/ is gitignored and persisted between runs via
+# actions/cache. On cache miss, cron_refresh.py falls back to a 12-month
+# backfill (slow but recoverable).
+#
+# Verification (baked in, never eyeball):
+#   - cron_refresh exits non-zero only if BOTH scrapers fail entirely.
+#   - v0_classify.py --strict asserts: this-week mentions > 0, by_source
+#     non-empty, ≥4 weeks of trend per family, total didn't shrink.
+#   - Post-deploy: poll GH Pages and assert the live data.json matches
+#     the just-pushed generated_at; retry 3× with 60s backoff.
+
+on:
+  schedule:
+    - cron: "0 */4 * * *"
+  workflow_dispatch:
+    inputs:
+      months_back:
+        description: "Override incremental window (default 1 = ~30 days)"
+        required: false
+        default: "1"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: refresh
+  cancel-in-progress: false
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: pip
+
+      - name: Install deps
+        run: pip install -e .
+
+      - name: Restore corpus cache
+        id: cache-corpus
+        uses: actions/cache@v4
+        with:
+          path: corpus
+          key: corpus-v1-${{ github.run_id }}
+          restore-keys: |
+            corpus-v1-
+
+      - name: Show corpus state
+        run: |
+          mkdir -p corpus
+          if find corpus -name '*.ndjson' | grep -q .; then
+            echo "corpus shards: $(find corpus -name '*.ndjson' | wc -l)"
+            du -sh corpus
+          else
+            echo "corpus is empty (cache miss) — cron will backfill"
+          fi
+
+      - name: Incremental scrape
+        run: |
+          python scripts/cron_refresh.py \
+            --months-back ${{ github.event.inputs.months_back || '1' }}
+
+      - name: Classify (strict)
+        run: |
+          python scripts/v0_classify.py --strict --out phase5/data.json
+
+      - name: Commit data.json if changed
+        id: commit
+        run: |
+          set -e
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add phase5/data.json
+          if git diff --staged --quiet; then
+            echo "no_change=true" >> "$GITHUB_OUTPUT"
+            echo "data.json unchanged — nothing to commit."
+            exit 0
+          fi
+          NEW_GEN_AT=$(python -c "import json; print(json.load(open('phase5/data.json'))['generated_at'])")
+          echo "new_generated_at=$NEW_GEN_AT" >> "$GITHUB_OUTPUT"
+          git commit -m "data: refresh $(date -u +%Y-%m-%dT%H:%MZ) [skip ci]"
+          git push origin HEAD:${GITHUB_REF_NAME}
+
+      - name: Verify GH Pages serves new data
+        if: steps.commit.outputs.no_change != 'true'
+        env:
+          EXPECTED_GEN_AT: ${{ steps.commit.outputs.new_generated_at }}
+        run: |
+          set -e
+          URL="https://mobetter20.github.io/lemon/phase5/data.json"
+          for i in 1 2 3 4 5; do
+            sleep 60
+            ACTUAL=$(curl -fsSL "$URL" 2>/dev/null | python -c "import sys, json; print(json.load(sys.stdin).get('generated_at',''))" 2>/dev/null || echo "")
+            echo "attempt $i: live generated_at=$ACTUAL (expected=$EXPECTED_GEN_AT)"
+            if [ "$ACTUAL" = "$EXPECTED_GEN_AT" ]; then
+              echo "::notice::Pages picked up the new data.json on attempt $i."
+              exit 0
+            fi
+          done
+          echo "::error::Pages did not pick up new data.json after 5 attempts (~5 min)."
+          exit 1
