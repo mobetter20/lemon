@@ -1,9 +1,9 @@
 {
   "version": "2.0",
   "schema_version": "v0",
-  "classifier_version": "v0",
+  "classifier_version": "v0-mock",
   "generated_at": "2026-05-06T12:00:00Z",
-  "_note": "MOCK DATA. Schema mirrors what scripts/v0_classify.py will produce once the curated phrase list runs over the corpus.",
+  "_note": "MOCK DATA. Schema mirrors what scripts/v0_classify.py produces. Real data lives in data.json (gitignored).",
   "totals": {
     "all_records": 75796
   },

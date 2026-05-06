@@ -5,21 +5,32 @@
  * v0 classifier output. Same schema either way.
  */
 
-const DATA_URL = "mock_data.json";
 const SVG_NS = "http://www.w3.org/2000/svg";
 
 let DATA = null;
 let xMode = "wall";  // "wall" | "release"
 
 /* ----------------------------------------------------------
-   Boot
+   Data loading: prefer real data.json, fall back to mock.
+   The standalone build script defines EMBEDDED_DATA before this script,
+   in which case we use it directly (no fetch).
    ---------------------------------------------------------- */
+async function loadData() {
+  if (typeof EMBEDDED_DATA !== "undefined") return EMBEDDED_DATA;
+  for (const url of ["data.json", "mock_data.json"]) {
+    try {
+      const r = await fetch(url);
+      if (r.ok) return await r.json();
+    } catch (e) { /* try next */ }
+  }
+  return null;
+}
+
 async function boot() {
-  try {
-    const r = await fetch(DATA_URL);
-    DATA = await r.json();
-  } catch (e) {
-    console.error("Failed to load data:", e);
+  DATA = await loadData();
+  if (!DATA) {
+    const meta = document.getElementById("meta-count");
+    if (meta) meta.textContent = "(no data — run scripts/v0_classify.py)";
     return;
   }
   renderMeta();
@@ -51,6 +62,19 @@ function renderMeta() {
   document.getElementById("meta-count").textContent = totalRecords.toLocaleString();
   document.getElementById("meta-updated").textContent = (DATA.generated_at || "").slice(0, 10);
   document.getElementById("meta-cls").textContent = DATA.classifier_version || "v0";
+
+  // Mock data carries a _note field with "MOCK" — flag it so it's never
+  // confused with the live numbers
+  if (DATA._note && /mock/i.test(DATA._note)) {
+    const meta = document.getElementById("meta-line");
+    if (meta && !meta.querySelector(".mock-badge")) {
+      const badge = document.createElement("strong");
+      badge.className = "mock-badge";
+      badge.style.cssText = "color:var(--lemon-rind);margin-left:.5em";
+      badge.textContent = "· MOCK DATA";
+      meta.appendChild(badge);
+    }
+  }
 
   for (const family of ["claude", "openai"]) {
     const s = DATA.summary[family];
