@@ -1,0 +1,81 @@
+name: ip-probe
+
+# One-off probe per CLAUDE.md "Phase 4 pre-flight". Verifies that the unauth
+# Reddit path returns HTTP 200 + JSON from a GitHub Actions runner IP. Reddit
+# frequently 403s shared cloud-provider IP ranges; the local healthcheck is
+# not predictive of CI behavior.
+#
+# Verdict: job is green iff all 5 production subs return HTTP 200 with a JSON
+# body. Otherwise the unauth path is dead in CI and Phase 4 needs a different
+# strategy (residential proxy, alt host, or solve PRAW) before shipping cron.
+
+on:
+  push:
+    branches:
+      - phase4/ip-probe
+  workflow_dispatch:
+
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Show runner public IP
+        run: |
+          echo "runner public IP:"
+          curl -s https://api.ipify.org
+          echo
+
+      - name: HEAD probe — exact CLAUDE.md spec
+        run: |
+          set +e
+          curl -sI \
+            -A "lemon-corpus-builder/0.1 (+https://github.com/mobetter20/lemon)" \
+            "https://old.reddit.com/r/ClaudeAI/new.json?limit=1"
+
+      - name: GET probe — all 5 production subreddits
+        run: |
+          set +e
+          UA="lemon-corpus-builder/0.1 (+https://github.com/mobetter20/lemon)"
+          OK=0
+          FAIL=0
+          for sub in ClaudeAI OpenAI ChatGPT LocalLLaMA singularity; do
+            echo "=== r/$sub ==="
+            STATUS=$(curl -sS \
+              -A "$UA" \
+              -D /tmp/h.txt \
+              -o /tmp/b.txt \
+              -w "%{http_code}" \
+              "https://old.reddit.com/r/$sub/new.json?limit=100")
+            CT=$(grep -i '^content-type:' /tmp/h.txt | head -1 | tr -d '\r')
+            FIRST=$(head -c 1 /tmp/b.txt)
+            SIZE=$(stat -c%s /tmp/b.txt)
+            echo "  HTTP=$STATUS | $CT | size=$SIZE | first_byte=$FIRST"
+            echo "  body[0:300]: $(head -c 300 /tmp/b.txt | tr '\n' ' ')"
+            echo
+            if [ "$STATUS" = "200" ] && [ "$FIRST" = "{" ]; then
+              OK=$((OK+1))
+            else
+              FAIL=$((FAIL+1))
+            fi
+            sleep 2
+          done
+          echo "VERDICT: ok=$OK/5 fail=$FAIL/5"
+          if [ "$FAIL" -gt 0 ]; then
+            echo "::error::Reddit unauth path FAILED on $FAIL/5 subs from this runner."
+            exit 1
+          fi
+          echo "::notice::Reddit unauth path PASSED on all 5 subs."
+
+      - name: HN Algolia sanity check
+        run: |
+          set +e
+          UA="lemon-corpus-builder/0.1 (+https://github.com/mobetter20/lemon)"
+          STATUS=$(curl -sS \
+            -A "$UA" \
+            -D /tmp/h.txt \
+            -o /tmp/b.txt \
+            -w "%{http_code}" \
+            "https://hn.algolia.com/api/v1/search_by_date?query=claude&hitsPerPage=1")
+          CT=$(grep -i '^content-type:' /tmp/h.txt | head -1 | tr -d '\r')
+          echo "HN HTTP=$STATUS | $CT"
+          echo "body[0:300]: $(head -c 300 /tmp/b.txt | tr '\n' ' ')"
