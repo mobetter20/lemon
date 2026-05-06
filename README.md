@@ -1,120 +1,84 @@
 # lemon
 
-AI Model Reality Check — counter-dashboard for what AI labs claim vs what users report breaking.
+> **is it just you, or is it actually bad right now?**
 
-> "What they claim vs what people report breaking — and where they're voting with their feet."
->
-> Defection language is tracked as **rhetorical sentiment**, not measured behavior.
-> The dataset is selection-biased by construction (complaint forums); see Methodology when
-> the dashboard ships.
+Sentiment-rate barometer for Claude and ChatGPT/GPT-5/Codex. Tracks the rate
+at which public forums (Reddit, HN) post complaint-valence mentions of each
+model, weekly, with trend. Selection-biased by construction; methodology
+prominent on the dashboard.
 
-## State
+## What this is
 
-Phase 1 (corpus pull) — scaffolding in place.
-Phases 2–5 not yet started.
+A single number per model, updated weekly:
+
+> **42% of Claude mentions this week are complaints** — up from 31% last week.
+
+Plus a trend line (90 days), plus the top words people are using when they
+complain, plus a defection-rhetoric line (labeled as *rhetoric*, not behavior).
+
+That's the whole product.
+
+## What this is NOT
+
+- Not a counter-benchmark or fairness audit
+- Not a satisfaction metric (it's complaint volume in *complaint forums*)
+- Not a measurement of actual user churn (defection language is rhetoric)
+- Not a fine-grained failure-mode taxonomy — that work was deferred (see
+  `docs/PIVOT-2026-05-06.md` for why)
+
+## Status
+
+Phase 1 (corpus pull): mostly done. HN: 73k records. Reddit historical:
+partial.
+Phase 5 (dashboard): prototype with mock data.
+Phase 3 (classifier — curated phrase list + word frequency): pending.
+Phase 4 (live scrapers + GitHub Action): pending.
+
+See [`CLAUDE.md`](CLAUDE.md) for the locked v0 scope and constraints.
 
 ## Layout
 
 ```
 lemon/
-├── config/                     hand-curated knobs
-│   ├── subreddits.json         subreddits + percentile/floor selection strategy
-│   ├── hn_queries.json         HN Algolia queries + point thresholds
-│   ├── model_keywords.json     for model_mentioned detection
-│   └── releases.json           release calendar (populate before Phase 5)
-├── scrapers/
-│   ├── common.py               schema, model detection, dedup, NDJSON I/O
-│   ├── hn.py                   HN Algolia
-│   ├── reddit_historical.py    pullpush primary, arctic_shift fallback
-│   └── reddit_recent.py        PRAW (last ~30 days, fills pullpush lag)
-├── scripts/
-│   ├── healthcheck.py          source reachability + mode decision
-│   ├── run_phase1.py           orchestrator
-│   └── corpus_stats.py         validation gate
-└── corpus/                     NDJSON output, gitignored in Phase 1
+├── CLAUDE.md            agent instructions, locked scope
+├── config/              hand-curated knobs
+├── scrapers/            HN + Reddit corpus collectors
+├── scripts/             healthcheck, orchestrator, stats
+├── phase5/              dashboard (static site)
+├── docs/                pivot history + archived v1 ideas
+└── corpus/              scraped NDJSON (gitignored)
 ```
 
 ## Quickstart
 
 ```bash
-# From the project root
 pip install -e .
-
-# Optional: PRAW credentials (covers ~last 30 days where pullpush lags)
-# Create a script-type Reddit app at https://www.reddit.com/prefs/apps
-export REDDIT_CLIENT_ID=...
-export REDDIT_CLIENT_SECRET=...
-export REDDIT_USER_AGENT="lemon-corpus-builder/0.1 (by /u/<your-handle>)"
-
-# 1) Health-check
 python scripts/healthcheck.py
-
-# 2) Smoke test (2 months, HN only)
-python scripts/run_phase1.py --months-back 2 --skip-reddit-historical --skip-reddit-recent
-
-# 3) Full run (~hours)
-python scripts/run_phase1.py
-
-# 4) Validate
-python scripts/corpus_stats.py
+python scripts/run_phase1.py           # full 12-month corpus pull
+python scripts/corpus_stats.py         # validation gate
 ```
 
-To re-scrape from scratch:
+Dashboard preview:
 
 ```bash
-rm -rf corpus/* corpus/.dedup.db
+cd phase5 && python3 -m http.server 8766
+# open http://localhost:8766
 ```
 
-## Schema
+## Methodology
 
-Every NDJSON line:
+Disclosed on the dashboard itself, not buried.
 
-```json
-{
-  "source": "hn|reddit",
-  "source_subkey": "hn-thread-12345 | r/ClaudeAI",
-  "post_id": "...",
-  "permalink": "...",
-  "date": "ISO 8601 UTC",
-  "model_mentioned": "claude|openai|both|unknown",
-  "post_text": "...",
-  "score": 12,
-  "is_comment": false,
-  "parent_id": null,
-  "mentions_release_event": null,
-  "scraped_at": "ISO 8601 UTC",
-  "scraper_version": "1.0"
-}
-```
-
-## Phase 1 validation gates
-
-`scripts/corpus_stats.py` exits non-zero unless:
-
-- Records ≥ 5,000 (full) or ≥ 2,000 (degraded — flagged)
-- Date range ≥ 6 months
-- Each model family ≥ 30%, no skew worse than 70/30
-
-Soft warning if < 3 release events covered (until `releases.json` populated).
-
-## Decisions locked
-
-- **Storage**: date-sharded by source (`corpus/<source>/<YYYY-MM>.ndjson`)
-- **Reddit selection**: top-20% by score per (subreddit, month), absolute floor 5
-- **Comment scope**: Reddit — top-level + nested where score ≥ 3. HN — text-length ≥ 20 (HN does not expose comment scores).
-- **Bluesky**: deferred to Phase 4 (live-only, not historical)
-- **Dedup**: `(source, permalink)` keyed; SQLite index at `corpus/.dedup.db`
-
-## Mode logic
-
-`healthcheck.py` exits:
-- `0` full — HN + at least one Reddit historical source up
-- `1` fail — HN down (cannot proceed)
-- `2` degraded — HN up, both Reddit historical sources down → 2k target, HN + PRAW recent only
-
-## Known caveats
-
-- **HN comment scores**: HN doesn't expose comment scores via Algolia. Filter by text length instead.
-- **Reddit historical reliability**: pullpush and arctic_shift both depend on third-party infrastructure that has had outages since the 2023 API change. Re-run healthcheck before each session.
-- **PRAW credentials**: optional but recommended — covers the ~24h lag in pullpush coverage.
-- **Dedup is single-run**: clear `corpus/.dedup.db` and `corpus/*` to re-scrape.
+1. **Selection bias.** People who are angry post; people who are satisfied
+   don't. The data is a complaint distribution, not a satisfaction metric.
+2. **Defection language is rhetoric, not behavior.** "Switching to,"
+   "cancelled" track expressed sentiment. They do not measure churn.
+3. **Two-horse race tracks release calendars.** Spikes correlate with
+   contentious launches. Toggle the x-axis to "weeks since release" to compare
+   models without launch confounding.
+4. **The classifier undercounts.** Curated phrase list ships transparency over
+   recall. The trend captures direction; the absolute level is conservative.
+5. **Twitter/X is missing.** Free-tier API access closed in 2023. Bluesky
+   covers a sliver but is journalist-skewed.
+6. **Volume is asymmetric.** ChatGPT/Codex get mentioned far more than Claude.
+   All numbers are *per 1k mentions*, never raw counts.

@@ -1,11 +1,109 @@
 {
-  "version": "1.0",
-  "taxonomy_version": "1.0",
+  "version": "2.0",
+  "schema_version": "v0",
+  "classifier_version": "v0",
   "generated_at": "2026-05-06T12:00:00Z",
-  "_note": "MOCK DATA. Replace with Phase 3 output once classifier ships.",
+  "_note": "MOCK DATA. Schema mirrors what scripts/v0_classify.py will produce once the curated phrase list runs over the corpus.",
   "totals": {
-    "claude":  {"all_mentions": 184320, "complaints": 14982},
-    "openai":  {"all_mentions": 487211, "complaints": 38214}
+    "all_records": 75796
+  },
+  "summary": {
+    "claude": {
+      "this_week_label": "2026-W18",
+      "this_week": {"all_mentions": 4280, "complaints": 1789, "rate": 0.418},
+      "last_week":  {"all_mentions": 3950, "complaints": 1224, "rate": 0.310},
+      "delta_pts": 10.8
+    },
+    "openai": {
+      "this_week_label": "2026-W18",
+      "this_week": {"all_mentions": 11240, "complaints": 4271, "rate": 0.380},
+      "last_week":  {"all_mentions": 10812, "complaints": 4757, "rate": 0.440},
+      "delta_pts": -6.0
+    }
+  },
+  "trend": {
+    "claude": [
+      {"week": "2025-W22", "all_mentions": 2310, "complaints": 532, "rate": 0.230},
+      {"week": "2025-W26", "all_mentions": 2540, "complaints": 686, "rate": 0.270},
+      {"week": "2025-W30", "all_mentions": 2715, "complaints": 706, "rate": 0.260},
+      {"week": "2025-W34", "all_mentions": 2820, "complaints": 818, "rate": 0.290},
+      {"week": "2025-W38", "all_mentions": 3300, "complaints": 1320, "rate": 0.400},
+      {"week": "2025-W42", "all_mentions": 3120, "complaints": 1029, "rate": 0.330},
+      {"week": "2025-W46", "all_mentions": 2980, "complaints": 894, "rate": 0.300},
+      {"week": "2025-W50", "all_mentions": 3120, "complaints": 905, "rate": 0.290},
+      {"week": "2026-W02", "all_mentions": 3280, "complaints": 1083, "rate": 0.330},
+      {"week": "2026-W06", "all_mentions": 3640, "complaints": 1419, "rate": 0.390},
+      {"week": "2026-W10", "all_mentions": 3540, "complaints": 1097, "rate": 0.310},
+      {"week": "2026-W14", "all_mentions": 3760, "complaints": 1090, "rate": 0.290},
+      {"week": "2026-W17", "all_mentions": 3950, "complaints": 1224, "rate": 0.310},
+      {"week": "2026-W18", "all_mentions": 4280, "complaints": 1789, "rate": 0.418}
+    ],
+    "openai": [
+      {"week": "2025-W22", "all_mentions": 6240, "complaints": 1622, "rate": 0.260},
+      {"week": "2025-W26", "all_mentions": 6810, "complaints": 1635, "rate": 0.240},
+      {"week": "2025-W30", "all_mentions": 7320, "complaints": 2050, "rate": 0.280},
+      {"week": "2025-W34", "all_mentions": 8420, "complaints": 2862, "rate": 0.340},
+      {"week": "2025-W38", "all_mentions": 9870, "complaints": 4737, "rate": 0.480},
+      {"week": "2025-W42", "all_mentions": 9340, "complaints": 3829, "rate": 0.410},
+      {"week": "2025-W46", "all_mentions": 8920, "complaints": 3122, "rate": 0.350},
+      {"week": "2025-W50", "all_mentions": 9120, "complaints": 2918, "rate": 0.320},
+      {"week": "2026-W02", "all_mentions": 9540, "complaints": 3243, "rate": 0.340},
+      {"week": "2026-W06", "all_mentions": 10240, "complaints": 3686, "rate": 0.360},
+      {"week": "2026-W10", "all_mentions": 10560, "complaints": 4013, "rate": 0.380},
+      {"week": "2026-W14", "all_mentions": 10720, "complaints": 4288, "rate": 0.400},
+      {"week": "2026-W17", "all_mentions": 10812, "complaints": 4757, "rate": 0.440},
+      {"week": "2026-W18", "all_mentions": 11240, "complaints": 4271, "rate": 0.380}
+    ]
+  },
+  "top_terms": {
+    "claude": {
+      "this_week": [
+        {"term": "rate limit",       "count": 287},
+        {"term": "broken",           "count": 198},
+        {"term": "refused",          "count": 156},
+        {"term": "lazy",             "count": 142},
+        {"term": "regression",       "count": 128},
+        {"term": "context window",   "count": 96},
+        {"term": "doesn't work",     "count": 78},
+        {"term": "lobotomized",      "count": 64},
+        {"term": "stuck in a loop",  "count": 51},
+        {"term": "hallucinated",     "count": 47}
+      ]
+    },
+    "openai": {
+      "this_week": [
+        {"term": "broken",           "count": 412},
+        {"term": "regression",       "count": 289},
+        {"term": "slow",             "count": 231},
+        {"term": "rate limit",       "count": 198},
+        {"term": "doesn't work",     "count": 174},
+        {"term": "got worse",        "count": 142},
+        {"term": "useless",          "count": 119},
+        {"term": "hallucinated",     "count": 98},
+        {"term": "neutered",         "count": 74},
+        {"term": "garbage",          "count": 61}
+      ]
+    }
+  },
+  "defection_trend": {
+    "claude": [
+      {"week": "2025-W22", "rate": 0.018}, {"week": "2025-W26", "rate": 0.022},
+      {"week": "2025-W30", "rate": 0.020}, {"week": "2025-W34", "rate": 0.024},
+      {"week": "2025-W38", "rate": 0.038}, {"week": "2025-W42", "rate": 0.030},
+      {"week": "2025-W46", "rate": 0.026}, {"week": "2025-W50", "rate": 0.024},
+      {"week": "2026-W02", "rate": 0.027}, {"week": "2026-W06", "rate": 0.034},
+      {"week": "2026-W10", "rate": 0.029}, {"week": "2026-W14", "rate": 0.026},
+      {"week": "2026-W17", "rate": 0.031}, {"week": "2026-W18", "rate": 0.052}
+    ],
+    "openai": [
+      {"week": "2025-W22", "rate": 0.024}, {"week": "2025-W26", "rate": 0.026},
+      {"week": "2025-W30", "rate": 0.029}, {"week": "2025-W34", "rate": 0.041},
+      {"week": "2025-W38", "rate": 0.068}, {"week": "2025-W42", "rate": 0.054},
+      {"week": "2025-W46", "rate": 0.043}, {"week": "2025-W50", "rate": 0.037},
+      {"week": "2026-W02", "rate": 0.034}, {"week": "2026-W06", "rate": 0.037},
+      {"week": "2026-W10", "rate": 0.039}, {"week": "2026-W14", "rate": 0.035},
+      {"week": "2026-W17", "rate": 0.041}, {"week": "2026-W18", "rate": 0.038}
+    ]
   },
   "releases": [
     {"id": "claude-opus-4-7",      "model_family": "claude", "label": "Opus 4.7",   "date": "2026-04-15"},
@@ -15,35 +113,5 @@
     {"id": "claude-sonnet-4",      "model_family": "claude", "label": "Sonnet 4",   "date": "2025-05-15"},
     {"id": "openai-gpt-5",         "model_family": "openai", "label": "GPT-5",      "date": "2025-08-15"},
     {"id": "openai-codex-cli",     "model_family": "openai", "label": "Codex CLI",  "date": "2025-06-15"}
-  ],
-  "time_series": {
-    "claude": {
-      "rate_limits":       [{"week":"2025-W22","complaints_per_1k":18.2,"raw_count":42},{"week":"2025-W26","complaints_per_1k":24.8,"raw_count":58},{"week":"2025-W30","complaints_per_1k":21.3,"raw_count":61},{"week":"2025-W34","complaints_per_1k":19.7,"raw_count":53},{"week":"2025-W38","complaints_per_1k":33.5,"raw_count":110},{"week":"2025-W42","complaints_per_1k":27.6,"raw_count":92},{"week":"2025-W46","complaints_per_1k":22.9,"raw_count":74},{"week":"2025-W50","complaints_per_1k":20.4,"raw_count":65},{"week":"2026-W02","complaints_per_1k":24.1,"raw_count":83},{"week":"2026-W06","complaints_per_1k":31.7,"raw_count":118},{"week":"2026-W10","complaints_per_1k":26.5,"raw_count":97},{"week":"2026-W14","complaints_per_1k":22.8,"raw_count":76},{"week":"2026-W17","complaints_per_1k":42.3,"raw_count":189}],
-      "regressions":       [{"week":"2025-W22","complaints_per_1k":12.4,"raw_count":28},{"week":"2025-W26","complaints_per_1k":9.1,"raw_count":21},{"week":"2025-W30","complaints_per_1k":11.8,"raw_count":34},{"week":"2025-W34","complaints_per_1k":10.5,"raw_count":29},{"week":"2025-W38","complaints_per_1k":18.7,"raw_count":61},{"week":"2025-W42","complaints_per_1k":14.2,"raw_count":47},{"week":"2025-W46","complaints_per_1k":12.0,"raw_count":39},{"week":"2025-W50","complaints_per_1k":11.3,"raw_count":36},{"week":"2026-W02","complaints_per_1k":13.4,"raw_count":46},{"week":"2026-W06","complaints_per_1k":22.8,"raw_count":85},{"week":"2026-W10","complaints_per_1k":17.1,"raw_count":63},{"week":"2026-W14","complaints_per_1k":13.6,"raw_count":45},{"week":"2026-W17","complaints_per_1k":28.4,"raw_count":127}],
-      "refusals":          [{"week":"2025-W22","complaints_per_1k":6.2,"raw_count":14},{"week":"2025-W26","complaints_per_1k":5.4,"raw_count":12},{"week":"2025-W30","complaints_per_1k":7.3,"raw_count":21},{"week":"2025-W34","complaints_per_1k":6.8,"raw_count":18},{"week":"2025-W38","complaints_per_1k":8.1,"raw_count":26},{"week":"2025-W42","complaints_per_1k":7.9,"raw_count":26},{"week":"2025-W46","complaints_per_1k":6.7,"raw_count":21},{"week":"2025-W50","complaints_per_1k":5.9,"raw_count":19},{"week":"2026-W02","complaints_per_1k":7.2,"raw_count":24},{"week":"2026-W06","complaints_per_1k":9.8,"raw_count":36},{"week":"2026-W10","complaints_per_1k":7.5,"raw_count":27},{"week":"2026-W14","complaints_per_1k":6.4,"raw_count":21},{"week":"2026-W17","complaints_per_1k":11.2,"raw_count":50}],
-      "code_failures":     [{"week":"2025-W22","complaints_per_1k":14.3,"raw_count":33},{"week":"2025-W26","complaints_per_1k":17.2,"raw_count":40},{"week":"2025-W30","complaints_per_1k":15.7,"raw_count":45},{"week":"2025-W34","complaints_per_1k":18.4,"raw_count":50},{"week":"2025-W38","complaints_per_1k":24.9,"raw_count":81},{"week":"2025-W42","complaints_per_1k":21.3,"raw_count":71},{"week":"2025-W46","complaints_per_1k":17.8,"raw_count":58},{"week":"2025-W50","complaints_per_1k":16.4,"raw_count":53},{"week":"2026-W02","complaints_per_1k":19.7,"raw_count":68},{"week":"2026-W06","complaints_per_1k":26.5,"raw_count":99},{"week":"2026-W10","complaints_per_1k":21.0,"raw_count":77},{"week":"2026-W14","complaints_per_1k":17.9,"raw_count":59},{"week":"2026-W17","complaints_per_1k":34.7,"raw_count":155}],
-      "reasoning_quality": [{"week":"2025-W22","complaints_per_1k":9.6,"raw_count":22},{"week":"2025-W26","complaints_per_1k":8.4,"raw_count":19},{"week":"2025-W30","complaints_per_1k":10.2,"raw_count":29},{"week":"2025-W34","complaints_per_1k":11.7,"raw_count":31},{"week":"2025-W38","complaints_per_1k":13.6,"raw_count":44},{"week":"2025-W42","complaints_per_1k":12.1,"raw_count":40},{"week":"2025-W46","complaints_per_1k":10.5,"raw_count":34},{"week":"2025-W50","complaints_per_1k":9.9,"raw_count":32},{"week":"2026-W02","complaints_per_1k":11.4,"raw_count":39},{"week":"2026-W06","complaints_per_1k":14.7,"raw_count":55},{"week":"2026-W10","complaints_per_1k":12.0,"raw_count":44},{"week":"2026-W14","complaints_per_1k":10.4,"raw_count":34},{"week":"2026-W17","complaints_per_1k":18.2,"raw_count":81}],
-      "tool_breakage":     [{"week":"2025-W22","complaints_per_1k":4.1,"raw_count":9},{"week":"2025-W26","complaints_per_1k":4.9,"raw_count":11},{"week":"2025-W30","complaints_per_1k":6.3,"raw_count":18},{"week":"2025-W34","complaints_per_1k":5.7,"raw_count":15},{"week":"2025-W38","complaints_per_1k":7.4,"raw_count":24},{"week":"2025-W42","complaints_per_1k":6.9,"raw_count":23},{"week":"2025-W46","complaints_per_1k":5.4,"raw_count":17},{"week":"2025-W50","complaints_per_1k":5.0,"raw_count":16},{"week":"2026-W02","complaints_per_1k":6.7,"raw_count":23},{"week":"2026-W06","complaints_per_1k":9.3,"raw_count":34},{"week":"2026-W10","complaints_per_1k":7.2,"raw_count":26},{"week":"2026-W14","complaints_per_1k":5.6,"raw_count":18},{"week":"2026-W17","complaints_per_1k":13.8,"raw_count":61}]
-    },
-    "openai": {
-      "rate_limits":       [{"week":"2025-W22","complaints_per_1k":22.8,"raw_count":98},{"week":"2025-W26","complaints_per_1k":18.9,"raw_count":84},{"week":"2025-W30","complaints_per_1k":24.6,"raw_count":124},{"week":"2025-W34","complaints_per_1k":29.4,"raw_count":156},{"week":"2025-W38","complaints_per_1k":42.7,"raw_count":287},{"week":"2025-W42","complaints_per_1k":35.2,"raw_count":211},{"week":"2025-W46","complaints_per_1k":28.5,"raw_count":172},{"week":"2025-W50","complaints_per_1k":25.8,"raw_count":146},{"week":"2026-W02","complaints_per_1k":27.3,"raw_count":166},{"week":"2026-W06","complaints_per_1k":31.0,"raw_count":196},{"week":"2026-W10","complaints_per_1k":29.8,"raw_count":182},{"week":"2026-W14","complaints_per_1k":27.4,"raw_count":159},{"week":"2026-W17","complaints_per_1k":33.6,"raw_count":228}],
-      "regressions":       [{"week":"2025-W22","complaints_per_1k":15.7,"raw_count":67},{"week":"2025-W26","complaints_per_1k":13.8,"raw_count":61},{"week":"2025-W30","complaints_per_1k":17.9,"raw_count":91},{"week":"2025-W34","complaints_per_1k":31.2,"raw_count":166},{"week":"2025-W38","complaints_per_1k":47.5,"raw_count":319},{"week":"2025-W42","complaints_per_1k":38.4,"raw_count":230},{"week":"2025-W46","complaints_per_1k":29.7,"raw_count":179},{"week":"2025-W50","complaints_per_1k":24.5,"raw_count":138},{"week":"2026-W02","complaints_per_1k":22.1,"raw_count":134},{"week":"2026-W06","complaints_per_1k":21.6,"raw_count":136},{"week":"2026-W10","complaints_per_1k":20.2,"raw_count":124},{"week":"2026-W14","complaints_per_1k":18.7,"raw_count":109},{"week":"2026-W17","complaints_per_1k":24.3,"raw_count":165}],
-      "refusals":          [{"week":"2025-W22","complaints_per_1k":11.4,"raw_count":49},{"week":"2025-W26","complaints_per_1k":9.6,"raw_count":42},{"week":"2025-W30","complaints_per_1k":12.5,"raw_count":63},{"week":"2025-W34","complaints_per_1k":17.8,"raw_count":94},{"week":"2025-W38","complaints_per_1k":21.4,"raw_count":143},{"week":"2025-W42","complaints_per_1k":18.7,"raw_count":112},{"week":"2025-W46","complaints_per_1k":14.9,"raw_count":89},{"week":"2025-W50","complaints_per_1k":12.5,"raw_count":70},{"week":"2026-W02","complaints_per_1k":11.8,"raw_count":71},{"week":"2026-W06","complaints_per_1k":13.4,"raw_count":85},{"week":"2026-W10","complaints_per_1k":14.0,"raw_count":86},{"week":"2026-W14","complaints_per_1k":11.7,"raw_count":68},{"week":"2026-W17","complaints_per_1k":16.5,"raw_count":112}],
-      "code_failures":     [{"week":"2025-W22","complaints_per_1k":18.3,"raw_count":78},{"week":"2025-W26","complaints_per_1k":21.0,"raw_count":93},{"week":"2025-W30","complaints_per_1k":19.7,"raw_count":99},{"week":"2025-W34","complaints_per_1k":23.4,"raw_count":124},{"week":"2025-W38","complaints_per_1k":35.8,"raw_count":240},{"week":"2025-W42","complaints_per_1k":29.5,"raw_count":177},{"week":"2025-W46","complaints_per_1k":24.6,"raw_count":148},{"week":"2025-W50","complaints_per_1k":22.0,"raw_count":124},{"week":"2026-W02","complaints_per_1k":24.7,"raw_count":150},{"week":"2026-W06","complaints_per_1k":27.3,"raw_count":172},{"week":"2026-W10","complaints_per_1k":25.5,"raw_count":156},{"week":"2026-W14","complaints_per_1k":23.1,"raw_count":135},{"week":"2026-W17","complaints_per_1k":29.2,"raw_count":198}],
-      "reasoning_quality": [{"week":"2025-W22","complaints_per_1k":11.7,"raw_count":50},{"week":"2025-W26","complaints_per_1k":10.5,"raw_count":46},{"week":"2025-W30","complaints_per_1k":13.4,"raw_count":68},{"week":"2025-W34","complaints_per_1k":18.9,"raw_count":100},{"week":"2025-W38","complaints_per_1k":26.5,"raw_count":178},{"week":"2025-W42","complaints_per_1k":21.7,"raw_count":130},{"week":"2025-W46","complaints_per_1k":16.4,"raw_count":99},{"week":"2025-W50","complaints_per_1k":14.0,"raw_count":79},{"week":"2026-W02","complaints_per_1k":13.7,"raw_count":83},{"week":"2026-W06","complaints_per_1k":14.5,"raw_count":91},{"week":"2026-W10","complaints_per_1k":15.0,"raw_count":92},{"week":"2026-W14","complaints_per_1k":13.2,"raw_count":77},{"week":"2026-W17","complaints_per_1k":17.8,"raw_count":121}],
-      "tool_breakage":     [{"week":"2025-W22","complaints_per_1k":5.4,"raw_count":23},{"week":"2025-W26","complaints_per_1k":6.2,"raw_count":27},{"week":"2025-W30","complaints_per_1k":7.7,"raw_count":39},{"week":"2025-W34","complaints_per_1k":9.5,"raw_count":50},{"week":"2025-W38","complaints_per_1k":13.4,"raw_count":90},{"week":"2025-W42","complaints_per_1k":11.0,"raw_count":66},{"week":"2025-W46","complaints_per_1k":8.6,"raw_count":52},{"week":"2025-W50","complaints_per_1k":7.3,"raw_count":41},{"week":"2026-W02","complaints_per_1k":8.0,"raw_count":48},{"week":"2026-W06","complaints_per_1k":9.7,"raw_count":61},{"week":"2026-W10","complaints_per_1k":8.4,"raw_count":51},{"week":"2026-W14","complaints_per_1k":7.0,"raw_count":41},{"week":"2026-W17","complaints_per_1k":10.5,"raw_count":71}]
-    }
-  },
-  "valence_markers": {
-    "claude": {
-      "defection_per_1k":           [{"week":"2025-W22","value":2.4},{"week":"2025-W26","value":2.1},{"week":"2025-W30","value":2.7},{"week":"2025-W34","value":3.1},{"week":"2025-W38","value":5.4},{"week":"2025-W42","value":4.2},{"week":"2025-W46","value":3.5},{"week":"2025-W50","value":3.0},{"week":"2026-W02","value":3.4},{"week":"2026-W06","value":4.7},{"week":"2026-W10","value":3.8},{"week":"2026-W14","value":3.2},{"week":"2026-W17","value":7.1}],
-      "loyalty_per_1k":             [{"week":"2025-W22","value":4.1},{"week":"2025-W26","value":4.5},{"week":"2025-W30","value":3.9},{"week":"2025-W34","value":4.2},{"week":"2025-W38","value":3.7},{"week":"2025-W42","value":4.0},{"week":"2025-W46","value":4.4},{"week":"2025-W50","value":4.6},{"week":"2026-W02","value":4.3},{"week":"2026-W06","value":4.0},{"week":"2026-W10","value":4.2},{"week":"2026-W14","value":4.5},{"week":"2026-W17","value":3.6}],
-      "conditional_loyalty_per_1k": [{"week":"2025-W22","value":3.0},{"week":"2025-W26","value":2.7},{"week":"2025-W30","value":3.4},{"week":"2025-W34","value":3.6},{"week":"2025-W38","value":4.8},{"week":"2025-W42","value":4.1},{"week":"2025-W46","value":3.7},{"week":"2025-W50","value":3.2},{"week":"2026-W02","value":3.5},{"week":"2026-W06","value":4.3},{"week":"2026-W10","value":3.8},{"week":"2026-W14","value":3.4},{"week":"2026-W17","value":5.6}]
-    },
-    "openai": {
-      "defection_per_1k":           [{"week":"2025-W22","value":3.2},{"week":"2025-W26","value":2.9},{"week":"2025-W30","value":3.6},{"week":"2025-W34","value":5.7},{"week":"2025-W38","value":9.4},{"week":"2025-W42","value":7.6},{"week":"2025-W46","value":5.8},{"week":"2025-W50","value":4.8},{"week":"2026-W02","value":4.4},{"week":"2026-W06","value":4.5},{"week":"2026-W10","value":4.2},{"week":"2026-W14","value":3.8},{"week":"2026-W17","value":4.9}],
-      "loyalty_per_1k":             [{"week":"2025-W22","value":3.4},{"week":"2025-W26","value":3.7},{"week":"2025-W30","value":3.5},{"week":"2025-W34","value":3.0},{"week":"2025-W38","value":2.4},{"week":"2025-W42","value":2.6},{"week":"2025-W46","value":3.0},{"week":"2025-W50","value":3.3},{"week":"2026-W02","value":3.4},{"week":"2026-W06","value":3.6},{"week":"2026-W10","value":3.5},{"week":"2026-W14","value":3.7},{"week":"2026-W17","value":3.4}],
-      "conditional_loyalty_per_1k": [{"week":"2025-W22","value":4.5},{"week":"2025-W26","value":4.2},{"week":"2025-W30","value":4.7},{"week":"2025-W34","value":6.3},{"week":"2025-W38","value":8.9},{"week":"2025-W42","value":7.5},{"week":"2025-W46","value":6.0},{"week":"2025-W50","value":5.2},{"week":"2026-W02","value":4.8},{"week":"2026-W06","value":4.9},{"week":"2026-W10","value":4.6},{"week":"2026-W14","value":4.3},{"week":"2026-W17","value":5.7}]
-    }
-  }
+  ]
 }

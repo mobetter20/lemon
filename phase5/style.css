@@ -18,18 +18,12 @@
   --fg-mute:      #5e5a52;
   --rule:         #26252b;
 
-  /* category palette — colors for each failure-mode theme */
-  --c-rate:       var(--lemon-rind);
-  --c-regress:    #ff7a59;
-  --c-refusal:    #c084fc;
-  --c-code:       #5cd1c5;
-  --c-reason:     #88a8ff;
-  --c-tool:       #cbe04f;
-
-  /* valence */
+  /* signal colors */
+  --c-rate:       var(--lemon-rind);    /* claude trend */
+  --c-rate-2:     #88a8ff;              /* openai trend */
   --c-defection:  #ff5b6c;
-  --c-loyalty:    #6ce389;
-  --c-cond:       #ffaa00;
+  --c-up:         #ff7a59;              /* delta worsening */
+  --c-down:       #6ce389;              /* delta improving */
 
   /* spacing scale */
   --space-1: 4px;
@@ -69,8 +63,16 @@ em { color: var(--lemon-leaf); font-style: normal; text-decoration: underline; t
 
 h1, h2, h3 { font-weight: 600; }
 
+code {
+  font-family: var(--font-mono);
+  background: var(--bg-3);
+  padding: 1px 4px;
+  border-radius: 2px;
+  font-size: 0.9em;
+}
+
 /* ============================================================
-   STICKY BANNER (selection-bias disclosure, co-equal UI)
+   STICKY BANNER
    ============================================================ */
 .banner {
   position: sticky;
@@ -110,10 +112,10 @@ h1, h2, h3 { font-weight: 600; }
   line-height: 1.05;
   margin-bottom: var(--space-3);
 }
-.masthead h1::after {
-  content: "·";
+.masthead h1 em {
+  text-decoration: none;
   color: var(--lemon-rind);
-  margin-left: var(--space-2);
+  font-style: normal;
 }
 .tagline {
   color: var(--fg-dim);
@@ -163,28 +165,12 @@ h1, h2, h3 { font-weight: 600; }
   color: var(--bg);
   font-weight: 600;
 }
-
-.legend {
-  display: flex;
-  gap: var(--space-4);
-  flex-wrap: wrap;
+.controls-note {
   font-size: 11px;
-  color: var(--fg-dim);
+  color: var(--fg-mute);
+  flex: 1;
+  text-align: right;
 }
-.legend-dot {
-  display: inline-block;
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  margin-right: 4px;
-  vertical-align: middle;
-}
-.dot-rate    { background: var(--c-rate); }
-.dot-regress { background: var(--c-regress); }
-.dot-refusal { background: var(--c-refusal); }
-.dot-code    { background: var(--c-code); }
-.dot-reason  { background: var(--c-reason); }
-.dot-tool    { background: var(--c-tool); }
 
 /* ============================================================
    DASHBOARD GRID
@@ -208,7 +194,7 @@ h1, h2, h3 { font-weight: 600; }
   padding: var(--space-4);
 }
 .model-panel[data-model="claude"]  { border-top: 3px solid var(--lemon-rind); }
-.model-panel[data-model="openai"]  { border-top: 3px solid var(--c-reason); }
+.model-panel[data-model="openai"]  { border-top: 3px solid var(--c-rate-2); }
 
 .panel-head {
   display: flex;
@@ -227,6 +213,44 @@ h1, h2, h3 { font-weight: 600; }
   color: var(--fg-mute);
 }
 
+/* ============================================================
+   BIG NUMBER
+   ============================================================ */
+.big-number-block {
+  text-align: center;
+  padding: var(--space-4) 0 var(--space-5);
+  border-bottom: 1px dashed var(--rule);
+  margin-bottom: var(--space-4);
+}
+.big-number {
+  font-size: clamp(72px, 10vw, 120px);
+  font-weight: 700;
+  letter-spacing: -0.04em;
+  line-height: 1;
+  color: var(--lemon-flesh);
+}
+.model-panel[data-model="openai"] .big-number {
+  color: var(--c-rate-2);
+}
+.big-number-label {
+  font-size: 12px;
+  color: var(--fg-mute);
+  margin-top: var(--space-2);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+.delta {
+  margin-top: var(--space-3);
+  font-size: 14px;
+  color: var(--fg-dim);
+}
+.delta.up    { color: var(--c-up); }
+.delta.down  { color: var(--c-down); }
+.delta-glyph { font-weight: 700; margin-right: 4px; }
+
+/* ============================================================
+   CHART BLOCK
+   ============================================================ */
 .chart-block { margin-bottom: var(--space-5); }
 .chart-block:last-child { margin-bottom: 0; }
 .chart-block h3 {
@@ -241,16 +265,14 @@ h1, h2, h3 { font-weight: 600; }
   font-weight: 400;
 }
 
-/* chart shell */
 .chart {
   width: 100%;
   background: var(--bg);
   border-radius: 4px;
   position: relative;
 }
-.chart.timeseries { height: 240px; }
-.chart.valence    { height: 140px; }
-.chart.bars       { height: 220px; }
+.chart.trend       { height: 200px; }
+.chart.defection   { height: 130px; }
 
 /* SVG chart styling */
 .chart svg { display: block; width: 100%; height: 100%; }
@@ -272,6 +294,49 @@ h1, h2, h3 { font-weight: 600; }
   fill: var(--lemon-flesh);
   font-size: 9px;
   opacity: 0.7;
+}
+
+/* ============================================================
+   TOP TERMS LIST
+   ============================================================ */
+.top-terms-block { margin-bottom: var(--space-5); }
+.top-terms {
+  list-style: none;
+  font-size: 13px;
+}
+.top-terms li {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  padding: 4px 0;
+  border-bottom: 1px dotted var(--rule);
+}
+.top-terms li:last-child { border-bottom: none; }
+.top-terms .term {
+  color: var(--fg);
+}
+.top-terms .count {
+  color: var(--fg-mute);
+  font-variant-numeric: tabular-nums;
+}
+.top-terms .bar {
+  flex: 1;
+  height: 1px;
+  margin: 0 var(--space-3);
+  background: var(--rule);
+  position: relative;
+}
+.top-terms .bar-fill {
+  position: absolute;
+  left: 0;
+  top: -2px;
+  height: 5px;
+  background: var(--lemon-rind);
+  border-radius: 1px;
+  opacity: 0.4;
+}
+.model-panel[data-model="openai"] .top-terms .bar-fill {
+  background: var(--c-rate-2);
 }
 
 /* ============================================================

@@ -1,27 +1,11 @@
 /**
- * lemon dashboard — renders mock_data.json into SVG charts.
+ * lemon dashboard (v0) — single complaint-rate per model, weekly, with trend.
  *
- * Phase 3 will produce data.json with the same schema. To switch from mock to
- * real, change DATA_URL.
+ * Reads mock_data.json today; will read data.json once Phase 3 ships the
+ * v0 classifier output. Same schema either way.
  */
 
 const DATA_URL = "mock_data.json";
-
-const CATEGORY_LABELS = {
-  rate_limits:        { label: "rate / capacity", color: "var(--c-rate)" },
-  regressions:        { label: "regression",      color: "var(--c-regress)" },
-  refusals:           { label: "refusal",         color: "var(--c-refusal)" },
-  code_failures:      { label: "code-specific",   color: "var(--c-code)" },
-  reasoning_quality:  { label: "reasoning",       color: "var(--c-reason)" },
-  tool_breakage:      { label: "tool / integration", color: "var(--c-tool)" },
-};
-
-const VALENCE_KEYS = {
-  defection_per_1k:           { label: "defection rhetoric", color: "var(--c-defection)" },
-  loyalty_per_1k:             { label: "loyalty rhetoric",   color: "var(--c-loyalty)" },
-  conditional_loyalty_per_1k: { label: "conditional",        color: "var(--c-cond)" },
-};
-
 const SVG_NS = "http://www.w3.org/2000/svg";
 
 let DATA = null;
@@ -63,26 +47,52 @@ function wireToggles() {
    Meta line
    ---------------------------------------------------------- */
 function renderMeta() {
-  const totalRecords = (DATA.totals.claude.all_mentions || 0) + (DATA.totals.openai.all_mentions || 0);
+  const totalRecords = DATA.totals?.all_records ?? 0;
   document.getElementById("meta-count").textContent = totalRecords.toLocaleString();
   document.getElementById("meta-updated").textContent = (DATA.generated_at || "").slice(0, 10);
-  document.getElementById("meta-tax").textContent = DATA.taxonomy_version || "1.0";
+  document.getElementById("meta-cls").textContent = DATA.classifier_version || "v0";
 
-  document.getElementById("totals-claude").textContent =
-    `${DATA.totals.claude.all_mentions.toLocaleString()} mentions / ${DATA.totals.claude.complaints.toLocaleString()} complaints`;
-  document.getElementById("totals-openai").textContent =
-    `${DATA.totals.openai.all_mentions.toLocaleString()} mentions / ${DATA.totals.openai.complaints.toLocaleString()} complaints`;
+  for (const family of ["claude", "openai"]) {
+    const s = DATA.summary[family];
+    if (!s) continue;
+    document.getElementById(`totals-${family}`).textContent =
+      `${s.this_week.all_mentions.toLocaleString()} mentions in ${s.this_week_label}`;
+  }
 }
 
 /* ----------------------------------------------------------
-   Render all charts
+   Render all
    ---------------------------------------------------------- */
 function renderAll() {
   for (const family of ["claude", "openai"]) {
-    renderTimeseries(`ts-${family}`, DATA.time_series[family], family);
-    renderValence(`val-${family}`, DATA.valence_markers[family], family);
-    renderBars(`bars-${family}`, DATA.time_series[family]);
+    renderBigNumber(family, DATA.summary[family]);
+    renderTrend(`trend-${family}`, DATA.trend[family], family);
+    renderTopTerms(`terms-${family}`, DATA.top_terms[family]);
+    renderDefection(`def-${family}`, DATA.defection_trend[family]);
   }
+}
+
+/* ----------------------------------------------------------
+   Big number + delta
+   ---------------------------------------------------------- */
+function renderBigNumber(family, s) {
+  if (!s) return;
+  const ratePct = (s.this_week.rate * 100);
+  document.getElementById(`rate-${family}`).textContent = ratePct.toFixed(0) + "%";
+
+  const delta = s.delta_pts;
+  const el = document.getElementById(`delta-${family}`);
+  el.classList.remove("up", "down");
+  if (delta == null || delta === 0) {
+    el.textContent = "no change from last week";
+    return;
+  }
+  const dir = delta > 0 ? "up" : "down";
+  const glyph = delta > 0 ? "▲" : "▼";
+  el.classList.add(dir);
+  const absDelta = Math.abs(delta).toFixed(1);
+  const lastPct = (s.last_week.rate * 100).toFixed(0);
+  el.innerHTML = `<span class="delta-glyph">${glyph}</span> ${absDelta} pts from last week (${lastPct}%)`;
 }
 
 /* ----------------------------------------------------------
@@ -96,21 +106,22 @@ function svgEl(host) {
   host.appendChild(svg);
   return svg;
 }
-
 function append(parent, tag, attrs = {}, text) {
   const el = document.createElementNS(SVG_NS, tag);
-  for (const [k, v] of Object.entries(attrs)) el.setAttribute(k, v);
+  for (const [k, v] of Object.entries(attrs)) {
+    if (v != null) el.setAttribute(k, v);
+  }
   if (text != null) el.textContent = text;
   parent.appendChild(el);
   return el;
 }
 
 /* ----------------------------------------------------------
-   Time series
+   Trend chart — single line per panel (complaint rate over time)
    ---------------------------------------------------------- */
-function renderTimeseries(hostId, series, family) {
+function renderTrend(hostId, series, family) {
   const host = document.getElementById(hostId);
-  if (!host || !series) return;
+  if (!host || !series || series.length === 0) return;
   const W = host.clientWidth;
   const H = host.clientHeight;
   const padL = 36, padR = 12, padT = 10, padB = 38;
@@ -120,39 +131,27 @@ function renderTimeseries(hostId, series, family) {
   const svg = svgEl(host);
   svg.setAttribute("viewBox", `0 0 ${W} ${H}`);
 
-  // Determine x-axis: build sorted list of weeks (across all categories)
-  const allWeeks = new Set();
-  for (const cat of Object.keys(series)) {
-    for (const pt of series[cat]) allWeeks.add(pt.week);
-  }
-  const weeks = [...allWeeks].sort();
-  if (weeks.length === 0) return;
+  const weeks = series.map(p => p.week);
+  const xOf = (w) => padL + (weeks.indexOf(w) / Math.max(weeks.length - 1, 1)) * innerW;
 
-  // X-axis transformation depends on mode
-  // For release mode, we'd recompute relative to nearest release; mocked for now
-  const xOf = (w) => {
-    const i = weeks.indexOf(w);
-    return padL + (i / Math.max(weeks.length - 1, 1)) * innerW;
-  };
-
-  // Y range: peak across categories
   let yMax = 0;
-  for (const cat of Object.keys(series)) {
-    for (const pt of series[cat]) yMax = Math.max(yMax, pt.complaints_per_1k);
-  }
-  yMax = Math.ceil(yMax * 1.1);
-  const yOf = (v) => padT + innerH - (v / Math.max(yMax, 1)) * innerH;
+  for (const p of series) yMax = Math.max(yMax, p.rate);
+  yMax = Math.min(1, Math.max(0.05, Math.ceil(yMax * 10 + 1) / 10)); // round up to 10% increments
+  const yOf = (v) => padT + innerH - (v / yMax) * innerH;
 
-  // Y-axis
+  const lineColor = family === "claude" ? "var(--c-rate)" : "var(--c-rate-2)";
+
+  // y-axis grid + labels (every 10% up to yMax)
   const ax = append(svg, "g", { class: "axis" });
-  for (let i = 0; i <= 4; i++) {
-    const v = (yMax / 4) * i;
+  const steps = Math.round(yMax / 0.1);
+  for (let i = 0; i <= steps; i++) {
+    const v = (i / steps) * yMax;
     const y = yOf(v);
     append(ax, "line", { x1: padL, x2: W - padR, y1: y, y2: y, opacity: 0.3 });
-    append(ax, "text", { x: 4, y: y + 3 }, v.toFixed(0));
+    append(ax, "text", { x: 4, y: y + 3 }, `${(v * 100).toFixed(0)}%`);
   }
 
-  // Release event vertical lines (only for wall mode), labels rotated vertical
+  // Release lines (wall-clock mode only)
   if (xMode === "wall" && DATA.releases) {
     for (const rel of DATA.releases) {
       if (rel.model_family !== family) continue;
@@ -172,7 +171,7 @@ function renderTimeseries(hostId, series, family) {
     }
   }
 
-  // X-axis labels (sample every Nth week), rotated, anchored above bottom edge
+  // X-axis labels (rotated)
   const labelEvery = Math.max(1, Math.floor(weeks.length / 6));
   const labelY = H - padB + 14;
   for (let i = 0; i < weeks.length; i += labelEvery) {
@@ -183,156 +182,120 @@ function renderTimeseries(hostId, series, family) {
     }, weeks[i].replace(/-W/, "·w"));
   }
 
-  // Lines per category
-  for (const [catId, info] of Object.entries(CATEGORY_LABELS)) {
-    const points = series[catId] || [];
-    if (points.length < 2) continue;
-    const dParts = points.map((pt, i) => {
-      const x = xOf(pt.week).toFixed(2);
-      const y = yOf(pt.complaints_per_1k).toFixed(2);
-      return `${i === 0 ? "M" : "L"} ${x} ${y}`;
-    });
-    append(svg, "path", {
-      d: dParts.join(" "),
-      fill: "none",
-      stroke: info.color,
-      "stroke-width": "1.5",
-    });
-  }
+  // Light fill under the line
+  const linePoints = series.map(p => ({ x: xOf(p.week), y: yOf(p.rate) }));
+  const areaD = [
+    `M ${linePoints[0].x.toFixed(2)} ${(padT + innerH).toFixed(2)}`,
+    ...linePoints.map(pt => `L ${pt.x.toFixed(2)} ${pt.y.toFixed(2)}`),
+    `L ${linePoints[linePoints.length - 1].x.toFixed(2)} ${(padT + innerH).toFixed(2)} Z`,
+  ].join(" ");
+  append(svg, "path", { d: areaD, fill: lineColor, opacity: 0.12 });
+
+  // Line itself
+  const lineD = linePoints
+    .map((pt, i) => `${i === 0 ? "M" : "L"} ${pt.x.toFixed(2)} ${pt.y.toFixed(2)}`)
+    .join(" ");
+  append(svg, "path", {
+    d: lineD,
+    fill: "none",
+    stroke: lineColor,
+    "stroke-width": "2",
+  });
+
+  // Latest dot
+  const last = linePoints[linePoints.length - 1];
+  append(svg, "circle", {
+    cx: last.x, cy: last.y, r: 4,
+    fill: lineColor, stroke: "var(--bg)", "stroke-width": "1.5",
+  });
 }
 
 /* ----------------------------------------------------------
-   Valence (rhetoric markers) — three light lines
+   Defection rhetoric — single line, smaller chart
    ---------------------------------------------------------- */
-function renderValence(hostId, valence, family) {
+function renderDefection(hostId, series) {
   const host = document.getElementById(hostId);
-  if (!host || !valence) return;
+  if (!host || !series || series.length === 0) return;
   const W = host.clientWidth;
   const H = host.clientHeight;
-  const padL = 36, padR = 12, padT = 8, padB = 18;
+  const padL = 36, padR = 12, padT = 8, padB = 22;
   const innerW = W - padL - padR;
   const innerH = H - padT - padB;
 
   const svg = svgEl(host);
   svg.setAttribute("viewBox", `0 0 ${W} ${H}`);
 
-  // Build x-axis weeks
-  const allWeeks = new Set();
-  for (const k of Object.keys(VALENCE_KEYS)) {
-    for (const pt of (valence[k] || [])) allWeeks.add(pt.week);
-  }
-  const weeks = [...allWeeks].sort();
-  if (weeks.length === 0) return;
+  const weeks = series.map(p => p.week);
   const xOf = (w) => padL + (weeks.indexOf(w) / Math.max(weeks.length - 1, 1)) * innerW;
 
   let yMax = 0;
-  for (const k of Object.keys(VALENCE_KEYS)) {
-    for (const pt of (valence[k] || [])) yMax = Math.max(yMax, pt.value);
-  }
-  yMax = Math.ceil(yMax * 1.1);
-  const yOf = (v) => padT + innerH - (v / Math.max(yMax, 1)) * innerH;
+  for (const p of series) yMax = Math.max(yMax, p.rate);
+  yMax = Math.max(0.01, Math.ceil(yMax * 100) / 100);
+  const yOf = (v) => padT + innerH - (v / yMax) * innerH;
 
-  // Y axis (light)
+  // y axis (light)
   const ax = append(svg, "g", { class: "axis" });
   for (let i = 0; i <= 2; i++) {
-    const v = (yMax / 2) * i;
+    const v = (i / 2) * yMax;
     const y = yOf(v);
     append(ax, "line", { x1: padL, x2: W - padR, y1: y, y2: y, opacity: 0.2 });
-    append(ax, "text", { x: 4, y: y + 3 }, v.toFixed(0));
+    append(ax, "text", { x: 4, y: y + 3 }, `${(v * 100).toFixed(1)}%`);
   }
 
-  // Lines per valence type
-  for (const [k, info] of Object.entries(VALENCE_KEYS)) {
-    const pts = valence[k] || [];
-    if (pts.length < 2) continue;
-    const dParts = pts.map((pt, i) => {
-      const x = xOf(pt.week).toFixed(2);
-      const y = yOf(pt.value).toFixed(2);
-      return `${i === 0 ? "M" : "L"} ${x} ${y}`;
-    });
-    append(svg, "path", {
-      d: dParts.join(" "),
-      fill: "none",
-      stroke: info.color,
-      "stroke-width": "1.2",
-      "stroke-dasharray": k === "conditional_loyalty_per_1k" ? "3 2" : null,
-    });
+  // x labels (sparse)
+  const labelEvery = Math.max(1, Math.floor(weeks.length / 4));
+  for (let i = 0; i < weeks.length; i += labelEvery) {
+    const x = xOf(weeks[i]);
+    append(ax, "text", { x, y: H - 6, "text-anchor": "middle" }, weeks[i].replace(/-W/, "·w"));
   }
 
-  // Inline legend
-  const legY = H - 4;
-  let legX = padL;
-  for (const [k, info] of Object.entries(VALENCE_KEYS)) {
-    append(svg, "rect", { x: legX, y: legY - 8, width: 8, height: 2, fill: info.color });
-    append(svg, "text", { x: legX + 12, y: legY - 1, fill: "var(--fg-mute)", "font-size": "10" }, info.label);
-    legX += 130;
-  }
+  const dParts = series
+    .map((p, i) => `${i === 0 ? "M" : "L"} ${xOf(p.week).toFixed(2)} ${yOf(p.rate).toFixed(2)}`)
+    .join(" ");
+  append(svg, "path", {
+    d: dParts,
+    fill: "none",
+    stroke: "var(--c-defection)",
+    "stroke-width": "1.5",
+  });
 }
 
 /* ----------------------------------------------------------
-   This-week bars (most recent week's value, per category)
+   Top terms list (no chart, just text + faint bar)
    ---------------------------------------------------------- */
-function renderBars(hostId, series) {
+function renderTopTerms(hostId, top) {
   const host = document.getElementById(hostId);
-  if (!host || !series) return;
-  const W = host.clientWidth;
-  const H = host.clientHeight;
-  const padL = 140, padR = 36, padT = 6, padB = 6;
-  const innerW = W - padL - padR;
-
-  const svg = svgEl(host);
-  svg.setAttribute("viewBox", `0 0 ${W} ${H}`);
-
-  const cats = Object.keys(CATEGORY_LABELS);
-  const rowH = (H - padT - padB) / cats.length;
-
-  // Latest value per category
-  const latest = {};
-  let max = 0;
-  for (const cat of cats) {
-    const pts = series[cat] || [];
-    const last = pts[pts.length - 1];
-    latest[cat] = last ? last.complaints_per_1k : 0;
-    max = Math.max(max, latest[cat]);
+  if (!host || !top) return;
+  host.innerHTML = "";
+  const items = top.this_week || [];
+  const max = items.reduce((m, it) => Math.max(m, it.count), 0) || 1;
+  for (const it of items.slice(0, 10)) {
+    const li = document.createElement("li");
+    const term = document.createElement("span");
+    term.className = "term";
+    term.textContent = it.term;
+    const bar = document.createElement("span");
+    bar.className = "bar";
+    const fill = document.createElement("span");
+    fill.className = "bar-fill";
+    fill.style.width = `${(it.count / max) * 100}%`;
+    bar.appendChild(fill);
+    const count = document.createElement("span");
+    count.className = "count";
+    count.textContent = `${it.count}×`;
+    li.append(term, bar, count);
+    host.appendChild(li);
   }
-  max = Math.ceil(max * 1.2);
-
-  cats.forEach((cat, i) => {
-    const y = padT + i * rowH;
-    const barH = rowH * 0.55;
-    const v = latest[cat];
-    const w = (v / Math.max(max, 1)) * innerW;
-    const info = CATEGORY_LABELS[cat];
-
-    append(svg, "text", {
-      x: padL - 8, y: y + rowH / 2 + 3, "text-anchor": "end",
-      fill: "var(--fg-dim)", "font-size": "11",
-    }, info.label);
-
-    append(svg, "rect", {
-      x: padL, y: y + (rowH - barH) / 2,
-      width: w, height: barH,
-      fill: info.color,
-      rx: 2,
-    });
-
-    append(svg, "text", {
-      x: padL + w + 6, y: y + rowH / 2 + 3,
-      fill: "var(--fg)", "font-size": "11",
-    }, v.toFixed(1));
-  });
 }
 
 /* ----------------------------------------------------------
    Helpers
    ---------------------------------------------------------- */
 function nearestWeek(dateStr, weeks) {
-  // Convert YYYY-MM-DD to nearest YYYY-Www
   if (!dateStr) return null;
   const d = new Date(dateStr);
   if (isNaN(d)) return null;
   const target = `${d.getUTCFullYear()}-W${String(getISOWeek(d)).padStart(2, "0")}`;
-  // Find exact or closest
   if (weeks.includes(target)) return target;
   const targetMs = d.getTime();
   let best = null, bestDelta = Infinity;

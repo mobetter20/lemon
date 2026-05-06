@@ -13,11 +13,16 @@ corpus/*
 !corpus/.gitkeep
 .dedup.db
 
-# Phase 2 generated inputs contain corpus samples
-phase2/clustering_input.md
-phase2/noise_floor_input.md
+# Logs
 phase1.log
 *.log
+
+# Generated phrase-classification outputs (built from corpus)
+phase5/data.json
+
+# Archived v1 taxonomy proposal — generated sample inputs that contain corpus excerpts
+docs/_archive/v1_taxonomy_proposal/phase2/clustering_input.md
+docs/_archive/v1_taxonomy_proposal/phase2/noise_floor_input.md
 
 # OS
 .DS_Store
