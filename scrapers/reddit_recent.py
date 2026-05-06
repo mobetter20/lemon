@@ -90,6 +90,7 @@ def scrape_reddit_recent(
             if dedup and not dedup.should_write("reddit", permalink, score):
                 continue
 
+            post_model = detect_model(full_text, keywords)
             write_record(
                 corpus_dir,
                 Record(
@@ -98,7 +99,7 @@ def scrape_reddit_recent(
                     post_id=p.id,
                     permalink=permalink,
                     date=date_iso,
-                    model_mentioned=detect_model(full_text, keywords),
+                    model_mentioned=post_model,
                     post_text=full_text,
                     score=score,
                     is_comment=False,
@@ -133,7 +134,7 @@ def scrape_reddit_recent(
                             post_id=c.id,
                             permalink=cpermalink,
                             date=cdate,
-                            model_mentioned=detect_model(cbody, keywords),
+                            model_mentioned=detect_model(cbody, keywords, parent_model=post_model),
                             post_text=cbody,
                             score=cscore,
                             is_comment=True,

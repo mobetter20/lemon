@@ -63,8 +63,17 @@ def _matches_any(text_lower: str, keywords: list[str]) -> bool:
     return False
 
 
-def detect_model(text: str, keywords: dict[str, list[str]]) -> str:
-    """Return 'claude', 'openai', 'both', or 'unknown'."""
+def detect_model(
+    text: str,
+    keywords: dict[str, list[str]],
+    parent_model: str | None = None,
+) -> str:
+    """Return 'claude', 'openai', 'both', or 'unknown'.
+
+    If a `parent_model` is provided AND the text alone yields 'unknown', inherit the
+    parent's value. This captures comments that lack the model name in their own text
+    but are clearly contextually about the parent post's model.
+    """
     text_lower = text.lower()
     has_claude = _matches_any(text_lower, keywords.get("claude", []))
     has_openai = _matches_any(text_lower, keywords.get("openai", []))
@@ -74,6 +83,8 @@ def detect_model(text: str, keywords: dict[str, list[str]]) -> str:
         return "claude"
     if has_openai:
         return "openai"
+    if parent_model and parent_model != "unknown":
+        return parent_model
     return "unknown"
 
 

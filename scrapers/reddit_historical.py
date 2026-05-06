@@ -1,8 +1,14 @@
-"""Reddit historical scraper (pullpush.io primary, arctic_shift fallback).
+"""Reddit historical scraper — arctic_shift primary, pullpush fallback.
 
-Strategy: pull all submissions in each (subreddit, month) window, then keep the
-top-N% by score with an absolute floor. Then fetch comments above the configured
-score floor for each kept post.
+After Phase 1 testing, pullpush.io showed material data gaps for our subreddits
+(many windows returned 0 records, and its comments endpoint frequently 5xx'd).
+arctic_shift covers the same windows reliably. We use arctic_shift first; on
+empty result we retry against pullpush in case arctic_shift has its own gaps.
+
+Strategy: pull all submissions in each (subreddit, month) window, keep the
+top-N% by score with an absolute floor, then fetch comments above the score
+floor for each kept post. Comments inherit the post's `model_mentioned` when
+their own text doesn't trigger detection.
 """
 
 from __future__ import annotations
@@ -27,10 +33,10 @@ from .common import (
     write_record,
 )
 
-PULLPUSH_SUBMISSIONS = "https://api.pullpush.io/reddit/search/submission/"
-PULLPUSH_COMMENTS = "https://api.pullpush.io/reddit/search/comment/"
 ARCTIC_SUBMISSIONS = "https://arctic-shift.photon-reddit.com/api/posts/search"
 ARCTIC_COMMENTS = "https://arctic-shift.photon-reddit.com/api/comments/search"
+PULLPUSH_SUBMISSIONS = "https://api.pullpush.io/reddit/search/submission/"
+PULLPUSH_COMMENTS = "https://api.pullpush.io/reddit/search/comment/"
 
 
 @retry(stop=stop_after_attempt(3), wait=wait_exponential(multiplier=1, min=1, max=10))
@@ -40,22 +46,35 @@ def _get(url: str, params: dict[str, Any] | None = None, timeout: int = 60) -> d
     return resp.json()
 
 
-def _submissions_endpoint(use_arctic_shift: bool) -> str:
-    return ARCTIC_SUBMISSIONS if use_arctic_shift else PULLPUSH_SUBMISSIONS
+def _arctic_paginate(subreddit: str, after_ts: int, before_ts: int) -> list[dict]:
+    out: list[dict] = []
+    cursor_before = before_ts
+    while True:
+        params = {
+            "subreddit": subreddit,
+            "after": after_ts,
+            "before": cursor_before,
+            "limit": 100,
+            "sort": "desc",
+        }
+        try:
+            data = _get(ARCTIC_SUBMISSIONS, params=params)
+        except Exception as e:
+            print(f"  [arctic_shift] search failed: {e}")
+            break
+        hits = data.get("data") or []
+        if not hits:
+            break
+        out.extend(hits)
+        oldest = min((h.get("created_utc", before_ts) for h in hits), default=before_ts)
+        if oldest <= after_ts or len(hits) < 100:
+            break
+        cursor_before = int(oldest)
+        time.sleep(0.5)
+    return out
 
 
-def _comments_endpoint(use_arctic_shift: bool) -> str:
-    return ARCTIC_COMMENTS if use_arctic_shift else PULLPUSH_COMMENTS
-
-
-def search_submissions(
-    subreddit: str,
-    after_ts: int,
-    before_ts: int,
-    use_arctic_shift: bool = False,
-) -> list[dict]:
-    """Page newest-first through the time window."""
-    endpoint = _submissions_endpoint(use_arctic_shift)
+def _pullpush_paginate(subreddit: str, after_ts: int, before_ts: int) -> list[dict]:
     out: list[dict] = []
     cursor_before = before_ts
     while True:
@@ -68,42 +87,84 @@ def search_submissions(
             "sort_type": "created_utc",
         }
         try:
-            data = _get(endpoint, params=params)
+            data = _get(PULLPUSH_SUBMISSIONS, params=params)
         except Exception as e:
-            print(f"  [reddit_hist] {endpoint} failed: {e}")
+            print(f"  [pullpush] search failed: {e}")
             break
-        hits = data.get("data", []) or []
+        hits = data.get("data") or []
         if not hits:
             break
         out.extend(hits)
         oldest = min((h.get("created_utc", before_ts) for h in hits), default=before_ts)
         if oldest <= after_ts or len(hits) < 100:
             break
-        cursor_before = oldest
+        cursor_before = int(oldest)
         time.sleep(0.5)
     return out
 
 
+def search_submissions(
+    subreddit: str,
+    after_ts: int,
+    before_ts: int,
+    primary: str = "arctic_shift",
+) -> tuple[list[dict], str]:
+    """Try primary; fall back to the other source if it returns 0.
+
+    Returns (posts, source_used).
+    """
+    if primary == "pullpush":
+        first, fallback = _pullpush_paginate, _arctic_paginate
+        first_name, fb_name = "pullpush", "arctic_shift"
+    else:
+        first, fallback = _arctic_paginate, _pullpush_paginate
+        first_name, fb_name = "arctic_shift", "pullpush"
+    posts = first(subreddit, after_ts, before_ts)
+    if posts:
+        return posts, first_name
+    posts = fallback(subreddit, after_ts, before_ts)
+    return posts, fb_name
+
+
 def filter_top_percentile(posts: list[dict], top_pct: int, floor: int) -> list[dict]:
-    """Keep top-N% by score, with absolute score floor."""
     if not posts:
         return []
-    sorted_posts = sorted(posts, key=lambda p: p.get("score", 0), reverse=True)
+    sorted_posts = sorted(posts, key=lambda p: p.get("score", 0) or 0, reverse=True)
     cutoff_idx = max(1, int(len(sorted_posts) * top_pct / 100))
-    threshold_score = sorted_posts[cutoff_idx - 1].get("score", 0)
+    threshold_score = sorted_posts[cutoff_idx - 1].get("score", 0) or 0
     threshold = max(threshold_score, floor)
     return [p for p in sorted_posts if (p.get("score", 0) or 0) >= threshold]
 
 
-def fetch_comments(post_id: str, use_arctic_shift: bool = False) -> list[dict]:
-    endpoint = _comments_endpoint(use_arctic_shift)
-    params = {"link_id": post_id, "size": 1000}
-    try:
-        data = _get(endpoint, params=params)
-        return data.get("data", []) or []
-    except Exception as e:
-        print(f"  [reddit_hist] comments fetch failed for {post_id}: {e}")
-        return []
+def fetch_comments(post_id: str, primary: str = "arctic_shift") -> list[dict]:
+    """Fetch up to 100 top comments for a post.
+
+    arctic_shift caps `limit` at 100 (returns 400 above that). pullpush accepts
+    larger sizes but its comments endpoint has been flaky. We accept 100 max as a
+    reasonable cap — most posts have far fewer substantive comments above the
+    score floor anyway.
+
+    `post_id` may be raw ('1abc') or fullname ('t3_1abc').
+    """
+    raw_id = post_id.split("_", 1)[1] if post_id.startswith("t3_") else post_id
+    fullname = post_id if post_id.startswith("t3_") else f"t3_{post_id}"
+
+    sources: list[tuple[str, str, dict]] = [
+        ("arctic_shift", ARCTIC_COMMENTS, {"link_id": fullname, "limit": 100}),
+        ("pullpush", PULLPUSH_COMMENTS, {"link_id": raw_id, "size": 100}),
+    ]
+    if primary == "pullpush":
+        sources.reverse()
+
+    for name, endpoint, params in sources:
+        try:
+            data = _get(endpoint, params=params)
+            hits = data.get("data") or []
+            if hits:
+                return hits
+        except Exception as e:
+            print(f"  [{name}] comments failed for {post_id}: {e}")
+    return []
 
 
 def scrape_reddit_historical(
@@ -111,7 +172,7 @@ def scrape_reddit_historical(
     config_dir: Path,
     months_back: int = 12,
     dedup: DedupIndex | None = None,
-    use_arctic_shift: bool = False,
+    use_arctic_shift: bool = True,  # arctic_shift is now primary
 ) -> int:
     with open(config_dir / "subreddits.json") as f:
         cfg = json.load(f)
@@ -124,6 +185,7 @@ def scrape_reddit_historical(
     keywords = load_model_keywords(config_dir)
     releases = load_releases(config_dir)
 
+    primary = "arctic_shift" if use_arctic_shift else "pullpush"
     now = datetime.now(timezone.utc)
     n_records = 0
 
@@ -138,27 +200,33 @@ def scrape_reddit_historical(
                 f"[reddit_hist] r/{sub} window={window_start.date()}..{window_end.date()}",
                 flush=True,
             )
-            posts = search_submissions(
-                sub, after_ts, before_ts, use_arctic_shift=use_arctic_shift
-            )
+            posts, source_used = search_submissions(sub, after_ts, before_ts, primary=primary)
             kept = filter_top_percentile(posts, top_pct, floor)
-            print(f"  pulled={len(posts)} kept_top_{top_pct}%_floor_{floor}={len(kept)}")
+            print(
+                f"  src={source_used} pulled={len(posts)} "
+                f"kept_top_{top_pct}%_floor_{floor}={len(kept)}"
+            )
 
             for p in kept:
                 pid = str(p.get("id") or "")
                 if not pid:
                     continue
                 permalink_path = p.get("permalink") or ""
-                permalink = f"https://www.reddit.com{permalink_path}" if permalink_path else f"https://www.reddit.com/r/{sub}/comments/{pid}/"
+                permalink = (
+                    f"https://www.reddit.com{permalink_path}"
+                    if permalink_path
+                    else f"https://www.reddit.com/r/{sub}/comments/{pid}/"
+                )
                 date_iso = utc_iso_from_unix(p.get("created_utc", 0))
                 title = p.get("title") or ""
                 selftext = p.get("selftext") or ""
                 full_text = f"{title}\n\n{selftext}".strip()
-                score = p.get("score", 0) or 0
+                score = int(p.get("score", 0) or 0)
 
                 if dedup and not dedup.should_write("reddit", permalink, score):
                     continue
 
+                post_model = detect_model(full_text, keywords)
                 write_record(
                     corpus_dir,
                     Record(
@@ -167,7 +235,7 @@ def scrape_reddit_historical(
                         post_id=pid,
                         permalink=permalink,
                         date=date_iso,
-                        model_mentioned=detect_model(full_text, keywords),
+                        model_mentioned=post_model,
                         post_text=full_text,
                         score=score,
                         is_comment=False,
@@ -180,9 +248,9 @@ def scrape_reddit_historical(
                 n_records += 1
 
                 # Comments
-                comments = fetch_comments(f"t3_{pid}", use_arctic_shift=use_arctic_shift)
+                comments = fetch_comments(pid, primary=primary)
                 for c in comments:
-                    cscore = c.get("score", 0) or 0
+                    cscore = int(c.get("score", 0) or 0)
                     if cscore < comment_floor:
                         continue
                     ctext = c.get("body") or ""
@@ -190,7 +258,11 @@ def scrape_reddit_historical(
                         continue
                     cid = str(c.get("id") or "")
                     cperm_path = c.get("permalink") or ""
-                    cpermalink = f"https://www.reddit.com{cperm_path}" if cperm_path else f"{permalink}{cid}/"
+                    cpermalink = (
+                        f"https://www.reddit.com{cperm_path}"
+                        if cperm_path
+                        else f"{permalink}{cid}/"
+                    )
                     cdate = utc_iso_from_unix(c.get("created_utc", 0))
 
                     if dedup and not dedup.should_write("reddit", cpermalink, cscore):
@@ -204,7 +276,9 @@ def scrape_reddit_historical(
                             post_id=cid,
                             permalink=cpermalink,
                             date=cdate,
-                            model_mentioned=detect_model(ctext, keywords),
+                            model_mentioned=detect_model(
+                                ctext, keywords, parent_model=post_model
+                            ),
                             post_text=ctext,
                             score=cscore,
                             is_comment=True,

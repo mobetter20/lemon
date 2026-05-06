@@ -134,6 +134,7 @@ def scrape_hn(
                 if dedup and not dedup.should_write("hn", permalink, points):
                     continue
 
+                story_model = detect_model(full_text, keywords)
                 write_record(
                     corpus_dir,
                     Record(
@@ -142,7 +143,7 @@ def scrape_hn(
                         post_id=sid,
                         permalink=permalink,
                         date=date_iso,
-                        model_mentioned=detect_model(full_text, keywords),
+                        model_mentioned=story_model,
                         post_text=full_text,
                         score=points,
                         is_comment=False,
@@ -180,7 +181,7 @@ def scrape_hn(
                             post_id=cid,
                             permalink=cpermalink,
                             date=cdate,
-                            model_mentioned=detect_model(ctext, keywords),
+                            model_mentioned=detect_model(ctext, keywords, parent_model=story_model),
                             post_text=ctext,
                             score=0,
                             is_comment=True,

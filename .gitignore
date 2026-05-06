@@ -13,5 +13,11 @@ corpus/*
 !corpus/.gitkeep
 .dedup.db
 
+# Phase 2 generated inputs contain corpus samples
+phase2/clustering_input.md
+phase2/noise_floor_input.md
+phase1.log
+*.log
+
 # OS
 .DS_Store
