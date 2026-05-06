@@ -66,7 +66,49 @@ jobs:
           fi
           echo "::notice::Reddit unauth path PASSED on all 5 subs."
 
+      - name: RSS probe — all 5 subs (two URL forms)
+        if: always()
+        run: |
+          set +e
+          UA="lemon-corpus-builder/0.1 (+https://github.com/mobetter20/lemon)"
+          OK=0
+          FAIL=0
+          for sub in ClaudeAI OpenAI ChatGPT LocalLLaMA singularity; do
+            for path in "new/.rss" ".rss"; do
+              URL="https://old.reddit.com/r/$sub/$path"
+              echo "=== $URL ==="
+              STATUS=$(curl -sS \
+                -A "$UA" \
+                -D /tmp/h.txt \
+                -o /tmp/b.txt \
+                -w "%{http_code}" \
+                "$URL")
+              CT=$(grep -i '^content-type:' /tmp/h.txt | head -1 | tr -d '\r')
+              SIZE=$(stat -c%s /tmp/b.txt)
+              HEAD120=$(head -c 120 /tmp/b.txt | tr '\n' ' ')
+              echo "  HTTP=$STATUS | $CT | size=$SIZE"
+              echo "  body[0:120]: $HEAD120"
+              if [ "$STATUS" = "200" ] && echo "$HEAD120" | grep -qE '<\?xml|<rss|<feed'; then
+                echo "  -> RSS-shaped"
+                OK=$((OK+1))
+              else
+                echo "  -> NOT RSS"
+                FAIL=$((FAIL+1))
+              fi
+              echo
+              sleep 2
+            done
+          done
+          TOTAL=$((OK+FAIL))
+          echo "RSS VERDICT: ok=$OK/$TOTAL fail=$FAIL/$TOTAL"
+          if [ "$OK" -ge 5 ]; then
+            echo "::notice::Reddit RSS path works from CI ($OK/$TOTAL endpoints). Phase 4 cron unblocked via RSS."
+          else
+            echo "::warning::Reddit RSS also blocked or limited from this runner ($OK/$TOTAL ok)."
+          fi
+
       - name: HN Algolia sanity check
+        if: always()
         run: |
           set +e
           UA="lemon-corpus-builder/0.1 (+https://github.com/mobetter20/lemon)"
