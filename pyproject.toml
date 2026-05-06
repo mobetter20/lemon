@@ -1,0 +1,18 @@
+[project]
+name = "lemon"
+version = "0.1.0"
+description = "AI Model Reality Check — counter-dashboard for lab claims vs reported failures."
+requires-python = ">=3.11"
+dependencies = [
+    "praw>=7.7",
+    "requests>=2.31",
+    "tenacity>=8.2",
+    "python-dateutil>=2.8",
+]
+
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+include = ["scrapers*"]

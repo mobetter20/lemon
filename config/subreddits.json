@@ -1,0 +1,15 @@
+{
+  "subreddits": [
+    "ClaudeAI",
+    "OpenAI",
+    "ChatGPT",
+    "LocalLLaMA",
+    "singularity"
+  ],
+  "selection_strategy": {
+    "method": "percentile_with_floor",
+    "top_percentile": 20,
+    "min_score_floor": 5,
+    "comment_score_floor": 3
+  }
+}

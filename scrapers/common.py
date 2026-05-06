@@ -1,0 +1,182 @@
+"""Shared utilities: schema, model detection, dedup, NDJSON I/O."""
+
+from __future__ import annotations
+
+import json
+import re
+import sqlite3
+from dataclasses import asdict, dataclass, field
+from datetime import datetime, timezone
+from pathlib import Path
+from typing import Any
+
+SCRAPER_VERSION = "1.0"
+
+
+@dataclass
+class Record:
+    source: str
+    source_subkey: str
+    post_id: str
+    permalink: str
+    date: str
+    model_mentioned: str
+    post_text: str
+    score: int
+    is_comment: bool
+    parent_id: str | None
+    mentions_release_event: str | None
+    scraped_at: str = field(
+        default_factory=lambda: datetime.now(timezone.utc).isoformat()
+    )
+    scraper_version: str = SCRAPER_VERSION
+
+
+def utc_iso_from_unix(ts: int | float) -> str:
+    return datetime.fromtimestamp(int(ts), tz=timezone.utc).isoformat()
+
+
+# --- Model detection ---------------------------------------------------------
+
+_MODEL_KEYWORDS_CACHE: dict[str, list[str]] | None = None
+
+
+def load_model_keywords(config_dir: Path) -> dict[str, list[str]]:
+    global _MODEL_KEYWORDS_CACHE
+    if _MODEL_KEYWORDS_CACHE is None:
+        with open(config_dir / "model_keywords.json") as f:
+            _MODEL_KEYWORDS_CACHE = json.load(f)
+    return _MODEL_KEYWORDS_CACHE
+
+
+def _matches_any(text_lower: str, keywords: list[str]) -> bool:
+    for kw in keywords:
+        kw_lower = kw.lower()
+        # Use word-boundary regex for short tokens (≤3 chars) to avoid false positives
+        # like "o1" matching "to1k". Substring match is fine for longer tokens.
+        if len(kw_lower) <= 3:
+            if re.search(rf"\b{re.escape(kw_lower)}\b", text_lower):
+                return True
+        else:
+            if kw_lower in text_lower:
+                return True
+    return False
+
+
+def detect_model(text: str, keywords: dict[str, list[str]]) -> str:
+    """Return 'claude', 'openai', 'both', or 'unknown'."""
+    text_lower = text.lower()
+    has_claude = _matches_any(text_lower, keywords.get("claude", []))
+    has_openai = _matches_any(text_lower, keywords.get("openai", []))
+    if has_claude and has_openai:
+        return "both"
+    if has_claude:
+        return "claude"
+    if has_openai:
+        return "openai"
+    return "unknown"
+
+
+# --- Release detection -------------------------------------------------------
+
+_RELEASES_CACHE: list[dict[str, Any]] | None = None
+
+
+def load_releases(config_dir: Path) -> list[dict[str, Any]]:
+    global _RELEASES_CACHE
+    if _RELEASES_CACHE is None:
+        path = config_dir / "releases.json"
+        if not path.exists():
+            _RELEASES_CACHE = []
+        else:
+            with open(path) as f:
+                data = json.load(f)
+            _RELEASES_CACHE = data.get("releases", [])
+    return _RELEASES_CACHE
+
+
+def detect_release_event(
+    text: str, post_date_iso: str, releases: list[dict[str, Any]]
+) -> str | None:
+    """Match by label/version mention OR within 14 days post-release."""
+    if not releases:
+        return None
+    text_lower = text.lower()
+    for release in releases:
+        label = (release.get("label") or "").lower()
+        version = (release.get("version") or "").lower()
+        if label and label in text_lower:
+            return release.get("id")
+        if version and len(version) >= 3 and version in text_lower:
+            return release.get("id")
+    try:
+        post_dt = datetime.fromisoformat(post_date_iso.replace("Z", "+00:00"))
+    except ValueError:
+        return None
+    for release in releases:
+        rel_date = release.get("date") or ""
+        try:
+            rel_dt = datetime.fromisoformat(rel_date).replace(tzinfo=timezone.utc)
+        except ValueError:
+            continue
+        delta_days = (post_dt - rel_dt).days
+        if 0 <= delta_days <= 14:
+            return release.get("id")
+    return None
+
+
+# --- NDJSON output -----------------------------------------------------------
+
+def shard_path(corpus_dir: Path, source: str, date_iso: str) -> Path:
+    """corpus/<source>/<YYYY-MM>.ndjson, parents created as needed."""
+    yyyy_mm = date_iso[:7] if len(date_iso) >= 7 else "unknown"
+    out = corpus_dir / source / f"{yyyy_mm}.ndjson"
+    out.parent.mkdir(parents=True, exist_ok=True)
+    return out
+
+
+def write_record(corpus_dir: Path, record: Record) -> None:
+    path = shard_path(corpus_dir, record.source, record.date)
+    with open(path, "a", encoding="utf-8") as f:
+        f.write(json.dumps(asdict(record), ensure_ascii=False) + "\n")
+
+
+# --- Dedup -------------------------------------------------------------------
+
+class DedupIndex:
+    """SQLite-backed dedup keyed on (source, permalink). Persists across scraper
+    invocations within a single Phase 1 run. To re-scrape, delete corpus/.dedup.db
+    and corpus/* before running again."""
+
+    def __init__(self, db_path: Path):
+        db_path.parent.mkdir(parents=True, exist_ok=True)
+        self.conn = sqlite3.connect(db_path)
+        self.conn.execute(
+            """
+            CREATE TABLE IF NOT EXISTS seen (
+              source    TEXT NOT NULL,
+              permalink TEXT NOT NULL,
+              score     INTEGER NOT NULL,
+              PRIMARY KEY (source, permalink)
+            )
+            """
+        )
+        self.conn.commit()
+
+    def should_write(self, source: str, permalink: str, score: int) -> bool:
+        cur = self.conn.execute(
+            "SELECT score FROM seen WHERE source = ? AND permalink = ?",
+            (source, permalink),
+        )
+        row = cur.fetchone()
+        if row is None:
+            self.conn.execute(
+                "INSERT INTO seen (source, permalink, score) VALUES (?, ?, ?)",
+                (source, permalink, score),
+            )
+            self.conn.commit()
+            return True
+        return False  # already seen — first write wins
+
+    def close(self) -> None:
+        self.conn.close()

@@ -1,0 +1,4 @@
+{
+  "_doc": "Hand-curated release calendar. Populate before Phase 5 (release-aligned chart). Each entry: {id, model_family: claude|openai, label, date: YYYY-MM-DD, comparison_worthy}. Phase 1 mentions_release_event detection is best-effort with whatever is here. Date-proximity match window: 14 days post-release.",
+  "releases": []
+}

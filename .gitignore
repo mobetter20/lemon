@@ -1,0 +1,17 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.egg-info/
+.venv/
+venv/
+.env
+.env.*
+
+# Project: corpus is data, not source
+corpus/*
+!corpus/.gitkeep
+.dedup.db
+
+# OS
+.DS_Store

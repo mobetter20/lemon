@@ -1,0 +1,24 @@
+{
+  "claude": [
+    "claude",
+    "anthropic",
+    "sonnet",
+    "opus",
+    "haiku"
+  ],
+  "openai": [
+    "chatgpt",
+    "chat gpt",
+    "openai",
+    "gpt-4",
+    "gpt 4",
+    "gpt4",
+    "gpt-5",
+    "gpt 5",
+    "gpt5",
+    "gpt-4o",
+    "codex",
+    "o1",
+    "o3"
+  ]
+}

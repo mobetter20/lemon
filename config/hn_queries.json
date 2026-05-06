@@ -1,0 +1,16 @@
+{
+  "queries": [
+    "Claude",
+    "Claude Code",
+    "Sonnet",
+    "Opus",
+    "Haiku",
+    "GPT-5",
+    "Codex",
+    "ChatGPT",
+    "Anthropic",
+    "OpenAI"
+  ],
+  "min_points": 20,
+  "comment_min_text_length": 20
+}
