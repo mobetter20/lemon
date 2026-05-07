@@ -68,6 +68,29 @@ jobs:
           restore-keys: |
             corpus-v1-
 
+      - name: Seed corpus from release on cache miss
+        # A 12-month CI backfill via arctic_shift takes ~13h — untenable for
+        # a 4-hour cron. The release `corpus-seed-2026-05-07` carries the
+        # initial snapshot (53 MB gzipped); we download + extract on first
+        # run, then the cache + incremental scrape take it from there.
+        if: steps.cache-corpus.outputs.cache-hit != 'true'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          set -e
+          mkdir -p corpus
+          if find corpus -name '*.ndjson' | grep -q .; then
+            echo "corpus already populated, skipping seed"
+            exit 0
+          fi
+          echo "Cache miss + empty corpus — seeding from release..."
+          gh release download corpus-seed-2026-05-07 \
+            --pattern "*.tar.gz" \
+            --output /tmp/corpus-seed.tar.gz
+          tar -xzf /tmp/corpus-seed.tar.gz -C corpus
+          echo "Seeded: $(find corpus -name '*.ndjson' | wc -l) shards"
+          du -sh corpus
+
       - name: Show corpus state
         run: |
           mkdir -p corpus
@@ -75,7 +98,8 @@ jobs:
             echo "corpus shards: $(find corpus -name '*.ndjson' | wc -l)"
             du -sh corpus
           else
-            echo "corpus is empty (cache miss) — cron will backfill"
+            echo "::error::corpus is empty after restore + seed — cannot proceed"
+            exit 1
           fi
 
       - name: Incremental scrape
