@@ -395,6 +395,23 @@ def main(
     with open(out_path, "w") as f:
         json.dump(output, f, indent=2)
 
+    # Sitemap: regenerate alongside data.json so lastmod tracks the freshest
+    # cron run. One URL — that's the dashboard. Search engines pick up the
+    # daily-changefreq hint and re-index after each cron without us nagging.
+    sitemap_path = out_path.parent / "sitemap.xml"
+    lastmod_date = output["generated_at"][:10]  # YYYY-MM-DD
+    sitemap_path.write_text(
+        '<?xml version="1.0" encoding="UTF-8"?>\n'
+        '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
+        '  <url>\n'
+        '    <loc>https://ajin.im/lemon/</loc>\n'
+        f'    <lastmod>{lastmod_date}</lastmod>\n'
+        '    <changefreq>daily</changefreq>\n'
+        '    <priority>1.0</priority>\n'
+        '  </url>\n'
+        '</urlset>\n'
+    )
+
     print(f"Wrote {out_path}")
     print(f"  total_records: {total_records}")
     print(f"  skipped: {skipped_unknown} unknown-model, {skipped_no_text} no-text, {skipped_no_date} no-date")

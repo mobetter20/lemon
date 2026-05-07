@@ -68,7 +68,7 @@ jobs:
           set -e
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add data.json
+          git add data.json sitemap.xml
           if git diff --staged --quiet; then
             echo "data.json unchanged — phrase-list edit had no effect on corpus."
             exit 0
