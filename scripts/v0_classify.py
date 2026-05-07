@@ -1,4 +1,4 @@
-"""v0 classifier — applies the curated phrase list to the corpus, produces phase5/data.json.
+"""v0 classifier — applies the curated phrase list to the corpus, produces data.json.
 
 For each record we mark:
 - complaint = True if its lowercased text contains any phrase from
@@ -15,7 +15,7 @@ Aggregation:
   the dashboard's "most-mentioned in complaints" list (audit-friendly: every
   term shown is a literal entry from the phrase list)
 
-Output schema matches phase5/mock_data.json so the dashboard reads either.
+Output schema matches mock_data.json so the dashboard reads either.
 """
 
 from __future__ import annotations
@@ -173,7 +173,7 @@ def assert_output_shape(output: dict, prior_total: int | None = None) -> None:
 def main(
     corpus_dir: Path = ROOT / "corpus",
     config_dir: Path = ROOT / "config",
-    out_path: Path = ROOT / "phase5" / "data.json",
+    out_path: Path = ROOT / "data.json",
     strict: bool = False,
 ) -> int:
     complaint_phrases, defection_phrases = load_phrases(config_dir)
@@ -413,7 +413,7 @@ if __name__ == "__main__":
     p = argparse.ArgumentParser()
     p.add_argument("--corpus-dir", type=Path, default=ROOT / "corpus")
     p.add_argument("--config-dir", type=Path, default=ROOT / "config")
-    p.add_argument("--out", type=Path, default=ROOT / "phase5" / "data.json")
+    p.add_argument("--out", type=Path, default=ROOT / "data.json")
     p.add_argument(
         "--strict",
         action="store_true",

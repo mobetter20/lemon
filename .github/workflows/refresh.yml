@@ -2,7 +2,7 @@ name: refresh
 
 # Phase 4 cron — every 4 hours, run incremental scrape (HN Algolia +
 # Reddit historical via arctic_shift) and re-classify, then commit
-# phase5/data.json. Skips reddit_recent: GH Actions runner IPs are 403'd
+# data.json. Skips reddit_recent: GH Actions runner IPs are 403'd
 # by Reddit's unauth JSON path (verified 2026-05-07, run 25455800152) and
 # PRAW is blocked account-side. We accept arctic_shift's ~24-48h lag.
 #
@@ -104,7 +104,7 @@ jobs:
 
       - name: Classify (strict)
         run: |
-          python scripts/v0_classify.py --strict --out phase5/data.json
+          python scripts/v0_classify.py --strict --out data.json
 
       - name: Commit data.json if changed
         id: commit
@@ -112,13 +112,13 @@ jobs:
           set -e
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add phase5/data.json
+          git add data.json
           if git diff --staged --quiet; then
             echo "no_change=true" >> "$GITHUB_OUTPUT"
             echo "data.json unchanged — nothing to commit."
             exit 0
           fi
-          NEW_GEN_AT=$(python -c "import json; print(json.load(open('phase5/data.json'))['generated_at'])")
+          NEW_GEN_AT=$(python -c "import json; print(json.load(open('data.json'))['generated_at'])")
           echo "new_generated_at=$NEW_GEN_AT" >> "$GITHUB_OUTPUT"
           git commit -m "data: refresh $(date -u +%Y-%m-%dT%H:%MZ) [skip ci]"
           git push origin HEAD:${GITHUB_REF_NAME}
@@ -146,7 +146,7 @@ jobs:
           EXPECTED_GEN_AT: ${{ steps.commit.outputs.new_generated_at }}
         run: |
           set -e
-          URL="https://mobetter20.github.io/lemon/phase5/data.json"
+          URL="https://mobetter20.github.io/lemon/data.json"
           for i in 1 2 3 4 5; do
             sleep 60
             ACTUAL=$(curl -fsSL "$URL" 2>/dev/null | python -c "import sys, json; print(json.load(sys.stdin).get('generated_at',''))" 2>/dev/null || echo "")

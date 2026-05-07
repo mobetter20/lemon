@@ -17,9 +17,9 @@ corpus/*
 phase1.log
 *.log
 
-# NOTE: phase5/data.json IS tracked. The Phase 4 cron commits it on every
-# run so GH Pages can serve it. Local dev: regenerate via scripts/v0_classify.py
-# and let git pick it up.
+# NOTE: data.json (at repo root) IS tracked. The Phase 4 cron commits it on
+# every run so GH Pages can serve it. Local dev: regenerate via
+# scripts/v0_classify.py and let git pick it up.
 
 # Archived v1 taxonomy proposal — generated sample inputs that contain corpus excerpts
 docs/_archive/v1_taxonomy_proposal/phase2/clustering_input.md

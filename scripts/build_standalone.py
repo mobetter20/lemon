@@ -17,17 +17,16 @@ import sys
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
-PHASE5 = ROOT / "phase5"
 
 
 def main(out_path: Path) -> int:
-    html = (PHASE5 / "index.html").read_text()
-    css = (PHASE5 / "style.css").read_text()
-    js = (PHASE5 / "dashboard.js").read_text()
+    html = (ROOT / "index.html").read_text()
+    css = (ROOT / "style.css").read_text()
+    js = (ROOT / "dashboard.js").read_text()
 
     # Pick the real data if it exists; fall back to mock
-    real_path = PHASE5 / "data.json"
-    mock_path = PHASE5 / "mock_data.json"
+    real_path = ROOT / "data.json"
+    mock_path = ROOT / "mock_data.json"
     if real_path.exists():
         data_path = real_path
         is_mock = False
@@ -35,7 +34,7 @@ def main(out_path: Path) -> int:
         data_path = mock_path
         is_mock = True
     else:
-        print("No data file found in phase5/. Run scripts/v0_classify.py first.", file=sys.stderr)
+        print("No data file found at repo root. Run scripts/v0_classify.py first.", file=sys.stderr)
         return 1
 
     with open(data_path) as f:

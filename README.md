@@ -7,7 +7,7 @@ Claude and Codex on Reddit and HN — one complaint rate per model, weekly,
 with trend.
 
 Selection-biased by construction. Classifier undercounts on purpose.
-**Trend > absolute level.** [Methodology on the dashboard.](phase5/index.html#methodology)
+**Trend > absolute level.** [Methodology on the dashboard.](https://ajin.im/lemon/#methodology)
 
 ## Why
 
@@ -44,14 +44,14 @@ rhetoric — labeled rhetoric, not behavior.
 pip install -e .
 python scripts/healthcheck.py            # confirm data sources reachable
 python scripts/run_phase1.py             # 12-month corpus pull (~hours)
-python scripts/v0_classify.py            # apply phrase list → phase5/data.json
+python scripts/v0_classify.py            # apply phrase list → data.json
 python scripts/build_standalone.py       # build a single-file HTML snapshot
 ```
 
 Dashboard preview:
 
 ```bash
-cd phase5 && python3 -m http.server 8766    # open http://localhost:8766
+python3 -m http.server 8766    # open http://localhost:8766
 ```
 
 ## How the classifier works
@@ -73,7 +73,7 @@ the trend captures direction.
 - **v0 classifier** (phrase-list): runs in ~30 seconds against ~350k records.
 - **Dashboard**: static site, single page, vanilla HTML/CSS/JS, dark monospace.
   Deployed via GitHub Pages.
-- **Cron** commits `phase5/data.json` on each refresh; the dashboard reads it
+- **Cron** commits `data.json` on each refresh; the dashboard reads it
   at page load with a staleness banner if data ages past 8 hours.
 
 ## Layout
@@ -83,7 +83,8 @@ lemon/
 ├── config/                  hand-curated knobs (phrases, subreddits, releases)
 ├── scrapers/                HN + Reddit collectors
 ├── scripts/                 healthcheck, orchestrator, classifier, stats
-├── phase5/                  dashboard (static site, served by GH Pages)
+├── index.html               dashboard (static site, served by GH Pages at ajin.im/lemon/)
+├── style.css · dashboard.js · data.json · og-image.png
 ├── docs/                    methodology + roadmap notes
 ├── .github/workflows/       refresh + reclassify crons
 └── corpus/                  scraped NDJSON (gitignored)

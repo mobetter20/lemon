@@ -2,11 +2,224 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<title>lemon</title>
-<meta http-equiv="refresh" content="0; url=phase5/">
-<link rel="canonical" href="phase5/">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>lemon — is it just you?</title>
+<meta name="description" content="AI quality is felt, not measured. Crowd-sourced sentiment for Claude and Codex this week.">
+<link rel="canonical" href="https://ajin.im/lemon/">
+<meta name="theme-color" content="#0c0c0e">
+
+<!-- Open Graph -->
+<meta property="og:type" content="website">
+<meta property="og:title" content="lemon — is it just you?">
+<meta property="og:description" content="AI quality is felt, not measured. Crowd-sourced sentiment for Claude and Codex this week.">
+<meta property="og:url" content="https://ajin.im/lemon/">
+<meta property="og:image" content="https://ajin.im/lemon/og-image.png">
+<meta property="og:image:width" content="1730">
+<meta property="og:image:height" content="909">
+
+<!-- Twitter -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="lemon — is it just you?">
+<meta name="twitter:description" content="AI quality is felt, not measured. Crowd-sourced sentiment for Claude and Codex this week.">
+<meta name="twitter:image" content="https://ajin.im/lemon/og-image.png">
+
+<link rel="stylesheet" href="style.css">
 </head>
 <body>
-<p>Redirecting to <a href="phase5/">phase5/</a>…</p>
+
+<div id="staleness-banner" hidden></div>
+
+<header class="banner">
+  <span class="banner-mark">lemon</span>
+  <span class="banner-msg">
+    check — crowd-sourced sentiment for Claude and Codex.
+    <a href="#methodology">methodology →</a>
+  </span>
+</header>
+
+<section class="masthead">
+  <h1>is it just <em>you</em>?</h1>
+  <p class="tagline">
+    AI quality is felt, not measured. Here's what the crowd is feeling
+    about Claude and Codex this week.
+  </p>
+  <p class="meta" id="meta-line">
+    corpus: <span id="meta-count">…</span> records ·
+    last updated <span id="meta-updated">…</span> ·
+    classifier <span id="meta-cls">v0</span>
+  </p>
+</section>
+
+<section class="controls">
+  <div class="toggle-group" role="radiogroup" aria-label="X-axis">
+    <button class="toggle active" data-axis="wall" aria-pressed="true">wall-clock</button>
+    <button class="toggle" data-axis="release" aria-pressed="false">weeks since release</button>
+  </div>
+  <p class="controls-note">
+    one number per model, weekly. trend matters more than absolute level — see methodology.
+  </p>
+</section>
+
+<main class="dashboard">
+
+  <section class="model-panel" data-model="claude">
+    <header class="panel-head">
+      <h2>Claude</h2>
+      <span class="panel-totals" id="totals-claude">— mentions this week</span>
+    </header>
+
+    <div class="big-number-block">
+      <div class="big-number" id="rate-claude">—</div>
+      <div class="big-number-label">complaints this week</div>
+      <div class="by-source" id="by-source-claude"></div>
+      <div class="delta" id="delta-claude">—</div>
+    </div>
+    <div class="chart-block">
+      <h3>complaint rate trend <span class="chart-sub">(90 days, weekly)</span></h3>
+      <div class="chart trend" id="trend-claude" aria-label="Claude complaint rate trend"></div>
+    </div>
+    <div class="top-terms-block">
+      <h3>most-mentioned in complaints <span class="chart-sub">(this week, top 10)</span></h3>
+      <ol class="top-terms" id="terms-claude" aria-label="Claude top terms"></ol>
+    </div>
+    <div class="chart-block">
+      <h3>defection rhetoric <span class="chart-sub">("switching to / cancelled / done with" — rhetoric, not behavior)</span></h3>
+      <div class="chart defection" id="def-claude" aria-label="Claude defection rhetoric trend"></div>
+    </div>
+  </section>
+  <section class="model-panel" data-model="openai">
+    <header class="panel-head">
+      <h2>ChatGPT / GPT-5 / Codex</h2>
+      <span class="panel-totals" id="totals-openai">— mentions this week</span>
+    </header>
+
+    <div class="big-number-block">
+      <div class="big-number" id="rate-openai">—</div>
+      <div class="big-number-label">complaints this week</div>
+      <div class="by-source" id="by-source-openai"></div>
+      <div class="delta" id="delta-openai">—</div>
+    </div>
+
+    <div class="chart-block">
+      <h3>complaint rate trend <span class="chart-sub">(90 days, weekly)</span></h3>
+      <div class="chart trend" id="trend-openai" aria-label="OpenAI complaint rate trend"></div>
+    </div>
+
+    <div class="top-terms-block">
+      <h3>most-mentioned in complaints <span class="chart-sub">(this week, top 10)</span></h3>
+      <ol class="top-terms" id="terms-openai" aria-label="OpenAI top terms"></ol>
+    </div>
+
+    <div class="chart-block">
+      <h3>defection rhetoric <span class="chart-sub">("switching to / cancelled / done with" — rhetoric, not behavior)</span></h3>
+      <div class="chart defection" id="def-openai" aria-label="OpenAI defection rhetoric trend"></div>
+    </div>
+  </section>
+
+</main>
+
+<section id="methodology" class="methodology">
+  <h2>methodology &amp; limits</h2>
+  <p class="lead">
+    The dashboard answers one question: <strong>is the crowd feeling what
+    you're feeling about Claude / Codex right now?</strong> It does not measure
+    user satisfaction, model quality, or actual user churn. Read the caveats.
+  </p>
+
+  <article class="caveat">
+    <h3>1. Selection-biased by construction</h3>
+    <p>
+      The dataset is mentions on Hacker News, r/ClaudeAI, r/OpenAI, r/ChatGPT,
+      r/LocalLLaMA, and r/singularity. People who are angry post; people who are
+      satisfied don't. The complaint rate is a property of <em>what gets posted
+      in complaint forums</em>, not of all users. The chart cannot say "users
+      hate model X" — only "this is what the loudest critics report this week."
+      Example permalinks beneath each top phrase reflect what was public at
+      scrape time; some may have been deleted or edited since.
+    </p>
+  </article>
+
+  <article class="caveat">
+    <h3>2. The classifier undercounts</h3>
+    <p>
+      A record is counted as a complaint if its text contains any phrase from
+      a hand-curated list (<a href="https://github.com/mobetter20/lemon/blob/main/config/complaint_phrases.json"><code>config/complaint_phrases.json</code></a>).
+      Real complaints that don't use those phrases are missed by design — the
+      trade-off is a classifier you can audit line-by-line. The
+      <strong>trend</strong> (week-over-week, 90-day) captures direction even
+      when the absolute level is conservative. Don't read the percentage as
+      precise — read it as honest.
+    </p>
+  </article>
+
+  <article class="caveat">
+    <h3>3. Defection language is rhetoric, not behavior</h3>
+    <p>
+      "Switching to," "cancelled," "done with" are tracked because they're
+      high-signal sentiment. They do <em>not</em> measure who actually churned.
+      People announce departures and stay. The chart label says "defection
+      rhetoric," not "% of users defected."
+    </p>
+  </article>
+
+  <article class="caveat">
+    <h3>4. Two-horse race tracks release calendars</h3>
+    <p>
+      Most short-term variation in the chart is "days since the last contentious
+      release." When OpenAI ships GPT-N, r/OpenAI explodes. Same for Claude. To
+      compare across models without launch confounding, toggle the x-axis to
+      <strong>weeks since release</strong>.
+    </p>
+  </article>
+
+  <article class="caveat">
+    <h3>5. Same phrase list, both models</h3>
+    <p>
+      The classifier applies an identical phrase list to claude and openai
+      content. No per-model tuning. The comparison is honest only if both are
+      measured the same way. The list is in the repo; audit it.
+    </p>
+  </article>
+
+  <article class="caveat">
+    <h3>6. Reddit data lags 1–2 days; HN is real-time</h3>
+    <p>
+      Reddit posts arrive through a third-party archive that re-indexes
+      daily, so the most-recent week on the Reddit panels is built from a
+      partial sample — its rate ticks up as more posts get added over the
+      following day or two. Hacker News data is live. <strong>Read the
+      trend, not the rightmost point.</strong>
+    </p>
+  </article>
+
+  <article class="caveat">
+    <h3>7. Twitter/X is missing</h3>
+    <p>
+      Free-tier Twitter API access closed in 2023 and the paid tier is too
+      expensive for a free dashboard. Bluesky covers a sliver of similar
+      discourse but is journalist-skewed. This is the loudest gap in the
+      dataset.
+    </p>
+  </article>
+
+  <article class="caveat">
+    <h3>8. Volume is asymmetric</h3>
+    <p>
+      ChatGPT/Codex are mentioned far more than Claude. The big number on
+      each panel is a <strong>rate</strong> (% of weekly mentions that
+      contained complaint phrases), not a count. Compare the rates between
+      models — not the per-week mention totals shown beneath them.
+    </p>
+  </article>
+</section>
+
+<footer class="footer">
+  <p>
+    lemon · <a href="https://github.com/mobetter20/lemon">source</a> ·
+    one number per model, honestly undercounted, with a trend you can read
+  </p>
+</footer>
+
+<script src="dashboard.js" defer></script>
 </body>
 </html>
