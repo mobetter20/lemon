@@ -424,6 +424,9 @@ code {
   transition: transform 0.12s;
 }
 .top-terms details[open] .term-summary::before { transform: rotate(90deg); }
+@media (prefers-reduced-motion: reduce) {
+  .top-terms .term-summary::before { transition: none; }
+}
 .top-terms .term-summary:hover { color: var(--lemon-flesh); }
 
 .top-terms .term {
