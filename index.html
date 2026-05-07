@@ -137,7 +137,7 @@
       r/LocalLLaMA, and r/singularity. People who are angry post; people who are
       satisfied don't. The complaint rate is a property of <em>what gets posted
       in complaint forums</em>, not of all users. The chart cannot say "users
-      hate model X" — only "this is what the loudest critics report this week."
+      hate model X" — only "this is what people who post this week are reporting."
       Example permalinks beneath each top phrase reflect what was public at
       scrape time; some may have been deleted or edited since.
     </p>
@@ -157,17 +157,29 @@
   </article>
 
   <article class="caveat">
-    <h3>3. Defection language is rhetoric, not behavior</h3>
+    <h3>3. The headline number is last <em>completed</em> week, not this week</h3>
     <p>
-      "Switching to," "cancelled," "done with" are tracked because they're
-      high-signal sentiment. They do <em>not</em> measure who actually churned.
-      People announce departures and stay. The chart label says "defection
-      rhetoric," not "% of users defected."
+      Reddit posts arrive through a third-party archive that re-indexes
+      daily, so the current week's rate is always a partial sample until
+      indexing catches up a day or two later. Hacker News data is live. To
+      avoid showing a number that drifts under the visitor, the big
+      headline shows the <strong>last completed week</strong> — full
+      sample, stable. The "this week so far" chip below each panel is a
+      live-but-partial peek; it'll move slightly until the week closes.
     </p>
   </article>
 
   <article class="caveat">
-    <h3>4. Two-horse race tracks release calendars</h3>
+    <h3>4. Same phrase list, both models</h3>
+    <p>
+      The classifier applies an identical phrase list to claude and openai
+      content. No per-model tuning. The comparison is honest only if both are
+      measured the same way. The list is in the repo; audit it.
+    </p>
+  </article>
+
+  <article class="caveat">
+    <h3>5. Two-horse race tracks release calendars</h3>
     <p>
       Most short-term variation in the chart is "days since the last contentious
       release." When OpenAI ships GPT-N, r/OpenAI spikes. Same for Claude. To
@@ -177,24 +189,12 @@
   </article>
 
   <article class="caveat">
-    <h3>5. Same phrase list, both models</h3>
+    <h3>6. Volume is asymmetric</h3>
     <p>
-      The classifier applies an identical phrase list to claude and openai
-      content. No per-model tuning. The comparison is honest only if both are
-      measured the same way. The list is in the repo; audit it.
-    </p>
-  </article>
-
-  <article class="caveat">
-    <h3>6. The headline number is last <em>completed</em> week, not this week</h3>
-    <p>
-      Reddit posts arrive through a third-party archive that re-indexes
-      daily, so the current week's rate is always a partial sample until
-      indexing catches up a day or two later. Hacker News data is live. To
-      avoid showing a number that drifts under the visitor, the big
-      headline shows the <strong>last completed week</strong> — full
-      sample, stable. The "this week so far" chip below each panel is a
-      live-but-partial peek; it'll move slightly until the week closes.
+      ChatGPT/Codex are mentioned far more than Claude. The big number on
+      each panel is a <strong>rate</strong> (% of weekly mentions that
+      contained complaint phrases), not a count. Compare the rates between
+      models — not the per-week mention totals shown beneath them.
     </p>
   </article>
 
@@ -209,12 +209,12 @@
   </article>
 
   <article class="caveat">
-    <h3>8. Volume is asymmetric</h3>
+    <h3>8. Defection language is rhetoric, not behavior</h3>
     <p>
-      ChatGPT/Codex are mentioned far more than Claude. The big number on
-      each panel is a <strong>rate</strong> (% of weekly mentions that
-      contained complaint phrases), not a count. Compare the rates between
-      models — not the per-week mention totals shown beneath them.
+      "Switching to," "cancelled," "done with" are tracked because they're
+      high-signal sentiment. They do <em>not</em> measure who actually churned.
+      People announce departures and stay. The chart label says "defection
+      rhetoric," not "% of users defected."
     </p>
   </article>
 </section>
@@ -222,7 +222,7 @@
 <footer class="footer">
   <p>
     lemon · <a href="https://github.com/mobetter20/lemon">source</a> ·
-    one number per model, honestly undercounted, with a trend you can read
+    the crowd is what's left when nothing else can be trusted
   </p>
 </footer>
 
