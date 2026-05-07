@@ -188,6 +188,7 @@ def scrape_reddit_historical(
     primary = "arctic_shift" if use_arctic_shift else "pullpush"
     now = datetime.now(timezone.utc)
     n_records = 0
+    n_windows_with_posts = 0
 
     for sub in subs:
         for month_offset in range(months_back):
@@ -201,6 +202,8 @@ def scrape_reddit_historical(
                 flush=True,
             )
             posts, source_used = search_submissions(sub, after_ts, before_ts, primary=primary)
+            if posts:
+                n_windows_with_posts += 1
             kept = filter_top_percentile(posts, top_pct, floor)
             print(
                 f"  src={source_used} pulled={len(posts)} "
@@ -294,5 +297,22 @@ def scrape_reddit_historical(
 
             time.sleep(1.0)
 
-    print(f"[reddit_hist] total records: {n_records}", flush=True)
+    # Fail-loud guard: if no window across any subreddit returned posts,
+    # arctic_shift is almost certainly down (or both arctic_shift AND
+    # pullpush are). Without this, the cron silently produces a zero-Reddit
+    # data.json that passes --strict (HN-only weeks still have records),
+    # and the dashboard goes flat on Reddit without anyone noticing.
+    expected_windows = len(subs) * months_back
+    if expected_windows > 0 and n_windows_with_posts == 0:
+        raise RuntimeError(
+            f"reddit_hist: ALL {expected_windows} (sub × month) windows "
+            f"returned 0 posts. arctic_shift / pullpush are likely down. "
+            f"Failing the run rather than silently producing zero-Reddit data."
+        )
+
+    print(
+        f"[reddit_hist] total records: {n_records} "
+        f"(windows_with_posts={n_windows_with_posts}/{expected_windows})",
+        flush=True,
+    )
     return n_records

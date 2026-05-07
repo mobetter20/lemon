@@ -447,7 +447,12 @@ function append(parent, tag, attrs = {}, text) {
    ---------------------------------------------------------- */
 function renderTrend(hostId, series, family) {
   const host = document.getElementById(hostId);
-  if (!host || !series || series.length === 0) return;
+  if (!host) return;
+  if (!series || series.length === 0) {
+    // Don't leave a stale "loading…" message; surface the empty state.
+    _setChartMessage(hostId, "no trend data");
+    return;
+  }
   const W = host.clientWidth;
   const H = host.clientHeight;
   const padL = 36, padR = 12, padT = 10, padB = 38;
@@ -541,7 +546,11 @@ function renderTrend(hostId, series, family) {
    ---------------------------------------------------------- */
 function renderDefection(hostId, series) {
   const host = document.getElementById(hostId);
-  if (!host || !series || series.length === 0) return;
+  if (!host) return;
+  if (!series || series.length === 0) {
+    _setChartMessage(hostId, "no defection-rhetoric data");
+    return;
+  }
   const W = host.clientWidth;
   const H = host.clientHeight;
   const padL = 36, padR = 12, padT = 8, padB = 22;

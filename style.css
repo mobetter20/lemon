@@ -198,8 +198,9 @@ code {
   background: transparent;
   color: var(--fg-dim);
   font-family: inherit;
-  font-size: 12px;
-  padding: 6px 14px;
+  font-size: 13px;
+  padding: 8px 16px;
+  min-height: 36px;
   border: none;
   cursor: pointer;
   border-right: 1px solid var(--rule);
@@ -571,6 +572,10 @@ code {
   }
   .panel-head h2 {
     font-size: 18px;
+  }
+  .toggle {
+    padding: 10px 18px;
+    min-height: 44px;
   }
   .big-number {
     font-size: clamp(56px, 18vw, 96px);

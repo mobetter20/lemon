@@ -77,10 +77,10 @@
   </p>
 </section>
 
-<section class="verdict" id="verdict-line" hidden></section>
+<aside class="verdict" id="verdict-line" aria-label="Last completed week verdict" hidden></aside>
 
 <section class="controls">
-  <div class="toggle-group" role="radiogroup" aria-label="X-axis">
+  <div class="toggle-group" aria-label="X-axis mode">
     <button class="toggle active" data-axis="wall" aria-pressed="true">wall-clock</button>
     <button class="toggle" data-axis="release" aria-pressed="false">weeks since release</button>
   </div>
@@ -106,7 +106,7 @@
     </div>
     <div class="chart-block">
       <h3>trend <span class="chart-sub">(90 days, weekly)</span></h3>
-      <div class="chart trend" id="trend-claude" aria-label="Claude complaint rate trend"></div>
+      <div class="chart trend" id="trend-claude" role="img" aria-label="Claude complaint rate trend"></div>
     </div>
     <div class="top-terms-block">
       <h3>top complaint phrases <span class="chart-sub">(this week, top 10)</span></h3>
@@ -114,7 +114,7 @@
     </div>
     <div class="chart-block">
       <h3>defection rhetoric <span class="chart-sub">("switching to / cancelled / done with" — rhetoric, not behavior)</span></h3>
-      <div class="chart defection" id="def-claude" aria-label="Claude defection rhetoric trend"></div>
+      <div class="chart defection" id="def-claude" role="img" aria-label="Claude defection rhetoric trend"></div>
     </div>
   </section>
   <section class="model-panel" data-model="openai">
@@ -133,7 +133,7 @@
 
     <div class="chart-block">
       <h3>trend <span class="chart-sub">(90 days, weekly)</span></h3>
-      <div class="chart trend" id="trend-openai" aria-label="OpenAI complaint rate trend"></div>
+      <div class="chart trend" id="trend-openai" role="img" aria-label="OpenAI complaint rate trend"></div>
     </div>
 
     <div class="top-terms-block">
@@ -143,7 +143,7 @@
 
     <div class="chart-block">
       <h3>defection rhetoric <span class="chart-sub">("switching to / cancelled / done with" — rhetoric, not behavior)</span></h3>
-      <div class="chart defection" id="def-openai" aria-label="OpenAI defection rhetoric trend"></div>
+      <div class="chart defection" id="def-openai" role="img" aria-label="OpenAI defection rhetoric trend"></div>
     </div>
   </section>
 
