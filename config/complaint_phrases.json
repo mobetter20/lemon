@@ -69,7 +69,6 @@
     "had enough",
     "ridiculous",
     "absurd",
-    "joke",
     "is a joke",
     "hallucinating",
     "hallucinated",
@@ -96,7 +95,6 @@
     "is down",
     "crashed",
     "crashing",
-    "context window",
     "forgot",
     "forgot what",
     "context loss",
@@ -118,7 +116,13 @@
     "ripoff",
     "rip off",
     "waste of money",
-    "not worth"
+    "not worth",
+    "unusable",
+    "terrible",
+    "disappointed",
+    "gone downhill",
+    "subpar",
+    "refund"
   ],
   "defection_phrases": [
     "switching to",
@@ -129,7 +133,6 @@
     "canceling",
     "cancelled my",
     "going back to",
-    "back to",
     "moved to",
     "moving to",
     "done with",
