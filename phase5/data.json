@@ -2,17 +2,17 @@
   "version": "2.0",
   "schema_version": "v0",
   "classifier_version": "v0",
-  "generated_at": "2026-05-07T10:38:11.890428+00:00",
+  "generated_at": "2026-05-07T14:35:47.353887+00:00",
   "totals": {
-    "all_records": 350543
+    "all_records": 350612
   },
   "summary": {
     "claude": {
       "this_week_label": "2026-W19",
       "this_week": {
-        "all_mentions": 1833,
-        "complaints": 173,
-        "rate": 0.0944,
+        "all_mentions": 1864,
+        "complaints": 177,
+        "rate": 0.095,
         "by_source": {
           "hn": {
             "all_mentions": 905,
@@ -20,9 +20,9 @@
             "rate": 0.0785
           },
           "reddit": {
-            "all_mentions": 928,
-            "complaints": 102,
-            "rate": 0.1099
+            "all_mentions": 959,
+            "complaints": 106,
+            "rate": 0.1105
           }
         }
       },
@@ -43,14 +43,14 @@
           }
         }
       },
-      "delta_pts": -0.1
+      "delta_pts": -0.0
     },
     "openai": {
       "this_week_label": "2026-W19",
       "this_week": {
-        "all_mentions": 1699,
-        "complaints": 127,
-        "rate": 0.0747,
+        "all_mentions": 1721,
+        "complaints": 130,
+        "rate": 0.0755,
         "by_source": {
           "hn": {
             "all_mentions": 846,
@@ -58,9 +58,9 @@
             "rate": 0.0745
           },
           "reddit": {
-            "all_mentions": 853,
-            "complaints": 64,
-            "rate": 0.075
+            "all_mentions": 875,
+            "complaints": 67,
+            "rate": 0.0766
           }
         }
       },
@@ -81,7 +81,7 @@
           }
         }
       },
-      "delta_pts": -0.8
+      "delta_pts": -0.7
     }
   },
   "trend": {
@@ -400,9 +400,9 @@
       },
       {
         "week": "2026-W19",
-        "all_mentions": 1833,
-        "complaints": 173,
-        "rate": 0.0944
+        "all_mentions": 1864,
+        "complaints": 177,
+        "rate": 0.095
       }
     ],
     "openai": [
@@ -720,9 +720,9 @@
       },
       {
         "week": "2026-W19",
-        "all_mentions": 1699,
-        "complaints": 127,
-        "rate": 0.0747
+        "all_mentions": 1721,
+        "complaints": 130,
+        "rate": 0.0755
       }
     ]
   },
@@ -757,6 +757,33 @@
           ]
         },
         {
+          "term": "context window",
+          "count": 14,
+          "examples": [
+            {
+              "permalink": "https://www.reddit.com/r/LocalLLaMA/comments/1t4wv6c/12m_context_window_and_some_some_sprinkle_of_lies/",
+              "date": "2026-05-06T00:04:28+00:00",
+              "score": 71,
+              "source": "reddit",
+              "_kind": "top_scored"
+            },
+            {
+              "permalink": "https://news.ycombinator.com/item?id=48039603",
+              "date": "2026-05-06T18:15:21+00:00",
+              "score": 0,
+              "source": "hn",
+              "_kind": "newest"
+            },
+            {
+              "permalink": "https://www.reddit.com/r/ClaudeAI/comments/1t32rzn/stop_trying_to_put_me_to_bed_claude/ojsy9j3/",
+              "date": "2026-05-04T03:41:28+00:00",
+              "score": 3,
+              "source": "reddit",
+              "_kind": "oldest"
+            }
+          ]
+        },
+        {
           "term": "regression",
           "count": 14,
           "examples": [
@@ -778,33 +805,6 @@
               "permalink": "https://www.reddit.com/r/ClaudeAI/comments/1t32zxi/anyone_actually_built_a_real_feedback_loop_for/",
               "date": "2026-05-04T00:59:03+00:00",
               "score": 9,
-              "source": "reddit",
-              "_kind": "oldest"
-            }
-          ]
-        },
-        {
-          "term": "context window",
-          "count": 12,
-          "examples": [
-            {
-              "permalink": "https://www.reddit.com/r/ClaudeAI/comments/1t3du61/your_claude_code_agent_is_always_working_from/",
-              "date": "2026-05-04T10:33:23+00:00",
-              "score": 61,
-              "source": "reddit",
-              "_kind": "top_scored"
-            },
-            {
-              "permalink": "https://news.ycombinator.com/item?id=48039603",
-              "date": "2026-05-06T18:15:21+00:00",
-              "score": 0,
-              "source": "hn",
-              "_kind": "newest"
-            },
-            {
-              "permalink": "https://www.reddit.com/r/ClaudeAI/comments/1t32rzn/stop_trying_to_put_me_to_bed_claude/ojsy9j3/",
-              "date": "2026-05-04T03:41:28+00:00",
-              "score": 3,
               "source": "reddit",
               "_kind": "oldest"
             }
@@ -865,6 +865,33 @@
           ]
         },
         {
+          "term": "broken",
+          "count": 11,
+          "examples": [
+            {
+              "permalink": "https://www.reddit.com/r/ClaudeAI/comments/1t4gchn/i_asked_claude_to_investigate_its_own_token_burn/",
+              "date": "2026-05-05T14:00:32+00:00",
+              "score": 236,
+              "source": "reddit",
+              "_kind": "top_scored"
+            },
+            {
+              "permalink": "https://news.ycombinator.com/item?id=48041101",
+              "date": "2026-05-06T20:10:59+00:00",
+              "score": 0,
+              "source": "hn",
+              "_kind": "newest"
+            },
+            {
+              "permalink": "https://www.reddit.com/r/ClaudeAI/comments/1t32zxi/anyone_actually_built_a_real_feedback_loop_for/",
+              "date": "2026-05-04T00:59:03+00:00",
+              "score": 9,
+              "source": "reddit",
+              "_kind": "oldest"
+            }
+          ]
+        },
+        {
           "term": "usage limit",
           "count": 11,
           "examples": [
@@ -913,33 +940,6 @@
               "permalink": "https://www.reddit.com/r/ClaudeAI/comments/1t32rzn/stop_trying_to_put_me_to_bed_claude/ojs7yrf/",
               "date": "2026-05-04T00:57:28+00:00",
               "score": 4,
-              "source": "reddit",
-              "_kind": "oldest"
-            }
-          ]
-        },
-        {
-          "term": "broken",
-          "count": 10,
-          "examples": [
-            {
-              "permalink": "https://www.reddit.com/r/ClaudeAI/comments/1t4gchn/i_asked_claude_to_investigate_its_own_token_burn/",
-              "date": "2026-05-05T14:00:32+00:00",
-              "score": 236,
-              "source": "reddit",
-              "_kind": "top_scored"
-            },
-            {
-              "permalink": "https://news.ycombinator.com/item?id=48041101",
-              "date": "2026-05-06T20:10:59+00:00",
-              "score": 0,
-              "source": "hn",
-              "_kind": "newest"
-            },
-            {
-              "permalink": "https://www.reddit.com/r/ClaudeAI/comments/1t32zxi/anyone_actually_built_a_real_feedback_loop_for/",
-              "date": "2026-05-04T00:59:03+00:00",
-              "score": 9,
               "source": "reddit",
               "_kind": "oldest"
             }
@@ -1233,21 +1233,28 @@
           ]
         },
         {
-          "term": "trash",
-          "count": 4,
+          "term": "context window",
+          "count": 5,
           "examples": [
             {
-              "permalink": "https://www.reddit.com/r/ChatGPT/comments/1t3vfsw/but_im_going_to_gently_slow_you_down_on_one_part/ojzjelt/",
-              "date": "2026-05-05T02:34:13+00:00",
-              "score": 19,
+              "permalink": "https://www.reddit.com/r/LocalLLaMA/comments/1t4wv6c/12m_context_window_and_some_some_sprinkle_of_lies/",
+              "date": "2026-05-06T00:04:28+00:00",
+              "score": 71,
               "source": "reddit",
               "_kind": "top_scored"
             },
             {
-              "permalink": "https://news.ycombinator.com/item?id=48003185",
-              "date": "2026-05-04T00:34:24+00:00",
-              "score": 0,
-              "source": "hn",
+              "permalink": "https://www.reddit.com/r/LocalLLaMA/comments/1t4wv6c/12m_context_window_and_some_some_sprinkle_of_lies/ok60w5i/",
+              "date": "2026-05-06T01:07:56+00:00",
+              "score": 3,
+              "source": "reddit",
+              "_kind": "newest"
+            },
+            {
+              "permalink": "https://www.reddit.com/r/LocalLLaMA/comments/1t3i219/the_more_i_use_it_the_more_im_impressed/ojvdu4e/",
+              "date": "2026-05-04T14:23:20+00:00",
+              "score": 5,
+              "source": "reddit",
               "_kind": "oldest"
             }
           ]
@@ -1467,7 +1474,7 @@
       },
       {
         "week": "2026-W19",
-        "rate": 0.0218
+        "rate": 0.0225
       }
     ],
     "openai": [
@@ -1681,7 +1688,7 @@
       },
       {
         "week": "2026-W19",
-        "rate": 0.0212
+        "rate": 0.0215
       }
     ]
   },
