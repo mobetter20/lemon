@@ -20,6 +20,7 @@ Output schema matches phase5/mock_data.json so the dashboard reads either.
 
 from __future__ import annotations
 
+import argparse
 import json
 import re
 import sys
@@ -47,7 +48,11 @@ def load_releases(config_dir: Path) -> list[dict]:
 
 def iter_corpus(corpus_dir: Path):
     for shard in sorted(corpus_dir.rglob("*.ndjson")):
-        with open(shard) as f:
+        # errors="replace": one record with a stray non-UTF-8 byte
+        # (mojibake from upstream) shouldn't crash the whole classifier.
+        # The replacement char ufffd will fail json.loads for that record
+        # only, and the except below skips it.
+        with open(shard, encoding="utf-8", errors="replace") as f:
             for line in f:
                 line = line.strip()
                 if not line:
@@ -106,10 +111,60 @@ def families_for(model_mentioned: str | None) -> list[str]:
     return []
 
 
+def assert_output_shape(output: dict, prior_total: int | None = None) -> None:
+    """Hard asserts for the Phase 4 cron.
+
+    Designed so a silent zero-record run cannot quietly advance the dashboard.
+    If any of these fail, the workflow exits red and the user notices.
+    """
+    summary = output.get("summary") or {}
+    trend = output.get("trend") or {}
+    totals = output.get("totals") or {}
+
+    assert summary, "summary block missing"
+    assert trend, "trend block missing"
+    assert "claude" in summary and "openai" in summary, "summary must have both families"
+
+    # At least one family had this-week mentions. If both are 0 the corpus is dead.
+    this_week_total = (
+        summary["claude"]["this_week"]["all_mentions"]
+        + summary["openai"]["this_week"]["all_mentions"]
+    )
+    assert this_week_total > 0, (
+        f"this-week all_mentions is 0 across both families — scraper or "
+        f"classifier is broken (claude={summary['claude']['this_week']['all_mentions']}, "
+        f"openai={summary['openai']['this_week']['all_mentions']})"
+    )
+
+    # Per-source non-empty: this catches a silent single-source outage
+    # (e.g., Reddit/arctic_shift returned 0 results but HN saved the day).
+    # Look at the most recent week with data; require at least one source present.
+    for fam in ("claude", "openai"):
+        s = summary[fam]
+        if s["this_week"]["all_mentions"] == 0:
+            continue  # this family genuinely had no mentions this week
+        by_source = s["this_week"].get("by_source") or {}
+        assert by_source, f"{fam} this-week has all_mentions but empty by_source"
+
+    # Trend has at least 4 weeks for both families (90-day chart needs density)
+    for fam in ("claude", "openai"):
+        assert len(trend[fam]) >= 4, (
+            f"{fam} trend has only {len(trend[fam])} weeks — corpus is too thin"
+        )
+
+    # Total records didn't shrink vs. prior data.json (catches corpus loss).
+    if prior_total is not None:
+        cur_total = totals.get("all_records", 0)
+        assert cur_total >= prior_total, (
+            f"total_records shrank: prior={prior_total} now={cur_total}"
+        )
+
+
 def main(
     corpus_dir: Path = ROOT / "corpus",
     config_dir: Path = ROOT / "config",
     out_path: Path = ROOT / "phase5" / "data.json",
+    strict: bool = False,
 ) -> int:
     complaint_phrases, defection_phrases = load_phrases(config_dir)
     match_complaint = build_matcher(complaint_phrases)
@@ -315,6 +370,17 @@ def main(
         "releases": load_releases(config_dir),
     }
 
+    if strict:
+        prior_total = None
+        if out_path.exists():
+            try:
+                with open(out_path) as f:
+                    prior = json.load(f)
+                prior_total = (prior.get("totals") or {}).get("all_records")
+            except (json.JSONDecodeError, OSError):
+                pass
+        assert_output_shape(output, prior_total=prior_total)
+
     out_path.parent.mkdir(parents=True, exist_ok=True)
     with open(out_path, "w") as f:
         json.dump(output, f, indent=2)
@@ -334,4 +400,21 @@ def main(
 
 
 if __name__ == "__main__":
-    sys.exit(main())
+    p = argparse.ArgumentParser()
+    p.add_argument("--corpus-dir", type=Path, default=ROOT / "corpus")
+    p.add_argument("--config-dir", type=Path, default=ROOT / "config")
+    p.add_argument("--out", type=Path, default=ROOT / "phase5" / "data.json")
+    p.add_argument(
+        "--strict",
+        action="store_true",
+        help="Run output-shape asserts (use for cron). Exits non-zero on any failure.",
+    )
+    args = p.parse_args()
+    sys.exit(
+        main(
+            corpus_dir=args.corpus_dir,
+            config_dir=args.config_dir,
+            out_path=args.out,
+            strict=args.strict,
+        )
+    )

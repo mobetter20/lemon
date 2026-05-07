@@ -17,12 +17,16 @@ corpus/*
 phase1.log
 *.log
 
-# Generated phrase-classification outputs (built from corpus)
-phase5/data.json
+# NOTE: phase5/data.json IS tracked. The Phase 4 cron commits it on every
+# run so GH Pages can serve it. Local dev: regenerate via scripts/v0_classify.py
+# and let git pick it up.
 
 # Archived v1 taxonomy proposal — generated sample inputs that contain corpus excerpts
 docs/_archive/v1_taxonomy_proposal/phase2/clustering_input.md
 docs/_archive/v1_taxonomy_proposal/phase2/noise_floor_input.md
+
+# Local-only agent instructions; intentionally not tracked
+CLAUDE.md
 
 # OS
 .DS_Store

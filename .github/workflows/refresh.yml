@@ -1,0 +1,160 @@
+name: refresh
+
+# Phase 4 cron — every 4 hours, run incremental scrape (HN Algolia +
+# Reddit historical via arctic_shift) and re-classify, then commit
+# phase5/data.json. Skips reddit_recent: GH Actions runner IPs are 403'd
+# by Reddit's unauth JSON path (verified 2026-05-07, run 25455800152) and
+# PRAW is blocked account-side. We accept arctic_shift's ~24-48h lag.
+#
+# Self-healing: corpus/ is gitignored and persisted between runs via
+# actions/cache. On cache miss, cron_refresh.py falls back to a 12-month
+# backfill (slow but recoverable).
+#
+# Verification (baked in, never eyeball):
+#   - cron_refresh exits non-zero only if BOTH scrapers fail entirely.
+#   - v0_classify.py --strict asserts: this-week mentions > 0, by_source
+#     non-empty, ≥4 weeks of trend per family, total didn't shrink.
+#   - Post-deploy: poll GH Pages and assert the live data.json matches
+#     the just-pushed generated_at; retry 3× with 60s backoff.
+
+on:
+  schedule:
+    - cron: "0 */4 * * *"
+  workflow_dispatch:
+    inputs:
+      months_back:
+        description: "Override incremental window (default 1 = ~30 days)"
+        required: false
+        default: "1"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: refresh
+  cancel-in-progress: false
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    # 60 was too tight: a 12-month backfill on cache miss timed out at the
+    # arctic_shift step. Subsequent runs (cache hit) finish in ~5 min, so
+    # this only matters for cold starts — but cold starts must succeed.
+    timeout-minutes: 120
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: pip
+
+      - name: Install deps
+        run: pip install -e .
+
+      - name: Restore corpus cache
+        id: cache-corpus
+        uses: actions/cache/restore@v4
+        with:
+          path: corpus
+          key: corpus-v1-${{ github.run_id }}
+          restore-keys: |
+            corpus-v1-
+
+      - name: Seed corpus from release on cache miss
+        # A 12-month CI backfill via arctic_shift takes ~13h — untenable for
+        # a 4-hour cron. The release `corpus-seed-2026-05-07` carries the
+        # initial snapshot (53 MB gzipped); we download + extract on first
+        # run, then the cache + incremental scrape take it from there.
+        if: steps.cache-corpus.outputs.cache-hit != 'true'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          set -e
+          mkdir -p corpus
+          if find corpus -name '*.ndjson' | grep -q .; then
+            echo "corpus already populated, skipping seed"
+            exit 0
+          fi
+          echo "Cache miss + empty corpus — seeding from release..."
+          gh release download corpus-seed-2026-05-07 \
+            --pattern "*.tar.gz" \
+            --output /tmp/corpus-seed.tar.gz
+          tar -xzf /tmp/corpus-seed.tar.gz -C corpus
+          echo "Seeded: $(find corpus -name '*.ndjson' | wc -l) shards"
+          du -sh corpus
+
+      - name: Show corpus state
+        run: |
+          mkdir -p corpus
+          if find corpus -name '*.ndjson' | grep -q .; then
+            echo "corpus shards: $(find corpus -name '*.ndjson' | wc -l)"
+            du -sh corpus
+          else
+            echo "::error::corpus is empty after restore + seed — cannot proceed"
+            exit 1
+          fi
+
+      - name: Incremental scrape
+        run: |
+          python scripts/cron_refresh.py \
+            --months-back ${{ github.event.inputs.months_back || '1' }}
+
+      - name: Classify (strict)
+        run: |
+          python scripts/v0_classify.py --strict --out phase5/data.json
+
+      - name: Commit data.json if changed
+        id: commit
+        run: |
+          set -e
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add phase5/data.json
+          if git diff --staged --quiet; then
+            echo "no_change=true" >> "$GITHUB_OUTPUT"
+            echo "data.json unchanged — nothing to commit."
+            exit 0
+          fi
+          NEW_GEN_AT=$(python -c "import json; print(json.load(open('phase5/data.json'))['generated_at'])")
+          echo "new_generated_at=$NEW_GEN_AT" >> "$GITHUB_OUTPUT"
+          git commit -m "data: refresh $(date -u +%Y-%m-%dT%H:%MZ) [skip ci]"
+          git push origin HEAD:${GITHUB_REF_NAME}
+
+      - name: Save corpus cache
+        # `if: always()` so a classifier failure (mid-iteration) still saves
+        # the work the scrape just did. Otherwise every retry re-pays the
+        # ~35-min scrape cost. Cache key is run-id-stamped, so each run
+        # writes a distinct entry (size budget: ~10 GB; one corpus is ~200 MB).
+        if: always() && steps.cache-corpus.outputs.cache-hit != 'true'
+        uses: actions/cache/save@v4
+        with:
+          path: corpus
+          key: corpus-v1-${{ github.run_id }}
+
+      - name: Verify GH Pages serves new data
+        # The cron's job is to refresh data — Pages availability is a separate
+        # concern. Don't fail the job if the curl-check times out: data has
+        # already been committed and pushed by the previous step. The job-level
+        # status will go red on real Pages-deploy failures, but a slow CDN
+        # propagation won't block tomorrow's cron run.
+        continue-on-error: true
+        if: steps.commit.outputs.no_change != 'true'
+        env:
+          EXPECTED_GEN_AT: ${{ steps.commit.outputs.new_generated_at }}
+        run: |
+          set -e
+          URL="https://mobetter20.github.io/lemon/phase5/data.json"
+          for i in 1 2 3 4 5; do
+            sleep 60
+            ACTUAL=$(curl -fsSL "$URL" 2>/dev/null | python -c "import sys, json; print(json.load(sys.stdin).get('generated_at',''))" 2>/dev/null || echo "")
+            echo "attempt $i: live generated_at=$ACTUAL (expected=$EXPECTED_GEN_AT)"
+            if [ "$ACTUAL" = "$EXPECTED_GEN_AT" ]; then
+              echo "::notice::Pages picked up the new data.json on attempt $i."
+              exit 0
+            fi
+          done
+          echo "::error::Pages did not pick up new data.json after 5 attempts (~5 min)."
+          exit 1

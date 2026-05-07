@@ -98,6 +98,27 @@ code {
 .banner-msg { color: var(--fg-dim); flex: 1; }
 .banner-msg a { font-size: inherit; }
 
+/* Staleness banner — shown only when data.json.generated_at age > 8h.
+   Yellow at 8–24h ("data is Nh old"), red at 24h+ ("cron may be down"). */
+#staleness-banner {
+  position: sticky;
+  top: 0;
+  z-index: 200;
+  padding: var(--space-2) var(--space-4);
+  font-size: 12px;
+  font-weight: 600;
+  text-align: center;
+  letter-spacing: 0.02em;
+}
+#staleness-banner.stale-yellow {
+  background: var(--lemon-zest);
+  color: var(--bg);
+}
+#staleness-banner.stale-red {
+  background: var(--c-defection);
+  color: var(--fg);
+}
+
 /* ============================================================
    MASTHEAD
    ============================================================ */
