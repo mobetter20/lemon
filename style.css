@@ -181,6 +181,12 @@ code {
 }
 .toggle:last-child { border-right: none; }
 .toggle:hover { color: var(--fg); background: var(--bg-2); }
+.toggle:focus-visible {
+  outline: 2px solid var(--lemon-rind);
+  outline-offset: 2px;
+  position: relative;
+  z-index: 1;
+}
 .toggle.active {
   background: var(--lemon-rind);
   color: var(--bg);

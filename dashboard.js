@@ -306,7 +306,13 @@ function renderAll() {
 function renderBigNumber(family, s) {
   if (!s) return;
   const ratePct = (s.this_week.rate * 100);
-  document.getElementById(`rate-${family}`).textContent = ratePct.toFixed(0) + "%";
+  const rateEl = document.getElementById(`rate-${family}`);
+  rateEl.textContent = ratePct.toFixed(0) + "%";
+  const familyLabel = family === "claude" ? "Claude" : "ChatGPT/Codex";
+  rateEl.setAttribute(
+    "aria-label",
+    `${familyLabel} complaint rate this week: ${ratePct.toFixed(0)} percent of mentions`
+  );
 
   // Per-source split (HN vs Reddit) — small line beneath the big number
   const bs = s.this_week.by_source || {};
