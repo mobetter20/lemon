@@ -14,51 +14,193 @@ let xMode = "wall";  // "wall" | "release"
    Data loading: prefer real data.json, fall back to mock.
    The standalone build script defines EMBEDDED_DATA before this script,
    in which case we use it directly (no fetch).
+
+   Returns a tagged result so callers can distinguish:
+     - "ok"     payload is renderable
+     - "empty"  fetch succeeded but payload lacks required keys (e.g. cron
+                ran but produced an empty/sparse data.json — surface the
+                generated_at and let the user wait for the next refresh)
+     - "error"  all fetch attempts threw or returned !ok (network / 404)
    ---------------------------------------------------------- */
+const REQUIRED_KEYS = ["summary", "trend", "top_terms", "defection_trend"];
+
+function isRenderable(payload) {
+  if (!payload || typeof payload !== "object") return false;
+  for (const k of REQUIRED_KEYS) {
+    const v = payload[k];
+    if (!v || typeof v !== "object") return false;
+  }
+  // need at least one model family with summary populated
+  const s = payload.summary || {};
+  if (!s.claude && !s.openai) return false;
+  return true;
+}
+
 async function loadData() {
-  if (typeof EMBEDDED_DATA !== "undefined") return EMBEDDED_DATA;
+  if (typeof EMBEDDED_DATA !== "undefined") {
+    return isRenderable(EMBEDDED_DATA)
+      ? { status: "ok", data: EMBEDDED_DATA }
+      : { status: "empty", data: EMBEDDED_DATA || null };
+  }
+  let lastPayload = null;
+  let anySucceeded = false;
   for (const url of ["data.json", "mock_data.json"]) {
     try {
       const r = await fetch(url);
-      if (r.ok) return await r.json();
+      if (!r.ok) continue;
+      anySucceeded = true;
+      const payload = await r.json();
+      if (isRenderable(payload)) return { status: "ok", data: payload };
+      // remember the first successful-but-empty payload so we can surface its
+      // generated_at if no later URL is renderable either
+      if (lastPayload === null) lastPayload = payload;
     } catch (e) { /* try next */ }
   }
-  return null;
+  if (anySucceeded) return { status: "empty", data: lastPayload };
+  return { status: "error", data: null };
 }
 
 async function boot() {
-  DATA = await loadData();
-  if (!DATA) {
-    showEmptyState();
+  showLoadingState();
+  let result;
+  try {
+    result = await loadData();
+  } catch (e) {
+    // defensive: loadData itself shouldn't throw, but if it does, surface as error
+    showErrorState();
     return;
   }
-  renderMeta();
-  renderAll();
-  wireToggles();
+  if (result.status === "ok") {
+    DATA = result.data;
+    renderMeta();
+    renderAll();
+    wireToggles();
+    return;
+  }
+  if (result.status === "empty") {
+    showEmptyState(result.data);
+    return;
+  }
+  showErrorState();
 }
 
-function showEmptyState() {
-  const meta = document.getElementById("meta-count");
-  if (meta) meta.textContent = "(awaiting classifier output)";
+/* ----------------------------------------------------------
+   Three UI states for non-renderable data.
+
+   Loading  — initial paint, before fetch resolves. Quiet placeholder so
+              first-time visitors don't see "(no data)" while data.json
+              is still in flight.
+   Empty    — fetch succeeded but payload is missing/sparse. Surface the
+              last successful refresh timestamp + source-health hints from
+              whatever the cron did write, so the visitor can tell whether
+              this is a fresh boot or a stale pipeline.
+   Error    — every fetch attempt failed (network, 404, parse error). Tell
+              the visitor to try again later; this is almost always
+              transient (mid-deploy, brief CDN miss).
+   ---------------------------------------------------------- */
+const LOADING_STARTED_AT = new Date();
+
+function _eachPanel(fn) {
+  for (const family of ["claude", "openai"]) fn(family);
+}
+
+function _setText(id, text) {
+  const el = document.getElementById(id);
+  if (el) el.textContent = text;
+}
+
+function _setChartMessage(id, message) {
+  const host = document.getElementById(id);
+  if (!host) return;
+  host.innerHTML = `<p class="chart-empty">${message}</p>`;
+}
+
+function showLoadingState() {
+  _setText("meta-count", "loading…");
+  _setText("meta-updated", `started ${LOADING_STARTED_AT.toLocaleTimeString()}`);
+  _setText("meta-cls", "—");
+  _eachPanel(family => {
+    _setText(`rate-${family}`, "…");
+    _setText(`totals-${family}`, "loading…");
+    _setText(`delta-${family}`, "Loading dashboard data…");
+    _setText(`by-source-${family}`, "");
+    _setChartMessage(`trend-${family}`, "loading…");
+    _setChartMessage(`def-${family}`, "loading…");
+    const terms = document.getElementById(`terms-${family}`);
+    if (terms) terms.innerHTML = `<li class="terms-empty">loading…</li>`;
+  });
+}
+
+function showEmptyState(partialPayload) {
+  // Last-refresh timestamp from whatever the cron managed to write.
+  const generatedAt = partialPayload && partialPayload.generated_at;
+  const refreshedLabel = generatedAt
+    ? `last successful refresh ${relativeTime(generatedAt)} (${generatedAt})`
+    : "last successful refresh: unknown";
+
+  // Source-health hint: if the partial payload has totals or _note, pass
+  // them through so the visitor can tell if the cron is producing zero
+  // records vs. some records but missing fields.
+  const totalRecords = partialPayload?.totals?.all_records;
+  let healthHint = "Source health: unknown";
+  if (typeof totalRecords === "number") {
+    healthHint = totalRecords === 0
+      ? "Source health: no records ingested yet"
+      : `Source health: ${totalRecords.toLocaleString()} records ingested but classifier output not ready`;
+  } else if (partialPayload?._note) {
+    healthHint = `Source health: ${partialPayload._note}`;
+  }
+
+  _setText("meta-count", typeof totalRecords === "number" ? totalRecords.toLocaleString() : "—");
+  _setText("meta-updated", generatedAt ? relativeTime(generatedAt) : "unknown");
+  _setText("meta-cls", partialPayload?.classifier_version || "v0");
 
   const hint = "Run scripts/v0_classify.py to populate phase5/data.json.";
-  for (const family of ["claude", "openai"]) {
-    const rate = document.getElementById(`rate-${family}`);
-    if (rate) rate.textContent = "—";
-    const totals = document.getElementById(`totals-${family}`);
-    if (totals) totals.textContent = "no data yet";
-    const delta = document.getElementById(`delta-${family}`);
-    if (delta) delta.textContent = hint;
-    const bySource = document.getElementById(`by-source-${family}`);
-    if (bySource) bySource.textContent = "";
-    for (const id of [`trend-${family}`, `def-${family}`]) {
-      const host = document.getElementById(id);
-      if (host) host.innerHTML = `<p class="chart-empty">no data</p>`;
-    }
+  const headlineMessage = `No dashboard data available — ${refreshedLabel}. ${healthHint}.`;
+  _eachPanel(family => {
+    _setText(`rate-${family}`, "—");
+    _setText(`totals-${family}`, "no data yet");
+    _setText(`delta-${family}`, hint);
+    _setText(`by-source-${family}`, "");
+    _setChartMessage(`trend-${family}`, "no data");
+    _setChartMessage(`def-${family}`, "no data");
     const terms = document.getElementById(`terms-${family}`);
     if (terms) terms.innerHTML = `<li class="terms-empty">no data</li>`;
+  });
+
+  // Also surface the headline at the top so visitors aren't left guessing.
+  const banner = document.getElementById("staleness-banner");
+  if (banner) {
+    banner.hidden = false;
+    banner.classList.add("stale-yellow");
+    banner.textContent = headlineMessage;
   }
 }
+
+function showErrorState() {
+  const message = "Could not load dashboard data — try refreshing in a few minutes.";
+  _setText("meta-count", "—");
+  _setText("meta-updated", "unavailable");
+  _setText("meta-cls", "—");
+  _eachPanel(family => {
+    _setText(`rate-${family}`, "—");
+    _setText(`totals-${family}`, "data unavailable");
+    _setText(`delta-${family}`, message);
+    _setText(`by-source-${family}`, "");
+    _setChartMessage(`trend-${family}`, "data unavailable");
+    _setChartMessage(`def-${family}`, "data unavailable");
+    const terms = document.getElementById(`terms-${family}`);
+    if (terms) terms.innerHTML = `<li class="terms-empty">data unavailable</li>`;
+  });
+
+  const banner = document.getElementById("staleness-banner");
+  if (banner) {
+    banner.hidden = false;
+    banner.classList.add("stale-red");
+    banner.textContent = message;
+  }
+}
+
 document.addEventListener("DOMContentLoaded", boot);
 
 function wireToggles() {
