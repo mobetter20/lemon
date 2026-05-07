@@ -138,10 +138,11 @@
     <p>
       A record is counted as a complaint if its text contains any phrase from
       a hand-curated list (<a href="https://github.com/mobetter20/lemon/blob/main/config/complaint_phrases.json"><code>config/complaint_phrases.json</code></a>).
-      Technical complaints that don't use those phrases are missed. This trades
-      recall for transparency. The <strong>trend</strong> (week-over-week,
-      90-day) captures direction even when the absolute level is conservative.
-      Don't read the percentage as precise — read it as honest.
+      Real complaints that don't use those phrases are missed by design — the
+      trade-off is a classifier you can audit line-by-line. The
+      <strong>trend</strong> (week-over-week, 90-day) captures direction even
+      when the absolute level is conservative. Don't read the percentage as
+      precise — read it as honest.
     </p>
   </article>
 
@@ -175,24 +176,21 @@
   </article>
 
   <article class="caveat">
-    <h3>6. Reddit data lags ~24–48 hours</h3>
+    <h3>6. Reddit data lags 1–2 days; HN is real-time</h3>
     <p>
-      GitHub Actions runner IPs are blocked by Reddit's unauth JSON endpoint
-      (verified empirically on 2026-05-07: HTTP 403 from Azure ranges). The
-      authenticated Reddit API (PRAW) is also unavailable to this project per
-      Reddit's post-2024 Responsible Builder Policy. As a result, Reddit data
-      flows in via the third-party arctic-shift archive, which has typical
-      indexing latency of one to two days. HN data is real-time. The headline
-      week's Reddit numbers are therefore conservative until that week ages
-      another day or two — read the trend, not the most-recent point.
+      Reddit posts arrive through a third-party archive that re-indexes
+      daily, so the most-recent week on the Reddit panels is built from a
+      partial sample — its rate ticks up as more posts get added over the
+      following day or two. Hacker News data is live. <strong>Read the
+      trend, not the rightmost point.</strong>
     </p>
   </article>
 
   <article class="caveat">
     <h3>7. Twitter/X is missing</h3>
     <p>
-      Free-tier API access closed in 2023 and the paid tier doesn't fit the
-      project's zero-recurring-cost rule. Bluesky covers a sliver of similar
+      Free-tier Twitter API access closed in 2023 and the paid tier is too
+      expensive for a free dashboard. Bluesky covers a sliver of similar
       discourse but is journalist-skewed. This is the loudest gap in the
       dataset.
     </p>
@@ -201,9 +199,10 @@
   <article class="caveat">
     <h3>8. Volume is asymmetric</h3>
     <p>
-      ChatGPT/Codex are mentioned far more than Claude. All numbers are
-      <em>per 1k mentions</em>, never raw counts. Compare the rates, not the
-      raw mention counts.
+      ChatGPT/Codex are mentioned far more than Claude. The big number on
+      each panel is a <strong>rate</strong> (% of weekly mentions that
+      contained complaint phrases), not a count. Compare the rates between
+      models — not the per-week mention totals shown beneath them.
     </p>
   </article>
 </section>
