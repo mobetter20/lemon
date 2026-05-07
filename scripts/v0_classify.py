@@ -48,7 +48,11 @@ def load_releases(config_dir: Path) -> list[dict]:
 
 def iter_corpus(corpus_dir: Path):
     for shard in sorted(corpus_dir.rglob("*.ndjson")):
-        with open(shard) as f:
+        # errors="replace": one record with a stray non-UTF-8 byte
+        # (mojibake from upstream) shouldn't crash the whole classifier.
+        # The replacement char ufffd will fail json.loads for that record
+        # only, and the except below skips it.
+        with open(shard, encoding="utf-8", errors="replace") as f:
             for line in f:
                 line = line.strip()
                 if not line:

@@ -61,7 +61,7 @@ jobs:
 
       - name: Restore corpus cache
         id: cache-corpus
-        uses: actions/cache@v4
+        uses: actions/cache/restore@v4
         with:
           path: corpus
           key: corpus-v1-${{ github.run_id }}
@@ -127,6 +127,17 @@ jobs:
           echo "new_generated_at=$NEW_GEN_AT" >> "$GITHUB_OUTPUT"
           git commit -m "data: refresh $(date -u +%Y-%m-%dT%H:%MZ) [skip ci]"
           git push origin HEAD:${GITHUB_REF_NAME}
+
+      - name: Save corpus cache
+        # `if: always()` so a classifier failure (mid-iteration) still saves
+        # the work the scrape just did. Otherwise every retry re-pays the
+        # ~35-min scrape cost. Cache key is run-id-stamped, so each run
+        # writes a distinct entry (size budget: ~10 GB; one corpus is ~200 MB).
+        if: always() && steps.cache-corpus.outputs.cache-hit != 'true'
+        uses: actions/cache/save@v4
+        with:
+          path: corpus
+          key: corpus-v1-${{ github.run_id }}
 
       - name: Verify GH Pages serves new data
         # The cron's job is to refresh data — Pages availability is a separate
