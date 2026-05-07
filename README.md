@@ -1,26 +1,34 @@
 # lemon
 
-> **is it just you, or is it actually bad right now?**
+> **is it just you?**
 
-Public sentiment for Claude and ChatGPT/GPT-5/Codex. One number per model
-each week — the share of public mentions classified as complaints — with
-trend, top phrases, and defection rhetoric.
+AI quality is felt, not measured. `lemon` tracks crowd-sourced sentiment for
+Claude and Codex on Reddit and HN — one complaint rate per model, weekly,
+with trend.
 
 Selection-biased by construction. Classifier undercounts on purpose.
 **Trend > absolute level.** [Methodology on the dashboard.](phase5/index.html#methodology)
+
+## Why
+
+When a vendor's quality claims can't be independently verified, your own
+perception is unreliable, and benchmarks come from the same companies that
+benefit from looking good — aggregated crowd sentiment becomes a crude
+substitute for ground truth. Not because it's accurate (it's noisy and
+selection-biased) but because it's what's left.
 
 ## What it shows
 
 ```
    CLAUDE                  CHATGPT / GPT-5 / CODEX
-   13%                     8%
+   9%                      8%
    complaints this week    complaints this week
-   HN 15% · Reddit 13%     HN 8% · Reddit 7%
-   ▲ 3.2 pts from last     ▼ 0.9 pts from last
+   HN 12% · Reddit 9%      HN 7% · Reddit 8%
+   ▼ 0.1 pts from last     ▼ 0.8 pts from last
 ```
 
 Plus a 90-day trend with release-event annotations, the top 10 phrases driving
-this week's complaints (each with 3 example permalinks you can click through
+this week's complaints (each with up to 3 example permalinks you can click through
 to read), and a separate small chart for "switching to / cancelled / done with"
 rhetoric — labeled rhetoric, not behavior.
 
@@ -28,7 +36,7 @@ rhetoric — labeled rhetoric, not behavior.
 
 - Not a counter-benchmark, satisfaction metric, or fairness audit
 - Not a measurement of actual user churn — defection language is rhetoric
-- Not a fine-grained failure-mode taxonomy (deferred — see [`docs/PIVOT-2026-05-06.md`](docs/PIVOT-2026-05-06.md))
+- Not a fine-grained failure-mode taxonomy
 
 ## Run it locally
 
@@ -37,7 +45,7 @@ pip install -e .
 python scripts/healthcheck.py            # confirm data sources reachable
 python scripts/run_phase1.py             # 12-month corpus pull (~hours)
 python scripts/v0_classify.py            # apply phrase list → phase5/data.json
-python scripts/build_standalone.py       # writes self-contained ~/Desktop/lemon.html
+python scripts/build_standalone.py       # build a single-file HTML snapshot
 ```
 
 Dashboard preview:
@@ -58,25 +66,26 @@ No ML. No off-the-shelf sentiment models (they misclassify dev-context
 language constantly). The trade is simpler: the absolute level under-counts;
 the trend captures direction.
 
-## Project state
+## Architecture
 
-- **Corpus pull** (HN + Reddit historical via arctic_shift + reddit recent
-  via unauthenticated JSON endpoints): operational; runs locally
-- **v0 classifier**: phrase-list based, runs in ~30 seconds against ~190k records
-- **Dashboard**: static site, single page, vanilla HTML/CSS/JS, dark monospace
-- **Live deployment** (GitHub Action cron + Pages): pending —
-  [see launch plan](docs/v0.1-launch-plan.md)
+- **Corpus pull** (HN Algolia + Reddit historical via arctic_shift): runs
+  locally and on a 4-hour GitHub Actions cron.
+- **v0 classifier** (phrase-list): runs in ~30 seconds against ~350k records.
+- **Dashboard**: static site, single page, vanilla HTML/CSS/JS, dark monospace.
+  Deployed via GitHub Pages.
+- **Cron** commits `phase5/data.json` on each refresh; the dashboard reads it
+  at page load with a staleness banner if data ages past 8 hours.
 
 ## Layout
 
 ```
 lemon/
-├── CLAUDE.md                agent instructions, locked v0 scope
 ├── config/                  hand-curated knobs (phrases, subreddits, releases)
 ├── scrapers/                HN + Reddit collectors
 ├── scripts/                 healthcheck, orchestrator, classifier, stats
-├── phase5/                  dashboard (static site)
-├── docs/                    pivot history + launch plan + audit notes
+├── phase5/                  dashboard (static site, served by GH Pages)
+├── docs/                    methodology + roadmap notes
+├── .github/workflows/       refresh + reclassify crons
 └── corpus/                  scraped NDJSON (gitignored)
 ```
 
@@ -94,16 +103,10 @@ lemon/
 4. **Two-horse race tracks release calendars.** Toggle the x-axis to "weeks
    since release" to compare without launch confounding.
 5. **Same phrase list, both models.** No per-model tuning.
-6. **Twitter/X is missing.** Free-tier API closed in 2023; not within the
+6. **Reddit data lags ~24–48 hours.** GH Actions runner IPs are blocked from
+   Reddit's unauth JSON endpoint, so Reddit posts come in via arctic-shift's
+   third-party archive. HN data is real-time.
+7. **Twitter/X is missing.** Free-tier API closed in 2023; not within the
    project's zero-recurring-cost budget.
-7. **Volume is asymmetric.** ChatGPT/Codex are mentioned far more than Claude.
+8. **Volume is asymmetric.** ChatGPT/Codex are mentioned far more than Claude.
    All rates are normalized per mention.
-
-## Pivots and decisions
-
-This was originally framed as a counter-benchmark with a fine-grained failure
-taxonomy. After review, the actual user need was simpler — *am I being
-gaslit?* — which is answered by a single rate with a trend, not a categorical
-breakdown. The taxonomy work is archived at
-[`docs/_archive/v1_taxonomy_proposal/`](docs/_archive/v1_taxonomy_proposal/).
-Full pivot rationale: [`docs/PIVOT-2026-05-06.md`](docs/PIVOT-2026-05-06.md).

@@ -1,7 +1,7 @@
 [project]
 name = "lemon"
 version = "0.1.0"
-description = "AI Model Reality Check — counter-dashboard for lab claims vs reported failures."
+description = "Crowd-sourced sentiment barometer for Claude and Codex — weekly complaint rate from public discourse."
 requires-python = ">=3.11"
 dependencies = [
     "praw>=7.7",

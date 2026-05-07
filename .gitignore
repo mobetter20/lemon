@@ -25,5 +25,8 @@ phase1.log
 docs/_archive/v1_taxonomy_proposal/phase2/clustering_input.md
 docs/_archive/v1_taxonomy_proposal/phase2/noise_floor_input.md
 
+# Local-only agent instructions; intentionally not tracked
+CLAUDE.md
+
 # OS
 .DS_Store
