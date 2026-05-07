@@ -87,6 +87,8 @@ function renderStalenessBanner() {
   const ageH = (Date.now() - new Date(DATA.generated_at).getTime()) / 3.6e6;
   if (!isFinite(ageH) || ageH < 8) {
     host.hidden = true;
+    host.textContent = "";
+    host.classList.remove("stale-yellow", "stale-red");
     return;
   }
   host.hidden = false;
