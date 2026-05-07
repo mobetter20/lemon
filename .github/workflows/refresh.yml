@@ -26,11 +26,6 @@ on:
         description: "Override incremental window (default 1 = ~30 days)"
         required: false
         default: "1"
-  # TEMPORARY — triggers the workflow on push to phase4/cron so we can verify
-  # the YAML before merging to main. Remove this `push:` block before merge.
-  push:
-    branches:
-      - phase4/cron
 
 permissions:
   contents: write
