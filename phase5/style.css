@@ -128,7 +128,7 @@ code {
   margin: 0 auto;
 }
 .masthead h1 {
-  font-size: clamp(36px, 5vw, 64px);
+  font-size: clamp(28px, 8vw, 64px);
   letter-spacing: -0.02em;
   line-height: 1.05;
   margin-bottom: var(--space-3);
@@ -496,4 +496,52 @@ code {
   color: var(--fg-mute);
   font-size: 11px;
   margin-top: var(--space-6);
+}
+
+/* ============================================================
+   MOBILE TIGHTENING — phones (≤480px)
+   The 1024px breakpoint above already collapses the dashboard to
+   single column. This block tightens spacing and tames the large
+   typography for narrow viewports so the H1/big-number don't
+   overflow and section padding doesn't waste pixels.
+   ============================================================ */
+@media (max-width: 480px) {
+  .masthead {
+    padding: var(--space-4) var(--space-3) var(--space-3);
+  }
+  .masthead h1 {
+    font-size: clamp(26px, 9vw, 36px);
+  }
+  .controls {
+    padding: 0 var(--space-3) var(--space-3);
+    flex-wrap: wrap;
+    gap: var(--space-2);
+  }
+  .controls-note {
+    text-align: left;
+    flex-basis: 100%;
+  }
+  .dashboard {
+    padding: var(--space-3);
+    gap: var(--space-4);
+  }
+  .model-panel {
+    padding: var(--space-3);
+  }
+  .panel-head h2 {
+    font-size: 18px;
+  }
+  .big-number {
+    font-size: clamp(56px, 18vw, 96px);
+  }
+  .methodology {
+    padding: var(--space-3);
+    margin: var(--space-4) auto;
+  }
+  .methodology h2 {
+    font-size: 22px;
+  }
+  .banner {
+    padding: var(--space-2) var(--space-3);
+  }
 }
