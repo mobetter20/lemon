@@ -283,8 +283,15 @@ function renderMeta() {
   for (const family of ["claude", "openai"]) {
     const s = DATA.summary[family];
     if (!s) continue;
+    // Show last completed week's mention total, since the headline rate
+    // also reflects last completed week. trendWeek(-2) is the last full
+    // entry; falls back to last_week's count if the trend is too sparse.
+    const lwTrend = trendWeek(family, -2);
+    const lw = s.last_week || {};
+    const lwLabel = lwTrend?.week || "—";
+    const lwCount = (lwTrend?.all_mentions ?? lw.all_mentions ?? 0);
     document.getElementById(`totals-${family}`).textContent =
-      `${s.this_week.all_mentions.toLocaleString()} mentions in ${s.this_week_label}`;
+      `${lwCount.toLocaleString()} mentions in ${lwLabel}`;
   }
 }
 
@@ -292,6 +299,7 @@ function renderMeta() {
    Render all
    ---------------------------------------------------------- */
 function renderAll() {
+  renderVerdict();
   for (const family of ["claude", "openai"]) {
     renderBigNumber(family, DATA.summary[family]);
     renderTrend(`trend-${family}`, DATA.trend[family], family);
@@ -301,21 +309,72 @@ function renderAll() {
 }
 
 /* ----------------------------------------------------------
+   Verdict line — sits between the masthead and the controls.
+   Closes the H1's question with a concrete one-liner: last
+   completed week's rate per model + delta vs the prior week.
+   ---------------------------------------------------------- */
+function trendWeek(family, offsetFromEnd) {
+  const t = DATA.trend?.[family] || [];
+  const i = t.length + offsetFromEnd;
+  return i >= 0 && i < t.length ? t[i] : null;
+}
+
+function renderVerdict() {
+  const verdict = document.getElementById("verdict-line");
+  if (!verdict) return;
+  const fragments = [];
+  for (const family of ["claude", "openai"]) {
+    const lw = trendWeek(family, -2);   // last full week
+    const wb = trendWeek(family, -3);   // week before that
+    if (!lw || lw.all_mentions === 0) continue;
+    const lwPct = (lw.rate * 100).toFixed(0);
+    const familyLabel = family === "claude" ? "Claude" : "ChatGPT/Codex";
+    let deltaSpan = "";
+    if (wb) {
+      const delta = (lw.rate - wb.rate) * 100;
+      if (Math.abs(delta) >= 0.1) {
+        const dir = delta > 0 ? "up" : "down";
+        const glyph = delta > 0 ? "▲" : "▼";
+        deltaSpan = ` <span class="verdict-delta ${dir}">${glyph} ${Math.abs(delta).toFixed(1)} pts</span>`;
+      } else {
+        deltaSpan = ` <span class="verdict-delta">≈ flat</span>`;
+      }
+    }
+    fragments.push(`<span class="verdict-fragment">${familyLabel} <strong>${lwPct}%</strong>${deltaSpan}</span>`);
+  }
+  if (fragments.length === 0) {
+    verdict.hidden = true;
+    return;
+  }
+  verdict.hidden = false;
+  verdict.innerHTML =
+    `<span class="verdict-prefix">last completed week:</span> ` +
+    fragments.join(' <span class="verdict-sep">·</span> ');
+}
+
+/* ----------------------------------------------------------
    Big number + delta
    ---------------------------------------------------------- */
 function renderBigNumber(family, s) {
   if (!s) return;
-  const ratePct = (s.this_week.rate * 100);
+
+  // The headline is the LAST FULL week (rate stable, full-sample). The
+  // current-ISO week is partial because Reddit indexing lags 1-2 days,
+  // so we show it as a smaller "this week so far" chip below.
+  const lw = s.last_week || {};
+  const tw = s.this_week || {};
+  const lwRatePct = (lw.rate || 0) * 100;
+
   const rateEl = document.getElementById(`rate-${family}`);
-  rateEl.textContent = ratePct.toFixed(0) + "%";
+  rateEl.textContent = lwRatePct.toFixed(0) + "%";
   const familyLabel = family === "claude" ? "Claude" : "ChatGPT/Codex";
   rateEl.setAttribute(
     "aria-label",
-    `${familyLabel} complaint rate this week: ${ratePct.toFixed(0)} percent of mentions`
+    `${familyLabel} complaint rate, last completed week: ${lwRatePct.toFixed(0)} percent of mentions`
   );
 
-  // Per-source split (HN vs Reddit) — small line beneath the big number
-  const bs = s.this_week.by_source || {};
+  // Per-source split (HN vs Reddit) for the last full week
+  const bs = lw.by_source || {};
   const sourceEl = document.getElementById(`by-source-${family}`);
   if (sourceEl) {
     const parts = [];
@@ -324,19 +383,42 @@ function renderBigNumber(family, s) {
     sourceEl.textContent = parts.length ? parts.join(" · ") : "";
   }
 
-  const delta = s.delta_pts;
+  // Delta: last full week vs the prior full week (computed from trend,
+  // not from summary.delta_pts which is this_week vs last_week — that
+  // comparison would be apples-to-oranges with our new headline).
+  const wb = trendWeek(family, -3);
   const el = document.getElementById(`delta-${family}`);
   el.classList.remove("up", "down");
-  if (delta == null || delta === 0) {
-    el.textContent = "no change from last week";
-    return;
+  if (!wb) {
+    el.textContent = "no prior week to compare";
+  } else {
+    const delta = (lw.rate - wb.rate) * 100;
+    if (Math.abs(delta) < 0.1) {
+      el.textContent = "no change from prior week";
+    } else {
+      const dir = delta > 0 ? "up" : "down";
+      const glyph = delta > 0 ? "▲" : "▼";
+      el.classList.add(dir);
+      const absDelta = Math.abs(delta).toFixed(1);
+      const wbPct = (wb.rate * 100).toFixed(0);
+      el.innerHTML = `<span class="delta-glyph">${glyph}</span> ${absDelta} pts from prior week (${wbPct}%)`;
+    }
   }
-  const dir = delta > 0 ? "up" : "down";
-  const glyph = delta > 0 ? "▲" : "▼";
-  el.classList.add(dir);
-  const absDelta = Math.abs(delta).toFixed(1);
-  const lastPct = (s.last_week.rate * 100).toFixed(0);
-  el.innerHTML = `<span class="delta-glyph">${glyph}</span> ${absDelta} pts from last week (${lastPct}%)`;
+
+  // Partial this-week chip
+  const partialEl = document.getElementById(`partial-${family}`);
+  if (partialEl) {
+    if (tw && tw.all_mentions > 0) {
+      const twRatePct = (tw.rate * 100).toFixed(0);
+      partialEl.hidden = false;
+      partialEl.innerHTML =
+        `this week so far: <strong>${twRatePct}%</strong> ` +
+        `(${tw.all_mentions.toLocaleString()} mentions, partial)`;
+    } else {
+      partialEl.hidden = true;
+      partialEl.textContent = "";
+    }
+  }
 }
 
 /* ----------------------------------------------------------

@@ -149,6 +149,31 @@ code {
 }
 
 /* ============================================================
+   VERDICT LINE — answers the H1's question concretely. Lives
+   between masthead and controls, before the first chart.
+   ============================================================ */
+.verdict {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: var(--space-3) var(--space-4);
+  font-size: 13px;
+  color: var(--fg);
+  letter-spacing: 0.01em;
+}
+.verdict-prefix {
+  color: var(--fg-mute);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-size: 11px;
+  margin-right: var(--space-2);
+}
+.verdict-fragment strong { color: var(--fg); font-weight: 700; }
+.verdict-delta { font-size: 12px; color: var(--fg-dim); margin-left: 4px; }
+.verdict-delta.up   { color: var(--c-up); }     /* louder than prior week */
+.verdict-delta.down { color: var(--c-down); }   /* quieter than prior week */
+.verdict-sep { color: var(--rule); margin: 0 var(--space-2); }
+
+/* ============================================================
    CONTROLS
    ============================================================ */
 .controls {
@@ -282,6 +307,16 @@ code {
 .delta.up    { color: var(--c-up); }
 .delta.down  { color: var(--c-down); }
 .delta-glyph { font-weight: 700; margin-right: 4px; }
+
+.partial-week {
+  margin-top: var(--space-3);
+  padding-top: var(--space-2);
+  border-top: 1px dashed var(--rule);
+  font-size: 12px;
+  color: var(--fg-mute);
+}
+.partial-week strong { color: var(--fg-dim); font-weight: 600; }
+.partial-week[hidden] { display: none; }
 
 /* ============================================================
    CHART BLOCK

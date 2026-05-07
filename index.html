@@ -50,6 +50,8 @@
   </p>
 </section>
 
+<section class="verdict" id="verdict-line" hidden></section>
+
 <section class="controls">
   <div class="toggle-group" role="radiogroup" aria-label="X-axis">
     <button class="toggle active" data-axis="wall" aria-pressed="true">wall-clock</button>
@@ -70,9 +72,10 @@
 
     <div class="big-number-block">
       <div class="big-number" id="rate-claude">—</div>
-      <div class="big-number-label">complaints this week</div>
+      <div class="big-number-label">complaints, last full week</div>
       <div class="by-source" id="by-source-claude"></div>
       <div class="delta" id="delta-claude">—</div>
+      <div class="partial-week" id="partial-claude" hidden></div>
     </div>
     <div class="chart-block">
       <h3>trend <span class="chart-sub">(90 days, weekly)</span></h3>
@@ -95,9 +98,10 @@
 
     <div class="big-number-block">
       <div class="big-number" id="rate-openai">—</div>
-      <div class="big-number-label">complaints this week</div>
+      <div class="big-number-label">complaints, last full week</div>
       <div class="by-source" id="by-source-openai"></div>
       <div class="delta" id="delta-openai">—</div>
+      <div class="partial-week" id="partial-openai" hidden></div>
     </div>
 
     <div class="chart-block">
@@ -182,13 +186,15 @@
   </article>
 
   <article class="caveat">
-    <h3>6. Reddit data lags 1–2 days; HN is real-time</h3>
+    <h3>6. The headline number is last <em>completed</em> week, not this week</h3>
     <p>
       Reddit posts arrive through a third-party archive that re-indexes
-      daily, so the most-recent week on the Reddit panels is built from a
-      partial sample — its rate ticks up as more posts get added over the
-      following day or two. Hacker News data is live. <strong>Read the
-      trend, not the rightmost point.</strong>
+      daily, so the current week's rate is always a partial sample until
+      indexing catches up a day or two later. Hacker News data is live. To
+      avoid showing a number that drifts under the visitor, the big
+      headline shows the <strong>last completed week</strong> — full
+      sample, stable. The "this week so far" chip below each panel is a
+      live-but-partial peek; it'll move slightly until the week closes.
     </p>
   </article>
 
