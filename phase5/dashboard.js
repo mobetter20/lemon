@@ -104,10 +104,23 @@ function renderStalenessBanner() {
 /* ----------------------------------------------------------
    Meta line
    ---------------------------------------------------------- */
+function relativeTime(iso) {
+  const then = new Date(iso || "").getTime();
+  if (!isFinite(then)) return "—";
+  const diffSec = Math.max(0, (Date.now() - then) / 1000);
+  if (diffSec < 60) return "just now";
+  const m = Math.floor(diffSec / 60);
+  if (m < 60) return m === 1 ? "1 minute ago" : `${m} minutes ago`;
+  const h = Math.floor(diffSec / 3600);
+  if (h < 24) return h === 1 ? "1 hour ago" : `${h} hours ago`;
+  const d = Math.floor(diffSec / 86400);
+  return d === 1 ? "1 day ago" : `${d} days ago`;
+}
+
 function renderMeta() {
   const totalRecords = DATA.totals?.all_records ?? 0;
   document.getElementById("meta-count").textContent = totalRecords.toLocaleString();
-  document.getElementById("meta-updated").textContent = (DATA.generated_at || "").slice(0, 10);
+  document.getElementById("meta-updated").textContent = relativeTime(DATA.generated_at);
   document.getElementById("meta-cls").textContent = DATA.classifier_version || "v0";
 
   renderStalenessBanner();
