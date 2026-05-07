@@ -39,11 +39,18 @@ def load_phrases(config_dir: Path) -> tuple[list[str], list[str]]:
 
 
 def load_releases(config_dir: Path) -> list[dict]:
+    """Load `verified: true` releases only. Unverified entries are
+    best-guess dates and shouldn't render annotation lines on the trend
+    chart at potentially-wrong positions. Flip `verified: true` in
+    config/releases.json after confirming the date against the vendor's
+    announcement page.
+    """
     p = config_dir / "releases.json"
     if not p.exists():
         return []
     with open(p) as f:
-        return json.load(f).get("releases", [])
+        all_releases = json.load(f).get("releases", [])
+    return [r for r in all_releases if r.get("verified") is True]
 
 
 def iter_corpus(corpus_dir: Path):

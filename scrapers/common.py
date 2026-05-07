@@ -94,6 +94,12 @@ _RELEASES_CACHE: list[dict[str, Any]] | None = None
 
 
 def load_releases(config_dir: Path) -> list[dict[str, Any]]:
+    """Load `verified: true` releases only. Unverified entries are
+    placeholders with best-guess dates — rendering them on the trend chart
+    or tagging records to them would mislead. Flip `verified: true` in
+    config/releases.json after confirming the date against the vendor's
+    announcement page.
+    """
     global _RELEASES_CACHE
     if _RELEASES_CACHE is None:
         path = config_dir / "releases.json"
@@ -102,7 +108,9 @@ def load_releases(config_dir: Path) -> list[dict[str, Any]]:
         else:
             with open(path) as f:
                 data = json.load(f)
-            _RELEASES_CACHE = data.get("releases", [])
+            _RELEASES_CACHE = [
+                r for r in data.get("releases", []) if r.get("verified") is True
+            ]
     return _RELEASES_CACHE
 
 
