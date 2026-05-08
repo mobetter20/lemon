@@ -2,27 +2,27 @@
   "version": "2.0",
   "schema_version": "v0",
   "classifier_version": "v0",
-  "generated_at": "2026-05-08T17:31:07.955455+00:00",
+  "generated_at": "2026-05-08T21:14:03.483597+00:00",
   "totals": {
-    "all_records": 351974
+    "all_records": 352107
   },
   "summary": {
     "claude": {
       "this_week_label": "2026-W19",
       "this_week": {
-        "all_mentions": 2255,
-        "complaints": 206,
-        "rate": 0.0914,
+        "all_mentions": 2269,
+        "complaints": 207,
+        "rate": 0.0912,
         "by_source": {
           "hn": {
-            "all_mentions": 985,
-            "complaints": 69,
-            "rate": 0.0701
+            "all_mentions": 996,
+            "complaints": 70,
+            "rate": 0.0703
           },
           "reddit": {
-            "all_mentions": 1270,
+            "all_mentions": 1273,
             "complaints": 137,
-            "rate": 0.1079
+            "rate": 0.1076
           }
         }
       },
@@ -48,19 +48,19 @@
     "openai": {
       "this_week_label": "2026-W19",
       "this_week": {
-        "all_mentions": 1883,
-        "complaints": 139,
-        "rate": 0.0738,
+        "all_mentions": 1915,
+        "complaints": 144,
+        "rate": 0.0752,
         "by_source": {
           "hn": {
-            "all_mentions": 853,
-            "complaints": 65,
-            "rate": 0.0762
+            "all_mentions": 872,
+            "complaints": 69,
+            "rate": 0.0791
           },
           "reddit": {
-            "all_mentions": 1030,
-            "complaints": 74,
-            "rate": 0.0718
+            "all_mentions": 1043,
+            "complaints": 75,
+            "rate": 0.0719
           }
         }
       },
@@ -81,7 +81,7 @@
           }
         }
       },
-      "delta_pts": -0.9
+      "delta_pts": -0.8
     }
   },
   "trend": {
@@ -376,9 +376,9 @@
       },
       {
         "week": "2026-W15",
-        "all_mentions": 9026,
-        "complaints": 968,
-        "rate": 0.1072
+        "all_mentions": 9029,
+        "complaints": 970,
+        "rate": 0.1074
       },
       {
         "week": "2026-W16",
@@ -400,9 +400,9 @@
       },
       {
         "week": "2026-W19",
-        "all_mentions": 2255,
-        "complaints": 206,
-        "rate": 0.0914
+        "all_mentions": 2269,
+        "complaints": 207,
+        "rate": 0.0912
       }
     ],
     "openai": [
@@ -696,9 +696,9 @@
       },
       {
         "week": "2026-W15",
-        "all_mentions": 4925,
-        "complaints": 424,
-        "rate": 0.0861
+        "all_mentions": 4941,
+        "complaints": 426,
+        "rate": 0.0862
       },
       {
         "week": "2026-W16",
@@ -720,9 +720,9 @@
       },
       {
         "week": "2026-W19",
-        "all_mentions": 1883,
-        "complaints": 139,
-        "rate": 0.0738
+        "all_mentions": 1915,
+        "complaints": 144,
+        "rate": 0.0752
       }
     ]
   },
@@ -1005,7 +1005,7 @@
       "this_week": [
         {
           "term": "slow",
-          "count": 21,
+          "count": 22,
           "examples": [
             {
               "permalink": "https://www.reddit.com/r/ChatGPT/comments/1t3vfsw/but_im_going_to_gently_slow_you_down_on_one_part/",
@@ -1015,10 +1015,10 @@
               "_kind": "top_scored"
             },
             {
-              "permalink": "https://www.reddit.com/r/LocalLLaMA/comments/1t5pdf8/great_results_with_qwen3635ba3budq5_k_xl_vs_code/okbsmec/",
-              "date": "2026-05-06T21:05:08+00:00",
-              "score": 3,
-              "source": "reddit",
+              "permalink": "https://news.ycombinator.com/item?id=48066984",
+              "date": "2026-05-08T18:32:51+00:00",
+              "score": 0,
+              "source": "hn",
               "_kind": "newest"
             },
             {
@@ -1059,7 +1059,7 @@
         },
         {
           "term": "annoying",
-          "count": 12,
+          "count": 13,
           "examples": [
             {
               "permalink": "https://www.reddit.com/r/ChatGPT/comments/1t3a0ys/gpt_seems_to_pretend_not_to_understand_just_to/ojtq73y/",
@@ -1069,10 +1069,10 @@
               "_kind": "top_scored"
             },
             {
-              "permalink": "https://www.reddit.com/r/ClaudeAI/comments/1t5llls/i_really_do_not_get_the_recent_hate_for_opus_47/okavxvy/",
-              "date": "2026-05-06T18:40:11+00:00",
-              "score": 7,
-              "source": "reddit",
+              "permalink": "https://news.ycombinator.com/item?id=48068575",
+              "date": "2026-05-08T20:45:06+00:00",
+              "score": 0,
+              "source": "hn",
               "_kind": "newest"
             }
           ]
@@ -1474,7 +1474,7 @@
       },
       {
         "week": "2026-W19",
-        "rate": 0.0124
+        "rate": 0.0123
       }
     ],
     "openai": [
@@ -1672,7 +1672,7 @@
       },
       {
         "week": "2026-W15",
-        "rate": 0.0171
+        "rate": 0.017
       },
       {
         "week": "2026-W16",
@@ -1688,7 +1688,7 @@
       },
       {
         "week": "2026-W19",
-        "rate": 0.0127
+        "rate": 0.0125
       }
     ]
   },
