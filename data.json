@@ -2,27 +2,27 @@
   "version": "2.0",
   "schema_version": "v0",
   "classifier_version": "v0",
-  "generated_at": "2026-05-08T09:53:58.391889+00:00",
+  "generated_at": "2026-05-08T14:09:39.565341+00:00",
   "totals": {
-    "all_records": 351627
+    "all_records": 351693
   },
   "summary": {
     "claude": {
       "this_week_label": "2026-W19",
       "this_week": {
-        "all_mentions": 2196,
-        "complaints": 201,
-        "rate": 0.0915,
+        "all_mentions": 2225,
+        "complaints": 203,
+        "rate": 0.0912,
         "by_source": {
           "hn": {
-            "all_mentions": 956,
+            "all_mentions": 959,
             "complaints": 68,
-            "rate": 0.0711
+            "rate": 0.0709
           },
           "reddit": {
-            "all_mentions": 1240,
-            "complaints": 133,
-            "rate": 0.1073
+            "all_mentions": 1266,
+            "complaints": 135,
+            "rate": 0.1066
           }
         }
       },
@@ -48,9 +48,9 @@
     "openai": {
       "this_week_label": "2026-W19",
       "this_week": {
-        "all_mentions": 1866,
-        "complaints": 136,
-        "rate": 0.0729,
+        "all_mentions": 1878,
+        "complaints": 139,
+        "rate": 0.074,
         "by_source": {
           "hn": {
             "all_mentions": 852,
@@ -58,9 +58,9 @@
             "rate": 0.0763
           },
           "reddit": {
-            "all_mentions": 1014,
-            "complaints": 71,
-            "rate": 0.07
+            "all_mentions": 1026,
+            "complaints": 74,
+            "rate": 0.0721
           }
         }
       },
@@ -81,7 +81,7 @@
           }
         }
       },
-      "delta_pts": -1.0
+      "delta_pts": -0.9
     }
   },
   "trend": {
@@ -400,9 +400,9 @@
       },
       {
         "week": "2026-W19",
-        "all_mentions": 2196,
-        "complaints": 201,
-        "rate": 0.0915
+        "all_mentions": 2225,
+        "complaints": 203,
+        "rate": 0.0912
       }
     ],
     "openai": [
@@ -720,9 +720,9 @@
       },
       {
         "week": "2026-W19",
-        "all_mentions": 1866,
-        "complaints": 136,
-        "rate": 0.0729
+        "all_mentions": 1878,
+        "complaints": 139,
+        "rate": 0.074
       }
     ]
   },
@@ -974,7 +974,7 @@
         },
         {
           "term": "hallucination",
-          "count": 8,
+          "count": 9,
           "examples": [
             {
               "permalink": "https://www.reddit.com/r/ClaudeAI/comments/1t3ggv8/claude_is_lying_regularly_when_i_have/ojv2jwc/",
@@ -1005,7 +1005,7 @@
       "this_week": [
         {
           "term": "slow",
-          "count": 19,
+          "count": 21,
           "examples": [
             {
               "permalink": "https://www.reddit.com/r/ChatGPT/comments/1t3vfsw/but_im_going_to_gently_slow_you_down_on_one_part/",
@@ -1015,10 +1015,10 @@
               "_kind": "top_scored"
             },
             {
-              "permalink": "https://news.ycombinator.com/item?id=48036145",
-              "date": "2026-05-06T13:41:46+00:00",
-              "score": 0,
-              "source": "hn",
+              "permalink": "https://www.reddit.com/r/LocalLLaMA/comments/1t5pdf8/great_results_with_qwen3635ba3budq5_k_xl_vs_code/okbsmec/",
+              "date": "2026-05-06T21:05:08+00:00",
+              "score": 3,
+              "source": "reddit",
               "_kind": "newest"
             },
             {
@@ -1078,6 +1078,33 @@
           ]
         },
         {
+          "term": "terrible",
+          "count": 10,
+          "examples": [
+            {
+              "permalink": "https://www.reddit.com/r/ChatGPT/comments/1t3a0ys/gpt_seems_to_pretend_not_to_understand_just_to/ojtq73y/",
+              "date": "2026-05-04T07:31:44+00:00",
+              "score": 34,
+              "source": "reddit",
+              "_kind": "top_scored"
+            },
+            {
+              "permalink": "https://www.reddit.com/r/ClaudeAI/comments/1t5s0za/accidentally_built_something_useful_trying_to_fix/",
+              "date": "2026-05-06T22:25:49+00:00",
+              "score": 8,
+              "source": "reddit",
+              "_kind": "newest"
+            },
+            {
+              "permalink": "https://news.ycombinator.com/item?id=48003751",
+              "date": "2026-05-04T01:54:11+00:00",
+              "score": 0,
+              "source": "hn",
+              "_kind": "oldest"
+            }
+          ]
+        },
+        {
           "term": "useless",
           "count": 9,
           "examples": [
@@ -1125,35 +1152,8 @@
           ]
         },
         {
-          "term": "terrible",
-          "count": 9,
-          "examples": [
-            {
-              "permalink": "https://www.reddit.com/r/ChatGPT/comments/1t3a0ys/gpt_seems_to_pretend_not_to_understand_just_to/ojtq73y/",
-              "date": "2026-05-04T07:31:44+00:00",
-              "score": 34,
-              "source": "reddit",
-              "_kind": "top_scored"
-            },
-            {
-              "permalink": "https://www.reddit.com/r/singularity/comments/1t4hnfl/googles_ai_architect_demis_hassabis_lived/ok3b72s/",
-              "date": "2026-05-05T17:05:03+00:00",
-              "score": 3,
-              "source": "reddit",
-              "_kind": "newest"
-            },
-            {
-              "permalink": "https://news.ycombinator.com/item?id=48003751",
-              "date": "2026-05-04T01:54:11+00:00",
-              "score": 0,
-              "source": "hn",
-              "_kind": "oldest"
-            }
-          ]
-        },
-        {
           "term": "lazy",
-          "count": 7,
+          "count": 8,
           "examples": [
             {
               "permalink": "https://www.reddit.com/r/LocalLLaMA/comments/1t4s6g2/deepseek_v4_being_17x_cheaper_got_me_to_actually/",
@@ -1161,6 +1161,13 @@
               "score": 635,
               "source": "reddit",
               "_kind": "top_scored"
+            },
+            {
+              "permalink": "https://www.reddit.com/r/ClaudeAI/comments/1t5s0za/accidentally_built_something_useful_trying_to_fix/",
+              "date": "2026-05-06T22:25:49+00:00",
+              "score": 8,
+              "source": "reddit",
+              "_kind": "newest"
             },
             {
               "permalink": "https://news.ycombinator.com/item?id=48007284",
@@ -1467,7 +1474,7 @@
       },
       {
         "week": "2026-W19",
-        "rate": 0.0128
+        "rate": 0.0126
       }
     ],
     "openai": [
@@ -1681,7 +1688,7 @@
       },
       {
         "week": "2026-W19",
-        "rate": 0.0129
+        "rate": 0.0128
       }
     ]
   },
