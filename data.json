@@ -2,17 +2,17 @@
   "version": "2.0",
   "schema_version": "v0",
   "classifier_version": "v0",
-  "generated_at": "2026-05-07T21:15:42.126327+00:00",
+  "generated_at": "2026-05-08T03:39:14.589040+00:00",
   "totals": {
-    "all_records": 350968
+    "all_records": 351155
   },
   "summary": {
     "claude": {
       "this_week_label": "2026-W19",
       "this_week": {
-        "all_mentions": 1950,
-        "complaints": 174,
-        "rate": 0.0892,
+        "all_mentions": 2014,
+        "complaints": 176,
+        "rate": 0.0874,
         "by_source": {
           "hn": {
             "all_mentions": 946,
@@ -20,9 +20,9 @@
             "rate": 0.0708
           },
           "reddit": {
-            "all_mentions": 1004,
-            "complaints": 107,
-            "rate": 0.1066
+            "all_mentions": 1068,
+            "complaints": 109,
+            "rate": 0.1021
           }
         }
       },
@@ -43,14 +43,14 @@
           }
         }
       },
-      "delta_pts": -0.7
+      "delta_pts": -0.9
     },
     "openai": {
       "this_week_label": "2026-W19",
       "this_week": {
-        "all_mentions": 1770,
+        "all_mentions": 1785,
         "complaints": 129,
-        "rate": 0.0729,
+        "rate": 0.0723,
         "by_source": {
           "hn": {
             "all_mentions": 848,
@@ -58,9 +58,9 @@
             "rate": 0.0767
           },
           "reddit": {
-            "all_mentions": 922,
+            "all_mentions": 937,
             "complaints": 64,
-            "rate": 0.0694
+            "rate": 0.0683
           }
         }
       },
@@ -81,7 +81,7 @@
           }
         }
       },
-      "delta_pts": -1.0
+      "delta_pts": -1.1
     }
   },
   "trend": {
@@ -400,9 +400,9 @@
       },
       {
         "week": "2026-W19",
-        "all_mentions": 1950,
-        "complaints": 174,
-        "rate": 0.0892
+        "all_mentions": 2014,
+        "complaints": 176,
+        "rate": 0.0874
       }
     ],
     "openai": [
@@ -720,9 +720,9 @@
       },
       {
         "week": "2026-W19",
-        "all_mentions": 1770,
+        "all_mentions": 1785,
         "complaints": 129,
-        "rate": 0.0729
+        "rate": 0.0723
       }
     ]
   },
@@ -750,6 +750,33 @@
             {
               "permalink": "https://news.ycombinator.com/item?id=48005144",
               "date": "2026-05-04T06:00:38+00:00",
+              "score": 0,
+              "source": "hn",
+              "_kind": "oldest"
+            }
+          ]
+        },
+        {
+          "term": "stupid",
+          "count": 13,
+          "examples": [
+            {
+              "permalink": "https://www.reddit.com/r/ChatGPT/comments/1t3vfsw/but_im_going_to_gently_slow_you_down_on_one_part/",
+              "date": "2026-05-04T21:32:06+00:00",
+              "score": 151,
+              "source": "reddit",
+              "_kind": "top_scored"
+            },
+            {
+              "permalink": "https://news.ycombinator.com/item?id=48039153",
+              "date": "2026-05-06T17:45:14+00:00",
+              "score": 0,
+              "source": "hn",
+              "_kind": "newest"
+            },
+            {
+              "permalink": "https://news.ycombinator.com/item?id=48003034",
+              "date": "2026-05-04T00:11:46+00:00",
               "score": 0,
               "source": "hn",
               "_kind": "oldest"
@@ -806,33 +833,6 @@
               "date": "2026-05-04T00:59:03+00:00",
               "score": 9,
               "source": "reddit",
-              "_kind": "oldest"
-            }
-          ]
-        },
-        {
-          "term": "stupid",
-          "count": 12,
-          "examples": [
-            {
-              "permalink": "https://www.reddit.com/r/ChatGPT/comments/1t3vfsw/but_im_going_to_gently_slow_you_down_on_one_part/",
-              "date": "2026-05-04T21:32:06+00:00",
-              "score": 151,
-              "source": "reddit",
-              "_kind": "top_scored"
-            },
-            {
-              "permalink": "https://news.ycombinator.com/item?id=48039153",
-              "date": "2026-05-06T17:45:14+00:00",
-              "score": 0,
-              "source": "hn",
-              "_kind": "newest"
-            },
-            {
-              "permalink": "https://news.ycombinator.com/item?id=48003034",
-              "date": "2026-05-04T00:11:46+00:00",
-              "score": 0,
-              "source": "hn",
               "_kind": "oldest"
             }
           ]
@@ -1467,7 +1467,7 @@
       },
       {
         "week": "2026-W19",
-        "rate": 0.0133
+        "rate": 0.0134
       }
     ],
     "openai": [
@@ -1681,7 +1681,7 @@
       },
       {
         "week": "2026-W19",
-        "rate": 0.0136
+        "rate": 0.0134
       }
     ]
   },
