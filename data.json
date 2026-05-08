@@ -2,27 +2,27 @@
   "version": "2.0",
   "schema_version": "v0",
   "classifier_version": "v0",
-  "generated_at": "2026-05-08T06:09:04.899743+00:00",
+  "generated_at": "2026-05-08T09:53:58.391889+00:00",
   "totals": {
-    "all_records": 351194
+    "all_records": 351627
   },
   "summary": {
     "claude": {
       "this_week_label": "2026-W19",
       "this_week": {
-        "all_mentions": 2024,
-        "complaints": 176,
-        "rate": 0.087,
+        "all_mentions": 2196,
+        "complaints": 201,
+        "rate": 0.0915,
         "by_source": {
           "hn": {
-            "all_mentions": 946,
-            "complaints": 67,
-            "rate": 0.0708
+            "all_mentions": 956,
+            "complaints": 68,
+            "rate": 0.0711
           },
           "reddit": {
-            "all_mentions": 1078,
-            "complaints": 109,
-            "rate": 0.1011
+            "all_mentions": 1240,
+            "complaints": 133,
+            "rate": 0.1073
           }
         }
       },
@@ -43,24 +43,24 @@
           }
         }
       },
-      "delta_pts": -0.9
+      "delta_pts": -0.5
     },
     "openai": {
       "this_week_label": "2026-W19",
       "this_week": {
-        "all_mentions": 1791,
-        "complaints": 129,
-        "rate": 0.072,
+        "all_mentions": 1866,
+        "complaints": 136,
+        "rate": 0.0729,
         "by_source": {
           "hn": {
-            "all_mentions": 848,
+            "all_mentions": 852,
             "complaints": 65,
-            "rate": 0.0767
+            "rate": 0.0763
           },
           "reddit": {
-            "all_mentions": 943,
-            "complaints": 64,
-            "rate": 0.0679
+            "all_mentions": 1014,
+            "complaints": 71,
+            "rate": 0.07
           }
         }
       },
@@ -81,7 +81,7 @@
           }
         }
       },
-      "delta_pts": -1.1
+      "delta_pts": -1.0
     }
   },
   "trend": {
@@ -400,9 +400,9 @@
       },
       {
         "week": "2026-W19",
-        "all_mentions": 2024,
-        "complaints": 176,
-        "rate": 0.087
+        "all_mentions": 2196,
+        "complaints": 201,
+        "rate": 0.0915
       }
     ],
     "openai": [
@@ -720,9 +720,9 @@
       },
       {
         "week": "2026-W19",
-        "all_mentions": 1791,
-        "complaints": 129,
-        "rate": 0.072
+        "all_mentions": 1866,
+        "complaints": 136,
+        "rate": 0.0729
       }
     ]
   },
@@ -757,6 +757,114 @@
           ]
         },
         {
+          "term": "usage limit",
+          "count": 17,
+          "examples": [
+            {
+              "permalink": "https://www.reddit.com/r/ClaudeAI/comments/1t5htq1/spacex_conpute_deal_double_limits/",
+              "date": "2026-05-06T16:24:30+00:00",
+              "score": 1378,
+              "source": "reddit",
+              "_kind": "top_scored"
+            },
+            {
+              "permalink": "https://news.ycombinator.com/item?id=48045045",
+              "date": "2026-05-07T03:18:17+00:00",
+              "score": 0,
+              "source": "hn",
+              "_kind": "newest"
+            },
+            {
+              "permalink": "https://www.reddit.com/r/ClaudeAI/comments/1t3ugvy/minesweeper_is_ais_biggest_enemy/",
+              "date": "2026-05-04T20:56:31+00:00",
+              "score": 7,
+              "source": "reddit",
+              "_kind": "oldest"
+            }
+          ]
+        },
+        {
+          "term": "annoying",
+          "count": 15,
+          "examples": [
+            {
+              "permalink": "https://www.reddit.com/r/ClaudeAI/comments/1t40z2r/i_wish_claude_projects_would_have_the_same/",
+              "date": "2026-05-05T01:20:19+00:00",
+              "score": 37,
+              "source": "reddit",
+              "_kind": "top_scored"
+            },
+            {
+              "permalink": "https://www.reddit.com/r/ClaudeAI/comments/1t5llls/i_really_do_not_get_the_recent_hate_for_opus_47/okavxvy/",
+              "date": "2026-05-06T18:40:11+00:00",
+              "score": 7,
+              "source": "reddit",
+              "_kind": "newest"
+            },
+            {
+              "permalink": "https://www.reddit.com/r/ClaudeAI/comments/1t32rzn/stop_trying_to_put_me_to_bed_claude/ojs7yrf/",
+              "date": "2026-05-04T00:57:28+00:00",
+              "score": 4,
+              "source": "reddit",
+              "_kind": "oldest"
+            }
+          ]
+        },
+        {
+          "term": "rate limit",
+          "count": 14,
+          "examples": [
+            {
+              "permalink": "https://www.reddit.com/r/ClaudeAI/comments/1t5htq1/spacex_conpute_deal_double_limits/",
+              "date": "2026-05-06T16:24:30+00:00",
+              "score": 1378,
+              "source": "reddit",
+              "_kind": "top_scored"
+            },
+            {
+              "permalink": "https://news.ycombinator.com/item?id=48042523",
+              "date": "2026-05-06T22:06:54+00:00",
+              "score": 0,
+              "source": "hn",
+              "_kind": "newest"
+            },
+            {
+              "permalink": "https://news.ycombinator.com/item?id=48003461",
+              "date": "2026-05-04T01:10:13+00:00",
+              "score": 0,
+              "source": "hn",
+              "_kind": "oldest"
+            }
+          ]
+        },
+        {
+          "term": "broken",
+          "count": 14,
+          "examples": [
+            {
+              "permalink": "https://www.reddit.com/r/ClaudeAI/comments/1t4gchn/i_asked_claude_to_investigate_its_own_token_burn/",
+              "date": "2026-05-05T14:00:32+00:00",
+              "score": 236,
+              "source": "reddit",
+              "_kind": "top_scored"
+            },
+            {
+              "permalink": "https://www.reddit.com/r/LocalLLaMA/comments/1t5p2yv/the_gb10_solution_atlas_is_now_open_source_the/",
+              "date": "2026-05-06T20:36:19+00:00",
+              "score": 55,
+              "source": "reddit",
+              "_kind": "newest"
+            },
+            {
+              "permalink": "https://www.reddit.com/r/ClaudeAI/comments/1t32zxi/anyone_actually_built_a_real_feedback_loop_for/",
+              "date": "2026-05-04T00:59:03+00:00",
+              "score": 9,
+              "source": "reddit",
+              "_kind": "oldest"
+            }
+          ]
+        },
+        {
           "term": "stupid",
           "count": 13,
           "examples": [
@@ -784,81 +892,27 @@
           ]
         },
         {
-          "term": "annoying",
-          "count": 13,
-          "examples": [
-            {
-              "permalink": "https://www.reddit.com/r/ClaudeAI/comments/1t40z2r/i_wish_claude_projects_would_have_the_same/",
-              "date": "2026-05-05T01:20:19+00:00",
-              "score": 37,
-              "source": "reddit",
-              "_kind": "top_scored"
-            },
-            {
-              "permalink": "https://news.ycombinator.com/item?id=48038336",
-              "date": "2026-05-06T16:43:12+00:00",
-              "score": 0,
-              "source": "hn",
-              "_kind": "newest"
-            },
-            {
-              "permalink": "https://www.reddit.com/r/ClaudeAI/comments/1t32rzn/stop_trying_to_put_me_to_bed_claude/ojs7yrf/",
-              "date": "2026-05-04T00:57:28+00:00",
-              "score": 4,
-              "source": "reddit",
-              "_kind": "oldest"
-            }
-          ]
-        },
-        {
-          "term": "broken",
+          "term": "scam",
           "count": 12,
           "examples": [
             {
-              "permalink": "https://www.reddit.com/r/ClaudeAI/comments/1t4gchn/i_asked_claude_to_investigate_its_own_token_burn/",
-              "date": "2026-05-05T14:00:32+00:00",
-              "score": 236,
+              "permalink": "https://www.reddit.com/r/ClaudeAI/comments/1t5hjs5/claude_just_saved_me_from_sending_money_to_a/",
+              "date": "2026-05-06T16:14:41+00:00",
+              "score": 337,
               "source": "reddit",
               "_kind": "top_scored"
             },
             {
-              "permalink": "https://news.ycombinator.com/item?id=48041101",
-              "date": "2026-05-06T20:10:59+00:00",
-              "score": 0,
-              "source": "hn",
-              "_kind": "newest"
-            },
-            {
-              "permalink": "https://www.reddit.com/r/ClaudeAI/comments/1t32zxi/anyone_actually_built_a_real_feedback_loop_for/",
-              "date": "2026-05-04T00:59:03+00:00",
-              "score": 9,
+              "permalink": "https://www.reddit.com/r/ClaudeAI/comments/1t5hjs5/claude_just_saved_me_from_sending_money_to_a/okaa0c1/",
+              "date": "2026-05-06T17:05:37+00:00",
+              "score": 26,
               "source": "reddit",
-              "_kind": "oldest"
-            }
-          ]
-        },
-        {
-          "term": "usage limit",
-          "count": 11,
-          "examples": [
-            {
-              "permalink": "https://news.ycombinator.com/item?id=48037986",
-              "date": "2026-05-06T16:17:33+00:00",
-              "score": 441,
-              "source": "hn",
-              "_kind": "top_scored"
-            },
-            {
-              "permalink": "https://news.ycombinator.com/item?id=48045045",
-              "date": "2026-05-07T03:18:17+00:00",
-              "score": 0,
-              "source": "hn",
               "_kind": "newest"
             },
             {
-              "permalink": "https://www.reddit.com/r/ClaudeAI/comments/1t3ugvy/minesweeper_is_ais_biggest_enemy/",
-              "date": "2026-05-04T20:56:31+00:00",
-              "score": 7,
+              "permalink": "https://www.reddit.com/r/ClaudeAI/comments/1t2ur8z/reminder_have_you_checked_your_context_lately/ojtlcy9/",
+              "date": "2026-05-04T06:48:04+00:00",
+              "score": 3,
               "source": "reddit",
               "_kind": "oldest"
             }
@@ -885,33 +939,6 @@
             {
               "permalink": "https://news.ycombinator.com/item?id=48004140",
               "date": "2026-05-04T03:00:11+00:00",
-              "score": 0,
-              "source": "hn",
-              "_kind": "oldest"
-            }
-          ]
-        },
-        {
-          "term": "rate limit",
-          "count": 9,
-          "examples": [
-            {
-              "permalink": "https://www.reddit.com/r/OpenAI/comments/1t3pqc6/is_codex_the_best_right_now/ojxwpzt/",
-              "date": "2026-05-04T21:14:10+00:00",
-              "score": 11,
-              "source": "reddit",
-              "_kind": "top_scored"
-            },
-            {
-              "permalink": "https://news.ycombinator.com/item?id=48042523",
-              "date": "2026-05-06T22:06:54+00:00",
-              "score": 0,
-              "source": "hn",
-              "_kind": "newest"
-            },
-            {
-              "permalink": "https://news.ycombinator.com/item?id=48003461",
-              "date": "2026-05-04T01:10:13+00:00",
               "score": 0,
               "source": "hn",
               "_kind": "oldest"
@@ -971,33 +998,6 @@
               "_kind": "oldest"
             }
           ]
-        },
-        {
-          "term": "worse than",
-          "count": 5,
-          "examples": [
-            {
-              "permalink": "https://www.reddit.com/r/LocalLLaMA/comments/1t4cev0/qwen36_merged_chat_template_from_allanchan339_and/ok1ecba/",
-              "date": "2026-05-05T11:24:36+00:00",
-              "score": 9,
-              "source": "reddit",
-              "_kind": "top_scored"
-            },
-            {
-              "permalink": "https://news.ycombinator.com/item?id=48045859",
-              "date": "2026-05-07T05:47:30+00:00",
-              "score": 0,
-              "source": "hn",
-              "_kind": "newest"
-            },
-            {
-              "permalink": "https://news.ycombinator.com/item?id=48003336",
-              "date": "2026-05-04T00:52:01+00:00",
-              "score": 0,
-              "source": "hn",
-              "_kind": "oldest"
-            }
-          ]
         }
       ]
     },
@@ -1032,7 +1032,7 @@
         },
         {
           "term": "stupid",
-          "count": 12,
+          "count": 13,
           "examples": [
             {
               "permalink": "https://www.reddit.com/r/LocalLLaMA/comments/1t4s6g2/deepseek_v4_being_17x_cheaper_got_me_to_actually/",
@@ -1042,10 +1042,10 @@
               "_kind": "top_scored"
             },
             {
-              "permalink": "https://news.ycombinator.com/item?id=48033686",
-              "date": "2026-05-06T08:23:22+00:00",
-              "score": 0,
-              "source": "hn",
+              "permalink": "https://www.reddit.com/r/ChatGPT/comments/1t5il7e/chatgpt_being_super_argumentative_recently_is/",
+              "date": "2026-05-06T16:50:49+00:00",
+              "score": 10,
+              "source": "reddit",
               "_kind": "newest"
             },
             {
@@ -1059,7 +1059,7 @@
         },
         {
           "term": "annoying",
-          "count": 11,
+          "count": 12,
           "examples": [
             {
               "permalink": "https://www.reddit.com/r/ChatGPT/comments/1t3a0ys/gpt_seems_to_pretend_not_to_understand_just_to/ojtq73y/",
@@ -1069,9 +1069,9 @@
               "_kind": "top_scored"
             },
             {
-              "permalink": "https://www.reddit.com/r/ChatGPT/comments/1t53rxx/yall_im_literally_so_aggravated_with_this_b/ok7kc0e/",
-              "date": "2026-05-06T07:35:56+00:00",
-              "score": 4,
+              "permalink": "https://www.reddit.com/r/ClaudeAI/comments/1t5llls/i_really_do_not_get_the_recent_hate_for_opus_47/okavxvy/",
+              "date": "2026-05-06T18:40:11+00:00",
+              "score": 7,
               "source": "reddit",
               "_kind": "newest"
             }
@@ -1105,6 +1105,26 @@
           ]
         },
         {
+          "term": "broken",
+          "count": 9,
+          "examples": [
+            {
+              "permalink": "https://www.reddit.com/r/LocalLLaMA/comments/1t5p2yv/the_gb10_solution_atlas_is_now_open_source_the/",
+              "date": "2026-05-06T20:36:19+00:00",
+              "score": 55,
+              "source": "reddit",
+              "_kind": "top_scored"
+            },
+            {
+              "permalink": "https://news.ycombinator.com/item?id=48006663",
+              "date": "2026-05-04T10:09:20+00:00",
+              "score": 0,
+              "source": "hn",
+              "_kind": "oldest"
+            }
+          ]
+        },
+        {
           "term": "terrible",
           "count": 9,
           "examples": [
@@ -1125,33 +1145,6 @@
             {
               "permalink": "https://news.ycombinator.com/item?id=48003751",
               "date": "2026-05-04T01:54:11+00:00",
-              "score": 0,
-              "source": "hn",
-              "_kind": "oldest"
-            }
-          ]
-        },
-        {
-          "term": "broken",
-          "count": 7,
-          "examples": [
-            {
-              "permalink": "https://www.reddit.com/r/LocalLLaMA/comments/1t4e83m/current_state_of_local_research_tools_as_of_may/",
-              "date": "2026-05-05T12:38:07+00:00",
-              "score": 53,
-              "source": "reddit",
-              "_kind": "top_scored"
-            },
-            {
-              "permalink": "https://www.reddit.com/r/OpenAI/comments/1t4u93u/i_built_a_web_tycoon_game_in_a_month_to_actually/",
-              "date": "2026-05-05T22:15:09+00:00",
-              "score": 8,
-              "source": "reddit",
-              "_kind": "newest"
-            },
-            {
-              "permalink": "https://news.ycombinator.com/item?id=48006663",
-              "date": "2026-05-04T10:09:20+00:00",
               "score": 0,
               "source": "hn",
               "_kind": "oldest"
@@ -1207,7 +1200,7 @@
         },
         {
           "term": "trash",
-          "count": 4,
+          "count": 6,
           "examples": [
             {
               "permalink": "https://www.reddit.com/r/ChatGPT/comments/1t3vfsw/but_im_going_to_gently_slow_you_down_on_one_part/ojzjelt/",
@@ -1215,6 +1208,13 @@
               "score": 19,
               "source": "reddit",
               "_kind": "top_scored"
+            },
+            {
+              "permalink": "https://www.reddit.com/r/ChatGPT/comments/1t5gumt/i_have_schizophrenia_and_chatgpt_is_barely/oka1hyu/",
+              "date": "2026-05-06T16:27:49+00:00",
+              "score": 3,
+              "source": "reddit",
+              "_kind": "newest"
             },
             {
               "permalink": "https://news.ycombinator.com/item?id=48003185",
@@ -1227,7 +1227,7 @@
         },
         {
           "term": "tired of",
-          "count": 4,
+          "count": 5,
           "examples": [
             {
               "permalink": "https://www.reddit.com/r/ChatGPT/comments/1t3vfsw/but_im_going_to_gently_slow_you_down_on_one_part/",
@@ -1237,9 +1237,9 @@
               "_kind": "top_scored"
             },
             {
-              "permalink": "https://www.reddit.com/r/ChatGPT/comments/1t47014/are_there_any_subreddits_that_discuss_chatgpt/",
-              "date": "2026-05-05T06:09:53+00:00",
-              "score": 66,
+              "permalink": "https://www.reddit.com/r/ChatGPT/comments/1t5g5f2/openai_phone_leaks_a_push_toward_ai_first_hardware/ok9rbxi/",
+              "date": "2026-05-06T15:42:53+00:00",
+              "score": 12,
               "source": "reddit",
               "_kind": "newest"
             },
@@ -1467,7 +1467,7 @@
       },
       {
         "week": "2026-W19",
-        "rate": 0.0133
+        "rate": 0.0128
       }
     ],
     "openai": [
@@ -1681,7 +1681,7 @@
       },
       {
         "week": "2026-W19",
-        "rate": 0.0134
+        "rate": 0.0129
       }
     ]
   },
