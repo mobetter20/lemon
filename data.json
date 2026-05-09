@@ -2,27 +2,27 @@
   "version": "2.0",
   "schema_version": "v0",
   "classifier_version": "v0",
-  "generated_at": "2026-05-09T03:39:14.802655+00:00",
+  "generated_at": "2026-05-09T06:28:46.250588+00:00",
   "totals": {
-    "all_records": 352496
+    "all_records": 352697
   },
   "summary": {
     "claude": {
       "this_week_label": "2026-W19",
       "this_week": {
-        "all_mentions": 2416,
-        "complaints": 217,
-        "rate": 0.0898,
+        "all_mentions": 2444,
+        "complaints": 222,
+        "rate": 0.0908,
         "by_source": {
           "hn": {
-            "all_mentions": 1068,
-            "complaints": 74,
-            "rate": 0.0693
+            "all_mentions": 1085,
+            "complaints": 77,
+            "rate": 0.071
           },
           "reddit": {
-            "all_mentions": 1348,
-            "complaints": 143,
-            "rate": 0.1061
+            "all_mentions": 1359,
+            "complaints": 145,
+            "rate": 0.1067
           }
         }
       },
@@ -43,24 +43,24 @@
           }
         }
       },
-      "delta_pts": -0.6
+      "delta_pts": -0.5
     },
     "openai": {
       "this_week_label": "2026-W19",
       "this_week": {
-        "all_mentions": 2023,
-        "complaints": 157,
-        "rate": 0.0776,
+        "all_mentions": 2092,
+        "complaints": 162,
+        "rate": 0.0774,
         "by_source": {
           "hn": {
-            "all_mentions": 912,
-            "complaints": 76,
-            "rate": 0.0833
+            "all_mentions": 949,
+            "complaints": 78,
+            "rate": 0.0822
           },
           "reddit": {
-            "all_mentions": 1111,
-            "complaints": 81,
-            "rate": 0.0729
+            "all_mentions": 1143,
+            "complaints": 84,
+            "rate": 0.0735
           }
         }
       },
@@ -400,9 +400,9 @@
       },
       {
         "week": "2026-W19",
-        "all_mentions": 2416,
-        "complaints": 217,
-        "rate": 0.0898
+        "all_mentions": 2444,
+        "complaints": 222,
+        "rate": 0.0908
       }
     ],
     "openai": [
@@ -720,9 +720,9 @@
       },
       {
         "week": "2026-W19",
-        "all_mentions": 2023,
-        "complaints": 157,
-        "rate": 0.0776
+        "all_mentions": 2092,
+        "complaints": 162,
+        "rate": 0.0774
       }
     ]
   },
@@ -784,6 +784,60 @@
           ]
         },
         {
+          "term": "annoying",
+          "count": 16,
+          "examples": [
+            {
+              "permalink": "https://www.reddit.com/r/ClaudeAI/comments/1t40z2r/i_wish_claude_projects_would_have_the_same/",
+              "date": "2026-05-05T01:20:19+00:00",
+              "score": 37,
+              "source": "reddit",
+              "_kind": "top_scored"
+            },
+            {
+              "permalink": "https://news.ycombinator.com/item?id=48072175",
+              "date": "2026-05-09T05:49:16+00:00",
+              "score": 0,
+              "source": "hn",
+              "_kind": "newest"
+            },
+            {
+              "permalink": "https://www.reddit.com/r/ClaudeAI/comments/1t32rzn/stop_trying_to_put_me_to_bed_claude/ojs7yrf/",
+              "date": "2026-05-04T00:57:28+00:00",
+              "score": 4,
+              "source": "reddit",
+              "_kind": "oldest"
+            }
+          ]
+        },
+        {
+          "term": "broken",
+          "count": 15,
+          "examples": [
+            {
+              "permalink": "https://www.reddit.com/r/ClaudeAI/comments/1t4gchn/i_asked_claude_to_investigate_its_own_token_burn/",
+              "date": "2026-05-05T14:00:32+00:00",
+              "score": 236,
+              "source": "reddit",
+              "_kind": "top_scored"
+            },
+            {
+              "permalink": "https://www.reddit.com/r/ClaudeAI/comments/1t6hgsf/opus_46_does_better_research_gemini_31_has_better/",
+              "date": "2026-05-07T17:32:58+00:00",
+              "score": 7,
+              "source": "reddit",
+              "_kind": "newest"
+            },
+            {
+              "permalink": "https://www.reddit.com/r/ClaudeAI/comments/1t32zxi/anyone_actually_built_a_real_feedback_loop_for/",
+              "date": "2026-05-04T00:59:03+00:00",
+              "score": 9,
+              "source": "reddit",
+              "_kind": "oldest"
+            }
+          ]
+        },
+        {
           "term": "stupid",
           "count": 15,
           "examples": [
@@ -811,33 +865,6 @@
           ]
         },
         {
-          "term": "annoying",
-          "count": 15,
-          "examples": [
-            {
-              "permalink": "https://www.reddit.com/r/ClaudeAI/comments/1t40z2r/i_wish_claude_projects_would_have_the_same/",
-              "date": "2026-05-05T01:20:19+00:00",
-              "score": 37,
-              "source": "reddit",
-              "_kind": "top_scored"
-            },
-            {
-              "permalink": "https://www.reddit.com/r/ClaudeAI/comments/1t5llls/i_really_do_not_get_the_recent_hate_for_opus_47/okavxvy/",
-              "date": "2026-05-06T18:40:11+00:00",
-              "score": 7,
-              "source": "reddit",
-              "_kind": "newest"
-            },
-            {
-              "permalink": "https://www.reddit.com/r/ClaudeAI/comments/1t32rzn/stop_trying_to_put_me_to_bed_claude/ojs7yrf/",
-              "date": "2026-05-04T00:57:28+00:00",
-              "score": 4,
-              "source": "reddit",
-              "_kind": "oldest"
-            }
-          ]
-        },
-        {
           "term": "rate limit",
           "count": 14,
           "examples": [
@@ -860,33 +887,6 @@
               "date": "2026-05-04T01:10:13+00:00",
               "score": 0,
               "source": "hn",
-              "_kind": "oldest"
-            }
-          ]
-        },
-        {
-          "term": "broken",
-          "count": 14,
-          "examples": [
-            {
-              "permalink": "https://www.reddit.com/r/ClaudeAI/comments/1t4gchn/i_asked_claude_to_investigate_its_own_token_burn/",
-              "date": "2026-05-05T14:00:32+00:00",
-              "score": 236,
-              "source": "reddit",
-              "_kind": "top_scored"
-            },
-            {
-              "permalink": "https://www.reddit.com/r/LocalLLaMA/comments/1t5p2yv/the_gb10_solution_atlas_is_now_open_source_the/",
-              "date": "2026-05-06T20:36:19+00:00",
-              "score": 55,
-              "source": "reddit",
-              "_kind": "newest"
-            },
-            {
-              "permalink": "https://www.reddit.com/r/ClaudeAI/comments/1t32zxi/anyone_actually_built_a_real_feedback_loop_for/",
-              "date": "2026-05-04T00:59:03+00:00",
-              "score": 9,
-              "source": "reddit",
               "_kind": "oldest"
             }
           ]
@@ -1005,7 +1005,7 @@
       "this_week": [
         {
           "term": "slow",
-          "count": 27,
+          "count": 28,
           "examples": [
             {
               "permalink": "https://www.reddit.com/r/ChatGPT/comments/1t3vfsw/but_im_going_to_gently_slow_you_down_on_one_part/",
@@ -1106,7 +1106,7 @@
         },
         {
           "term": "useless",
-          "count": 9,
+          "count": 10,
           "examples": [
             {
               "permalink": "https://www.reddit.com/r/ChatGPT/comments/1t3a0ys/gpt_seems_to_pretend_not_to_understand_just_to/ojtq73y/",
@@ -1116,10 +1116,10 @@
               "_kind": "top_scored"
             },
             {
-              "permalink": "https://www.reddit.com/r/OpenAI/comments/1t4u93u/i_built_a_web_tycoon_game_in_a_month_to_actually/",
-              "date": "2026-05-05T22:15:09+00:00",
-              "score": 8,
-              "source": "reddit",
+              "permalink": "https://news.ycombinator.com/item?id=48072253",
+              "date": "2026-05-09T06:03:51+00:00",
+              "score": 0,
+              "source": "hn",
               "_kind": "newest"
             },
             {
@@ -1133,7 +1133,7 @@
         },
         {
           "term": "broken",
-          "count": 9,
+          "count": 10,
           "examples": [
             {
               "permalink": "https://www.reddit.com/r/LocalLLaMA/comments/1t5p2yv/the_gb10_solution_atlas_is_now_open_source_the/",
@@ -1141,6 +1141,13 @@
               "score": 55,
               "source": "reddit",
               "_kind": "top_scored"
+            },
+            {
+              "permalink": "https://www.reddit.com/r/ClaudeAI/comments/1t6hgsf/opus_46_does_better_research_gemini_31_has_better/",
+              "date": "2026-05-07T17:32:58+00:00",
+              "score": 7,
+              "source": "reddit",
+              "_kind": "newest"
             },
             {
               "permalink": "https://news.ycombinator.com/item?id=48006663",
@@ -1474,7 +1481,7 @@
       },
       {
         "week": "2026-W19",
-        "rate": 0.0116
+        "rate": 0.0115
       }
     ],
     "openai": [
@@ -1688,7 +1695,7 @@
       },
       {
         "week": "2026-W19",
-        "rate": 0.0119
+        "rate": 0.0115
       }
     ]
   },
