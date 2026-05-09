@@ -2,17 +2,17 @@
   "version": "2.0",
   "schema_version": "v0",
   "classifier_version": "v0",
-  "generated_at": "2026-05-09T17:08:07.016045+00:00",
+  "generated_at": "2026-05-09T20:58:27.952803+00:00",
   "totals": {
-    "all_records": 353190
+    "all_records": 353266
   },
   "summary": {
     "claude": {
       "this_week_label": "2026-W19",
       "this_week": {
-        "all_mentions": 2497,
-        "complaints": 234,
-        "rate": 0.0937,
+        "all_mentions": 2516,
+        "complaints": 235,
+        "rate": 0.0934,
         "by_source": {
           "hn": {
             "all_mentions": 1091,
@@ -20,9 +20,9 @@
             "rate": 0.0733
           },
           "reddit": {
-            "all_mentions": 1406,
-            "complaints": 154,
-            "rate": 0.1095
+            "all_mentions": 1425,
+            "complaints": 155,
+            "rate": 0.1088
           }
         }
       },
@@ -48,9 +48,9 @@
     "openai": {
       "this_week_label": "2026-W19",
       "this_week": {
-        "all_mentions": 2153,
-        "complaints": 169,
-        "rate": 0.0785,
+        "all_mentions": 2165,
+        "complaints": 171,
+        "rate": 0.079,
         "by_source": {
           "hn": {
             "all_mentions": 950,
@@ -58,9 +58,9 @@
             "rate": 0.0821
           },
           "reddit": {
-            "all_mentions": 1203,
-            "complaints": 91,
-            "rate": 0.0756
+            "all_mentions": 1215,
+            "complaints": 93,
+            "rate": 0.0765
           }
         }
       },
@@ -81,7 +81,7 @@
           }
         }
       },
-      "delta_pts": -0.5
+      "delta_pts": -0.4
     }
   },
   "trend": {
@@ -400,9 +400,9 @@
       },
       {
         "week": "2026-W19",
-        "all_mentions": 2497,
-        "complaints": 234,
-        "rate": 0.0937
+        "all_mentions": 2516,
+        "complaints": 235,
+        "rate": 0.0934
       }
     ],
     "openai": [
@@ -720,9 +720,9 @@
       },
       {
         "week": "2026-W19",
-        "all_mentions": 2153,
-        "complaints": 169,
-        "rate": 0.0785
+        "all_mentions": 2165,
+        "complaints": 171,
+        "rate": 0.079
       }
     ]
   },
@@ -1059,7 +1059,7 @@
         },
         {
           "term": "annoying",
-          "count": 13,
+          "count": 14,
           "examples": [
             {
               "permalink": "https://www.reddit.com/r/ChatGPT/comments/1t3a0ys/gpt_seems_to_pretend_not_to_understand_just_to/ojtq73y/",
@@ -1481,7 +1481,7 @@
       },
       {
         "week": "2026-W19",
-        "rate": 0.0124
+        "rate": 0.0123
       }
     ],
     "openai": [
@@ -1695,7 +1695,7 @@
       },
       {
         "week": "2026-W19",
-        "rate": 0.0116
+        "rate": 0.0115
       }
     ]
   },
