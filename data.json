@@ -2,27 +2,27 @@
   "version": "2.0",
   "schema_version": "v0",
   "classifier_version": "v0",
-  "generated_at": "2026-05-09T13:51:37.620882+00:00",
+  "generated_at": "2026-05-09T17:08:07.016045+00:00",
   "totals": {
-    "all_records": 353094
+    "all_records": 353190
   },
   "summary": {
     "claude": {
       "this_week_label": "2026-W19",
       "this_week": {
-        "all_mentions": 2488,
-        "complaints": 232,
-        "rate": 0.0932,
+        "all_mentions": 2497,
+        "complaints": 234,
+        "rate": 0.0937,
         "by_source": {
           "hn": {
-            "all_mentions": 1089,
+            "all_mentions": 1091,
             "complaints": 80,
-            "rate": 0.0735
+            "rate": 0.0733
           },
           "reddit": {
-            "all_mentions": 1399,
-            "complaints": 152,
-            "rate": 0.1086
+            "all_mentions": 1406,
+            "complaints": 154,
+            "rate": 0.1095
           }
         }
       },
@@ -48,19 +48,19 @@
     "openai": {
       "this_week_label": "2026-W19",
       "this_week": {
-        "all_mentions": 2130,
-        "complaints": 168,
-        "rate": 0.0789,
+        "all_mentions": 2153,
+        "complaints": 169,
+        "rate": 0.0785,
         "by_source": {
           "hn": {
-            "all_mentions": 949,
+            "all_mentions": 950,
             "complaints": 78,
-            "rate": 0.0822
+            "rate": 0.0821
           },
           "reddit": {
-            "all_mentions": 1181,
-            "complaints": 90,
-            "rate": 0.0762
+            "all_mentions": 1203,
+            "complaints": 91,
+            "rate": 0.0756
           }
         }
       },
@@ -81,7 +81,7 @@
           }
         }
       },
-      "delta_pts": -0.4
+      "delta_pts": -0.5
     }
   },
   "trend": {
@@ -400,9 +400,9 @@
       },
       {
         "week": "2026-W19",
-        "all_mentions": 2488,
-        "complaints": 232,
-        "rate": 0.0932
+        "all_mentions": 2497,
+        "complaints": 234,
+        "rate": 0.0937
       }
     ],
     "openai": [
@@ -720,9 +720,9 @@
       },
       {
         "week": "2026-W19",
-        "all_mentions": 2130,
-        "complaints": 168,
-        "rate": 0.0789
+        "all_mentions": 2153,
+        "complaints": 169,
+        "rate": 0.0785
       }
     ]
   },
@@ -784,6 +784,33 @@
           ]
         },
         {
+          "term": "stupid",
+          "count": 17,
+          "examples": [
+            {
+              "permalink": "https://www.reddit.com/r/ChatGPT/comments/1t3vfsw/but_im_going_to_gently_slow_you_down_on_one_part/",
+              "date": "2026-05-04T21:32:06+00:00",
+              "score": 151,
+              "source": "reddit",
+              "_kind": "top_scored"
+            },
+            {
+              "permalink": "https://news.ycombinator.com/item?id=48072589",
+              "date": "2026-05-09T07:02:09+00:00",
+              "score": 0,
+              "source": "hn",
+              "_kind": "newest"
+            },
+            {
+              "permalink": "https://news.ycombinator.com/item?id=48003034",
+              "date": "2026-05-04T00:11:46+00:00",
+              "score": 0,
+              "source": "hn",
+              "_kind": "oldest"
+            }
+          ]
+        },
+        {
           "term": "broken",
           "count": 16,
           "examples": [
@@ -806,33 +833,6 @@
               "date": "2026-05-04T00:59:03+00:00",
               "score": 9,
               "source": "reddit",
-              "_kind": "oldest"
-            }
-          ]
-        },
-        {
-          "term": "stupid",
-          "count": 16,
-          "examples": [
-            {
-              "permalink": "https://www.reddit.com/r/ChatGPT/comments/1t3vfsw/but_im_going_to_gently_slow_you_down_on_one_part/",
-              "date": "2026-05-04T21:32:06+00:00",
-              "score": 151,
-              "source": "reddit",
-              "_kind": "top_scored"
-            },
-            {
-              "permalink": "https://news.ycombinator.com/item?id=48072589",
-              "date": "2026-05-09T07:02:09+00:00",
-              "score": 0,
-              "source": "hn",
-              "_kind": "newest"
-            },
-            {
-              "permalink": "https://news.ycombinator.com/item?id=48003034",
-              "date": "2026-05-04T00:11:46+00:00",
-              "score": 0,
-              "source": "hn",
               "_kind": "oldest"
             }
           ]
@@ -1079,7 +1079,7 @@
         },
         {
           "term": "terrible",
-          "count": 11,
+          "count": 12,
           "examples": [
             {
               "permalink": "https://www.reddit.com/r/ChatGPT/comments/1t3a0ys/gpt_seems_to_pretend_not_to_understand_just_to/ojtq73y/",
@@ -1089,9 +1089,9 @@
               "_kind": "top_scored"
             },
             {
-              "permalink": "https://www.reddit.com/r/ChatGPT/comments/1t6aae2/maybe_dont_use_chat_gpt_as_a_therapist/okg1fw1/",
-              "date": "2026-05-07T13:37:55+00:00",
-              "score": 24,
+              "permalink": "https://www.reddit.com/r/ChatGPT/comments/1t6rwts/chat_gpt_giving_fatal_advice/okjxva5/",
+              "date": "2026-05-08T00:56:11+00:00",
+              "score": 9,
               "source": "reddit",
               "_kind": "newest"
             },
@@ -1481,7 +1481,7 @@
       },
       {
         "week": "2026-W19",
-        "rate": 0.0125
+        "rate": 0.0124
       }
     ],
     "openai": [
@@ -1695,7 +1695,7 @@
       },
       {
         "week": "2026-W19",
-        "rate": 0.0117
+        "rate": 0.0116
       }
     ]
   },
