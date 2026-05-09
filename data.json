@@ -2,27 +2,27 @@
   "version": "2.0",
   "schema_version": "v0",
   "classifier_version": "v0",
-  "generated_at": "2026-05-09T06:28:46.250588+00:00",
+  "generated_at": "2026-05-09T09:33:22.623844+00:00",
   "totals": {
-    "all_records": 352697
+    "all_records": 352970
   },
   "summary": {
     "claude": {
       "this_week_label": "2026-W19",
       "this_week": {
-        "all_mentions": 2444,
-        "complaints": 222,
-        "rate": 0.0908,
+        "all_mentions": 2477,
+        "complaints": 231,
+        "rate": 0.0933,
         "by_source": {
           "hn": {
-            "all_mentions": 1085,
-            "complaints": 77,
-            "rate": 0.071
+            "all_mentions": 1089,
+            "complaints": 80,
+            "rate": 0.0735
           },
           "reddit": {
-            "all_mentions": 1359,
-            "complaints": 145,
-            "rate": 0.1067
+            "all_mentions": 1388,
+            "complaints": 151,
+            "rate": 0.1088
           }
         }
       },
@@ -43,14 +43,14 @@
           }
         }
       },
-      "delta_pts": -0.5
+      "delta_pts": -0.3
     },
     "openai": {
       "this_week_label": "2026-W19",
       "this_week": {
-        "all_mentions": 2092,
-        "complaints": 162,
-        "rate": 0.0774,
+        "all_mentions": 2122,
+        "complaints": 167,
+        "rate": 0.0787,
         "by_source": {
           "hn": {
             "all_mentions": 949,
@@ -58,9 +58,9 @@
             "rate": 0.0822
           },
           "reddit": {
-            "all_mentions": 1143,
-            "complaints": 84,
-            "rate": 0.0735
+            "all_mentions": 1173,
+            "complaints": 89,
+            "rate": 0.0759
           }
         }
       },
@@ -81,7 +81,7 @@
           }
         }
       },
-      "delta_pts": -0.6
+      "delta_pts": -0.5
     }
   },
   "trend": {
@@ -400,9 +400,9 @@
       },
       {
         "week": "2026-W19",
-        "all_mentions": 2444,
-        "complaints": 222,
-        "rate": 0.0908
+        "all_mentions": 2477,
+        "complaints": 231,
+        "rate": 0.0933
       }
     ],
     "openai": [
@@ -720,9 +720,9 @@
       },
       {
         "week": "2026-W19",
-        "all_mentions": 2092,
-        "complaints": 162,
-        "rate": 0.0774
+        "all_mentions": 2122,
+        "complaints": 167,
+        "rate": 0.0787
       }
     ]
   },
@@ -731,7 +731,7 @@
       "this_week": [
         {
           "term": "slow",
-          "count": 27,
+          "count": 28,
           "examples": [
             {
               "permalink": "https://www.reddit.com/r/ChatGPT/comments/1t3vfsw/but_im_going_to_gently_slow_you_down_on_one_part/",
@@ -741,10 +741,10 @@
               "_kind": "top_scored"
             },
             {
-              "permalink": "https://www.reddit.com/r/LocalLLaMA/comments/1t65vl8/running_qwen35_qwen36_with_nextn_mtp_multitoken/okfava3/",
-              "date": "2026-05-07T11:06:45+00:00",
-              "score": 3,
-              "source": "reddit",
+              "permalink": "https://news.ycombinator.com/item?id=48073405",
+              "date": "2026-05-09T09:15:59+00:00",
+              "score": 0,
+              "source": "hn",
               "_kind": "newest"
             },
             {
@@ -758,7 +758,7 @@
         },
         {
           "term": "usage limit",
-          "count": 17,
+          "count": 20,
           "examples": [
             {
               "permalink": "https://www.reddit.com/r/ClaudeAI/comments/1t5htq1/spacex_conpute_deal_double_limits/",
@@ -768,10 +768,10 @@
               "_kind": "top_scored"
             },
             {
-              "permalink": "https://news.ycombinator.com/item?id=48045045",
-              "date": "2026-05-07T03:18:17+00:00",
-              "score": 0,
-              "source": "hn",
+              "permalink": "https://www.reddit.com/r/ClaudeAI/comments/1t6ndxa/eu_subscribers_claude_pros_usage_limits_may_not/",
+              "date": "2026-05-07T21:01:26+00:00",
+              "score": 336,
+              "source": "reddit",
               "_kind": "newest"
             },
             {
@@ -779,6 +779,33 @@
               "date": "2026-05-04T20:56:31+00:00",
               "score": 7,
               "source": "reddit",
+              "_kind": "oldest"
+            }
+          ]
+        },
+        {
+          "term": "stupid",
+          "count": 16,
+          "examples": [
+            {
+              "permalink": "https://www.reddit.com/r/ChatGPT/comments/1t3vfsw/but_im_going_to_gently_slow_you_down_on_one_part/",
+              "date": "2026-05-04T21:32:06+00:00",
+              "score": 151,
+              "source": "reddit",
+              "_kind": "top_scored"
+            },
+            {
+              "permalink": "https://news.ycombinator.com/item?id=48072589",
+              "date": "2026-05-09T07:02:09+00:00",
+              "score": 0,
+              "source": "hn",
+              "_kind": "newest"
+            },
+            {
+              "permalink": "https://news.ycombinator.com/item?id=48003034",
+              "date": "2026-05-04T00:11:46+00:00",
+              "score": 0,
+              "source": "hn",
               "_kind": "oldest"
             }
           ]
@@ -838,33 +865,6 @@
           ]
         },
         {
-          "term": "stupid",
-          "count": 15,
-          "examples": [
-            {
-              "permalink": "https://www.reddit.com/r/ChatGPT/comments/1t3vfsw/but_im_going_to_gently_slow_you_down_on_one_part/",
-              "date": "2026-05-04T21:32:06+00:00",
-              "score": 151,
-              "source": "reddit",
-              "_kind": "top_scored"
-            },
-            {
-              "permalink": "https://www.reddit.com/r/ClaudeAI/comments/1t6cxsa/asked_claude_max_to_help_me_ruin_kindle_3_hours/",
-              "date": "2026-05-07T14:55:09+00:00",
-              "score": 10,
-              "source": "reddit",
-              "_kind": "newest"
-            },
-            {
-              "permalink": "https://news.ycombinator.com/item?id=48003034",
-              "date": "2026-05-04T00:11:46+00:00",
-              "score": 0,
-              "source": "hn",
-              "_kind": "oldest"
-            }
-          ]
-        },
-        {
           "term": "rate limit",
           "count": 14,
           "examples": [
@@ -919,6 +919,33 @@
           ]
         },
         {
+          "term": "regression",
+          "count": 10,
+          "examples": [
+            {
+              "permalink": "https://www.reddit.com/r/ClaudeAI/comments/1t3du61/your_claude_code_agent_is_always_working_from/",
+              "date": "2026-05-04T10:33:23+00:00",
+              "score": 61,
+              "source": "reddit",
+              "_kind": "top_scored"
+            },
+            {
+              "permalink": "https://news.ycombinator.com/item?id=48073405",
+              "date": "2026-05-09T09:15:59+00:00",
+              "score": 0,
+              "source": "hn",
+              "_kind": "newest"
+            },
+            {
+              "permalink": "https://www.reddit.com/r/ClaudeAI/comments/1t32zxi/anyone_actually_built_a_real_feedback_loop_for/",
+              "date": "2026-05-04T00:59:03+00:00",
+              "score": 9,
+              "source": "reddit",
+              "_kind": "oldest"
+            }
+          ]
+        },
+        {
           "term": "useless",
           "count": 9,
           "examples": [
@@ -941,33 +968,6 @@
               "date": "2026-05-04T03:00:11+00:00",
               "score": 0,
               "source": "hn",
-              "_kind": "oldest"
-            }
-          ]
-        },
-        {
-          "term": "regression",
-          "count": 9,
-          "examples": [
-            {
-              "permalink": "https://www.reddit.com/r/ClaudeAI/comments/1t3du61/your_claude_code_agent_is_always_working_from/",
-              "date": "2026-05-04T10:33:23+00:00",
-              "score": 61,
-              "source": "reddit",
-              "_kind": "top_scored"
-            },
-            {
-              "permalink": "https://www.reddit.com/r/ClaudeAI/comments/1t54m22/are_anthropic_folks_actually_seeing_reddit/ok7k1pe/",
-              "date": "2026-05-06T07:33:23+00:00",
-              "score": 4,
-              "source": "reddit",
-              "_kind": "newest"
-            },
-            {
-              "permalink": "https://www.reddit.com/r/ClaudeAI/comments/1t32zxi/anyone_actually_built_a_real_feedback_loop_for/",
-              "date": "2026-05-04T00:59:03+00:00",
-              "score": 9,
-              "source": "reddit",
               "_kind": "oldest"
             }
           ]
@@ -1159,6 +1159,33 @@
           ]
         },
         {
+          "term": "frustrating",
+          "count": 10,
+          "examples": [
+            {
+              "permalink": "https://www.reddit.com/r/ClaudeAI/comments/1t6jow8/claudes_new_limits/",
+              "date": "2026-05-07T18:50:14+00:00",
+              "score": 35,
+              "source": "reddit",
+              "_kind": "top_scored"
+            },
+            {
+              "permalink": "https://news.ycombinator.com/item?id=48070853",
+              "date": "2026-05-09T01:27:42+00:00",
+              "score": 0,
+              "source": "hn",
+              "_kind": "newest"
+            },
+            {
+              "permalink": "https://www.reddit.com/r/ChatGPT/comments/1t32k36/did_chatgpt_suddenly_move_project_chats_into/",
+              "date": "2026-05-04T00:39:06+00:00",
+              "score": 20,
+              "source": "reddit",
+              "_kind": "oldest"
+            }
+          ]
+        },
+        {
           "term": "lazy",
           "count": 8,
           "examples": [
@@ -1181,33 +1208,6 @@
               "date": "2026-05-04T11:24:11+00:00",
               "score": 0,
               "source": "hn",
-              "_kind": "oldest"
-            }
-          ]
-        },
-        {
-          "term": "frustrating",
-          "count": 8,
-          "examples": [
-            {
-              "permalink": "https://www.reddit.com/r/ChatGPT/comments/1t53rxx/yall_im_literally_so_aggravated_with_this_b/ok77o44/",
-              "date": "2026-05-06T05:48:32+00:00",
-              "score": 21,
-              "source": "reddit",
-              "_kind": "top_scored"
-            },
-            {
-              "permalink": "https://news.ycombinator.com/item?id=48070853",
-              "date": "2026-05-09T01:27:42+00:00",
-              "score": 0,
-              "source": "hn",
-              "_kind": "newest"
-            },
-            {
-              "permalink": "https://www.reddit.com/r/ChatGPT/comments/1t32k36/did_chatgpt_suddenly_move_project_chats_into/",
-              "date": "2026-05-04T00:39:06+00:00",
-              "score": 20,
-              "source": "reddit",
               "_kind": "oldest"
             }
           ]
@@ -1481,7 +1481,7 @@
       },
       {
         "week": "2026-W19",
-        "rate": 0.0115
+        "rate": 0.0121
       }
     ],
     "openai": [
@@ -1695,7 +1695,7 @@
       },
       {
         "week": "2026-W19",
-        "rate": 0.0115
+        "rate": 0.0118
       }
     ]
   },
