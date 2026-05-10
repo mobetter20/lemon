@@ -2,17 +2,17 @@
   "version": "2.0",
   "schema_version": "v0",
   "classifier_version": "v0",
-  "generated_at": "2026-05-10T06:44:45.314791+00:00",
+  "generated_at": "2026-05-10T09:48:34.577033+00:00",
   "totals": {
-    "all_records": 353739
+    "all_records": 353840
   },
   "summary": {
     "claude": {
       "this_week_label": "2026-W19",
       "this_week": {
-        "all_mentions": 2652,
-        "complaints": 248,
-        "rate": 0.0935,
+        "all_mentions": 2672,
+        "complaints": 249,
+        "rate": 0.0932,
         "by_source": {
           "hn": {
             "all_mentions": 1092,
@@ -20,9 +20,9 @@
             "rate": 0.0742
           },
           "reddit": {
-            "all_mentions": 1560,
-            "complaints": 167,
-            "rate": 0.1071
+            "all_mentions": 1580,
+            "complaints": 168,
+            "rate": 0.1063
           }
         }
       },
@@ -48,9 +48,9 @@
     "openai": {
       "this_week_label": "2026-W19",
       "this_week": {
-        "all_mentions": 2224,
-        "complaints": 173,
-        "rate": 0.0778,
+        "all_mentions": 2240,
+        "complaints": 174,
+        "rate": 0.0777,
         "by_source": {
           "hn": {
             "all_mentions": 950,
@@ -58,9 +58,9 @@
             "rate": 0.0821
           },
           "reddit": {
-            "all_mentions": 1274,
-            "complaints": 95,
-            "rate": 0.0746
+            "all_mentions": 1290,
+            "complaints": 96,
+            "rate": 0.0744
           }
         }
       },
@@ -400,9 +400,9 @@
       },
       {
         "week": "2026-W19",
-        "all_mentions": 2652,
-        "complaints": 248,
-        "rate": 0.0935
+        "all_mentions": 2672,
+        "complaints": 249,
+        "rate": 0.0932
       }
     ],
     "openai": [
@@ -720,9 +720,9 @@
       },
       {
         "week": "2026-W19",
-        "all_mentions": 2224,
-        "complaints": 173,
-        "rate": 0.0778
+        "all_mentions": 2240,
+        "complaints": 174,
+        "rate": 0.0777
       }
     ]
   },
@@ -812,7 +812,7 @@
         },
         {
           "term": "broken",
-          "count": 16,
+          "count": 17,
           "examples": [
             {
               "permalink": "https://www.reddit.com/r/ClaudeAI/comments/1t4gchn/i_asked_claude_to_investigate_its_own_token_burn/",
@@ -822,9 +822,9 @@
               "_kind": "top_scored"
             },
             {
-              "permalink": "https://www.reddit.com/r/ClaudeAI/comments/1t6sz7m/how_i_keep_my_claudemd_from_rotting_a_discipline/",
-              "date": "2026-05-08T00:54:43+00:00",
-              "score": 15,
+              "permalink": "https://www.reddit.com/r/ClaudeAI/comments/1t7jvh9/claude_vs_code_extension_broken_on_windows/",
+              "date": "2026-05-08T20:35:35+00:00",
+              "score": 11,
               "source": "reddit",
               "_kind": "newest"
             },
