@@ -2,15 +2,15 @@
   "version": "2.0",
   "schema_version": "v0",
   "classifier_version": "v0",
-  "generated_at": "2026-05-10T17:07:07.719857+00:00",
+  "generated_at": "2026-05-10T21:01:13.183452+00:00",
   "totals": {
-    "all_records": 354018
+    "all_records": 354031
   },
   "summary": {
     "claude": {
       "this_week_label": "2026-W19",
       "this_week": {
-        "all_mentions": 2740,
+        "all_mentions": 2741,
         "complaints": 253,
         "rate": 0.0923,
         "by_source": {
@@ -20,9 +20,9 @@
             "rate": 0.0729
           },
           "reddit": {
-            "all_mentions": 1629,
+            "all_mentions": 1630,
             "complaints": 172,
-            "rate": 0.1056
+            "rate": 0.1055
           }
         }
       },
@@ -48,9 +48,9 @@
     "openai": {
       "this_week_label": "2026-W19",
       "this_week": {
-        "all_mentions": 2290,
-        "complaints": 176,
-        "rate": 0.0769,
+        "all_mentions": 2293,
+        "complaints": 177,
+        "rate": 0.0772,
         "by_source": {
           "hn": {
             "all_mentions": 965,
@@ -58,9 +58,9 @@
             "rate": 0.0808
           },
           "reddit": {
-            "all_mentions": 1325,
-            "complaints": 98,
-            "rate": 0.074
+            "all_mentions": 1328,
+            "complaints": 99,
+            "rate": 0.0745
           }
         }
       },
@@ -400,7 +400,7 @@
       },
       {
         "week": "2026-W19",
-        "all_mentions": 2740,
+        "all_mentions": 2741,
         "complaints": 253,
         "rate": 0.0923
       }
@@ -720,9 +720,9 @@
       },
       {
         "week": "2026-W19",
-        "all_mentions": 2290,
-        "complaints": 176,
-        "rate": 0.0769
+        "all_mentions": 2293,
+        "complaints": 177,
+        "rate": 0.0772
       }
     ]
   },
@@ -1213,6 +1213,33 @@
           ]
         },
         {
+          "term": "garbage",
+          "count": 7,
+          "examples": [
+            {
+              "permalink": "https://www.reddit.com/r/OpenAI/comments/1t4fy1m/openai_revenue/ok31hwz/",
+              "date": "2026-05-05T16:22:00+00:00",
+              "score": 47,
+              "source": "reddit",
+              "_kind": "top_scored"
+            },
+            {
+              "permalink": "https://www.reddit.com/r/OpenAI/comments/1t7v9mu/how_often_are_you_using_codex_to_help_on_projects/",
+              "date": "2026-05-09T04:59:34+00:00",
+              "score": 10,
+              "source": "reddit",
+              "_kind": "newest"
+            },
+            {
+              "permalink": "https://news.ycombinator.com/item?id=48003742",
+              "date": "2026-05-04T01:53:01+00:00",
+              "score": 0,
+              "source": "hn",
+              "_kind": "oldest"
+            }
+          ]
+        },
+        {
           "term": "trash",
           "count": 7,
           "examples": [
@@ -1233,33 +1260,6 @@
             {
               "permalink": "https://news.ycombinator.com/item?id=48003185",
               "date": "2026-05-04T00:34:24+00:00",
-              "score": 0,
-              "source": "hn",
-              "_kind": "oldest"
-            }
-          ]
-        },
-        {
-          "term": "garbage",
-          "count": 6,
-          "examples": [
-            {
-              "permalink": "https://www.reddit.com/r/OpenAI/comments/1t4fy1m/openai_revenue/ok31hwz/",
-              "date": "2026-05-05T16:22:00+00:00",
-              "score": 47,
-              "source": "reddit",
-              "_kind": "top_scored"
-            },
-            {
-              "permalink": "https://news.ycombinator.com/item?id=48025998",
-              "date": "2026-05-05T17:51:10+00:00",
-              "score": 0,
-              "source": "hn",
-              "_kind": "newest"
-            },
-            {
-              "permalink": "https://news.ycombinator.com/item?id=48003742",
-              "date": "2026-05-04T01:53:01+00:00",
               "score": 0,
               "source": "hn",
               "_kind": "oldest"
