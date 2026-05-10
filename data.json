@@ -2,27 +2,27 @@
   "version": "2.0",
   "schema_version": "v0",
   "classifier_version": "v0",
-  "generated_at": "2026-05-10T13:46:26.484119+00:00",
+  "generated_at": "2026-05-10T17:07:07.719857+00:00",
   "totals": {
-    "all_records": 353973
+    "all_records": 354018
   },
   "summary": {
     "claude": {
       "this_week_label": "2026-W19",
       "this_week": {
-        "all_mentions": 2713,
-        "complaints": 251,
-        "rate": 0.0925,
+        "all_mentions": 2740,
+        "complaints": 253,
+        "rate": 0.0923,
         "by_source": {
           "hn": {
-            "all_mentions": 1101,
+            "all_mentions": 1111,
             "complaints": 81,
-            "rate": 0.0736
+            "rate": 0.0729
           },
           "reddit": {
-            "all_mentions": 1612,
-            "complaints": 170,
-            "rate": 0.1055
+            "all_mentions": 1629,
+            "complaints": 172,
+            "rate": 0.1056
           }
         }
       },
@@ -48,19 +48,19 @@
     "openai": {
       "this_week_label": "2026-W19",
       "this_week": {
-        "all_mentions": 2280,
+        "all_mentions": 2290,
         "complaints": 176,
-        "rate": 0.0772,
+        "rate": 0.0769,
         "by_source": {
           "hn": {
-            "all_mentions": 958,
+            "all_mentions": 965,
             "complaints": 78,
-            "rate": 0.0814
+            "rate": 0.0808
           },
           "reddit": {
-            "all_mentions": 1322,
+            "all_mentions": 1325,
             "complaints": 98,
-            "rate": 0.0741
+            "rate": 0.074
           }
         }
       },
@@ -400,9 +400,9 @@
       },
       {
         "week": "2026-W19",
-        "all_mentions": 2713,
-        "complaints": 251,
-        "rate": 0.0925
+        "all_mentions": 2740,
+        "complaints": 253,
+        "rate": 0.0923
       }
     ],
     "openai": [
@@ -720,9 +720,9 @@
       },
       {
         "week": "2026-W19",
-        "all_mentions": 2280,
+        "all_mentions": 2290,
         "complaints": 176,
-        "rate": 0.0772
+        "rate": 0.0769
       }
     ]
   },
@@ -731,7 +731,7 @@
       "this_week": [
         {
           "term": "slow",
-          "count": 30,
+          "count": 31,
           "examples": [
             {
               "permalink": "https://www.reddit.com/r/ChatGPT/comments/1t3vfsw/but_im_going_to_gently_slow_you_down_on_one_part/",
@@ -1481,7 +1481,7 @@
       },
       {
         "week": "2026-W19",
-        "rate": 0.0122
+        "rate": 0.0124
       }
     ],
     "openai": [
@@ -1695,7 +1695,7 @@
       },
       {
         "week": "2026-W19",
-        "rate": 0.0118
+        "rate": 0.0122
       }
     ]
   },
