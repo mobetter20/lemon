@@ -2,27 +2,27 @@
   "version": "2.0",
   "schema_version": "v0",
   "classifier_version": "v0",
-  "generated_at": "2026-05-09T20:58:27.952803+00:00",
+  "generated_at": "2026-05-10T03:53:18.811829+00:00",
   "totals": {
-    "all_records": 353266
+    "all_records": 353645
   },
   "summary": {
     "claude": {
       "this_week_label": "2026-W19",
       "this_week": {
-        "all_mentions": 2516,
-        "complaints": 235,
-        "rate": 0.0934,
+        "all_mentions": 2625,
+        "complaints": 246,
+        "rate": 0.0937,
         "by_source": {
           "hn": {
-            "all_mentions": 1091,
-            "complaints": 80,
-            "rate": 0.0733
+            "all_mentions": 1092,
+            "complaints": 81,
+            "rate": 0.0742
           },
           "reddit": {
-            "all_mentions": 1425,
-            "complaints": 155,
-            "rate": 0.1088
+            "all_mentions": 1533,
+            "complaints": 165,
+            "rate": 0.1076
           }
         }
       },
@@ -48,9 +48,9 @@
     "openai": {
       "this_week_label": "2026-W19",
       "this_week": {
-        "all_mentions": 2165,
-        "complaints": 171,
-        "rate": 0.079,
+        "all_mentions": 2216,
+        "complaints": 173,
+        "rate": 0.0781,
         "by_source": {
           "hn": {
             "all_mentions": 950,
@@ -58,9 +58,9 @@
             "rate": 0.0821
           },
           "reddit": {
-            "all_mentions": 1215,
-            "complaints": 93,
-            "rate": 0.0765
+            "all_mentions": 1266,
+            "complaints": 95,
+            "rate": 0.075
           }
         }
       },
@@ -81,7 +81,7 @@
           }
         }
       },
-      "delta_pts": -0.4
+      "delta_pts": -0.5
     }
   },
   "trend": {
@@ -400,9 +400,9 @@
       },
       {
         "week": "2026-W19",
-        "all_mentions": 2516,
-        "complaints": 235,
-        "rate": 0.0934
+        "all_mentions": 2625,
+        "complaints": 246,
+        "rate": 0.0937
       }
     ],
     "openai": [
@@ -720,9 +720,9 @@
       },
       {
         "week": "2026-W19",
-        "all_mentions": 2165,
-        "complaints": 171,
-        "rate": 0.079
+        "all_mentions": 2216,
+        "complaints": 173,
+        "rate": 0.0781
       }
     ]
   },
@@ -758,7 +758,7 @@
         },
         {
           "term": "usage limit",
-          "count": 20,
+          "count": 21,
           "examples": [
             {
               "permalink": "https://www.reddit.com/r/ClaudeAI/comments/1t5htq1/spacex_conpute_deal_double_limits/",
@@ -768,9 +768,9 @@
               "_kind": "top_scored"
             },
             {
-              "permalink": "https://www.reddit.com/r/ClaudeAI/comments/1t6ndxa/eu_subscribers_claude_pros_usage_limits_may_not/",
-              "date": "2026-05-07T21:01:26+00:00",
-              "score": 336,
+              "permalink": "https://www.reddit.com/r/OpenAI/comments/1t72x8l/claude_pro_20_vs_cursor_pro_60_after_the_new/",
+              "date": "2026-05-08T09:31:38+00:00",
+              "score": 17,
               "source": "reddit",
               "_kind": "newest"
             },
@@ -785,7 +785,7 @@
         },
         {
           "term": "stupid",
-          "count": 17,
+          "count": 19,
           "examples": [
             {
               "permalink": "https://www.reddit.com/r/ChatGPT/comments/1t3vfsw/but_im_going_to_gently_slow_you_down_on_one_part/",
@@ -946,6 +946,33 @@
           ]
         },
         {
+          "term": "hallucination",
+          "count": 10,
+          "examples": [
+            {
+              "permalink": "https://www.reddit.com/r/ClaudeAI/comments/1t3ggv8/claude_is_lying_regularly_when_i_have/ojv2jwc/",
+              "date": "2026-05-04T13:27:44+00:00",
+              "score": 35,
+              "source": "reddit",
+              "_kind": "top_scored"
+            },
+            {
+              "permalink": "https://www.reddit.com/r/ClaudeAI/comments/1t73sfv/claude_made_up_a_fake_phone_number/okmmhx4/",
+              "date": "2026-05-08T12:37:00+00:00",
+              "score": 3,
+              "source": "reddit",
+              "_kind": "newest"
+            },
+            {
+              "permalink": "https://news.ycombinator.com/item?id=48002954",
+              "date": "2026-05-04T00:01:04+00:00",
+              "score": 0,
+              "source": "hn",
+              "_kind": "oldest"
+            }
+          ]
+        },
+        {
           "term": "useless",
           "count": 9,
           "examples": [
@@ -966,33 +993,6 @@
             {
               "permalink": "https://news.ycombinator.com/item?id=48004140",
               "date": "2026-05-04T03:00:11+00:00",
-              "score": 0,
-              "source": "hn",
-              "_kind": "oldest"
-            }
-          ]
-        },
-        {
-          "term": "hallucination",
-          "count": 9,
-          "examples": [
-            {
-              "permalink": "https://www.reddit.com/r/ClaudeAI/comments/1t3ggv8/claude_is_lying_regularly_when_i_have/ojv2jwc/",
-              "date": "2026-05-04T13:27:44+00:00",
-              "score": 35,
-              "source": "reddit",
-              "_kind": "top_scored"
-            },
-            {
-              "permalink": "https://news.ycombinator.com/item?id=48054755",
-              "date": "2026-05-07T20:48:19+00:00",
-              "score": 0,
-              "source": "hn",
-              "_kind": "newest"
-            },
-            {
-              "permalink": "https://news.ycombinator.com/item?id=48002954",
-              "date": "2026-05-04T00:01:04+00:00",
               "score": 0,
               "source": "hn",
               "_kind": "oldest"
@@ -1105,6 +1105,33 @@
           ]
         },
         {
+          "term": "frustrating",
+          "count": 11,
+          "examples": [
+            {
+              "permalink": "https://www.reddit.com/r/ClaudeAI/comments/1t6jow8/claudes_new_limits/",
+              "date": "2026-05-07T18:50:14+00:00",
+              "score": 35,
+              "source": "reddit",
+              "_kind": "top_scored"
+            },
+            {
+              "permalink": "https://news.ycombinator.com/item?id=48070853",
+              "date": "2026-05-09T01:27:42+00:00",
+              "score": 0,
+              "source": "hn",
+              "_kind": "newest"
+            },
+            {
+              "permalink": "https://www.reddit.com/r/ChatGPT/comments/1t32k36/did_chatgpt_suddenly_move_project_chats_into/",
+              "date": "2026-05-04T00:39:06+00:00",
+              "score": 20,
+              "source": "reddit",
+              "_kind": "oldest"
+            }
+          ]
+        },
+        {
           "term": "useless",
           "count": 10,
           "examples": [
@@ -1154,33 +1181,6 @@
               "date": "2026-05-04T10:09:20+00:00",
               "score": 0,
               "source": "hn",
-              "_kind": "oldest"
-            }
-          ]
-        },
-        {
-          "term": "frustrating",
-          "count": 10,
-          "examples": [
-            {
-              "permalink": "https://www.reddit.com/r/ClaudeAI/comments/1t6jow8/claudes_new_limits/",
-              "date": "2026-05-07T18:50:14+00:00",
-              "score": 35,
-              "source": "reddit",
-              "_kind": "top_scored"
-            },
-            {
-              "permalink": "https://news.ycombinator.com/item?id=48070853",
-              "date": "2026-05-09T01:27:42+00:00",
-              "score": 0,
-              "source": "hn",
-              "_kind": "newest"
-            },
-            {
-              "permalink": "https://www.reddit.com/r/ChatGPT/comments/1t32k36/did_chatgpt_suddenly_move_project_chats_into/",
-              "date": "2026-05-04T00:39:06+00:00",
-              "score": 20,
-              "source": "reddit",
               "_kind": "oldest"
             }
           ]
@@ -1481,7 +1481,7 @@
       },
       {
         "week": "2026-W19",
-        "rate": 0.0123
+        "rate": 0.0122
       }
     ],
     "openai": [
@@ -1695,7 +1695,7 @@
       },
       {
         "week": "2026-W19",
-        "rate": 0.0115
+        "rate": 0.0117
       }
     ]
   },
