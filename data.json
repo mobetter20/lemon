@@ -2,9 +2,9 @@
   "version": "2.0",
   "schema_version": "v0",
   "classifier_version": "v0",
-  "generated_at": "2026-05-11T07:58:38.649065+00:00",
+  "generated_at": "2026-05-11T11:37:59.762640+00:00",
   "totals": {
-    "all_records": 354650
+    "all_records": 355067
   },
   "summary": {
     "claude": {
@@ -22,9 +22,9 @@
         }
       },
       "last_week": {
-        "all_mentions": 2826,
-        "complaints": 259,
-        "rate": 0.0916,
+        "all_mentions": 2981,
+        "complaints": 271,
+        "rate": 0.0909,
         "by_source": {
           "hn": {
             "all_mentions": 1112,
@@ -32,13 +32,13 @@
             "rate": 0.0728
           },
           "reddit": {
-            "all_mentions": 1714,
-            "complaints": 178,
-            "rate": 0.1039
+            "all_mentions": 1869,
+            "complaints": 190,
+            "rate": 0.1017
           }
         }
       },
-      "delta_pts": 16.6
+      "delta_pts": 16.7
     },
     "openai": {
       "this_week_label": "2026-W20",
@@ -55,9 +55,9 @@
         }
       },
       "last_week": {
-        "all_mentions": 2385,
-        "complaints": 180,
-        "rate": 0.0755,
+        "all_mentions": 2577,
+        "complaints": 187,
+        "rate": 0.0726,
         "by_source": {
           "hn": {
             "all_mentions": 965,
@@ -65,13 +65,13 @@
             "rate": 0.0808
           },
           "reddit": {
-            "all_mentions": 1420,
-            "complaints": 102,
-            "rate": 0.0718
+            "all_mentions": 1612,
+            "complaints": 109,
+            "rate": 0.0676
           }
         }
       },
-      "delta_pts": 12.5
+      "delta_pts": 12.7
     }
   },
   "trend": {
@@ -390,9 +390,9 @@
       },
       {
         "week": "2026-W19",
-        "all_mentions": 2826,
-        "complaints": 259,
-        "rate": 0.0916
+        "all_mentions": 2981,
+        "complaints": 271,
+        "rate": 0.0909
       },
       {
         "week": "2026-W20",
@@ -716,9 +716,9 @@
       },
       {
         "week": "2026-W19",
-        "all_mentions": 2385,
-        "complaints": 180,
-        "rate": 0.0755
+        "all_mentions": 2577,
+        "complaints": 187,
+        "rate": 0.0726
       },
       {
         "week": "2026-W20",
@@ -1074,7 +1074,7 @@
       },
       {
         "week": "2026-W19",
-        "rate": 0.0127
+        "rate": 0.0121
       },
       {
         "week": "2026-W20",
@@ -1292,7 +1292,7 @@
       },
       {
         "week": "2026-W19",
-        "rate": 0.0122
+        "rate": 0.0113
       },
       {
         "week": "2026-W20",
