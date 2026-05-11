@@ -2,29 +2,29 @@
   "version": "2.0",
   "schema_version": "v0",
   "classifier_version": "v0",
-  "generated_at": "2026-05-11T04:04:41.255861+00:00",
+  "generated_at": "2026-05-11T07:58:38.649065+00:00",
   "totals": {
-    "all_records": 354291
+    "all_records": 354650
   },
   "summary": {
     "claude": {
       "this_week_label": "2026-W20",
       "this_week": {
-        "all_mentions": 24,
-        "complaints": 7,
-        "rate": 0.2917,
+        "all_mentions": 31,
+        "complaints": 8,
+        "rate": 0.2581,
         "by_source": {
           "hn": {
-            "all_mentions": 24,
-            "complaints": 7,
-            "rate": 0.2917
+            "all_mentions": 31,
+            "complaints": 8,
+            "rate": 0.2581
           }
         }
       },
       "last_week": {
-        "all_mentions": 2764,
-        "complaints": 256,
-        "rate": 0.0926,
+        "all_mentions": 2826,
+        "complaints": 259,
+        "rate": 0.0916,
         "by_source": {
           "hn": {
             "all_mentions": 1112,
@@ -32,32 +32,32 @@
             "rate": 0.0728
           },
           "reddit": {
-            "all_mentions": 1652,
-            "complaints": 175,
-            "rate": 0.1059
+            "all_mentions": 1714,
+            "complaints": 178,
+            "rate": 0.1039
           }
         }
       },
-      "delta_pts": 19.9
+      "delta_pts": 16.6
     },
     "openai": {
       "this_week_label": "2026-W20",
       "this_week": {
-        "all_mentions": 6,
-        "complaints": 1,
-        "rate": 0.1667,
+        "all_mentions": 10,
+        "complaints": 2,
+        "rate": 0.2,
         "by_source": {
           "hn": {
-            "all_mentions": 6,
-            "complaints": 1,
-            "rate": 0.1667
+            "all_mentions": 10,
+            "complaints": 2,
+            "rate": 0.2
           }
         }
       },
       "last_week": {
-        "all_mentions": 2342,
+        "all_mentions": 2385,
         "complaints": 180,
-        "rate": 0.0769,
+        "rate": 0.0755,
         "by_source": {
           "hn": {
             "all_mentions": 965,
@@ -65,13 +65,13 @@
             "rate": 0.0808
           },
           "reddit": {
-            "all_mentions": 1377,
+            "all_mentions": 1420,
             "complaints": 102,
-            "rate": 0.0741
+            "rate": 0.0718
           }
         }
       },
-      "delta_pts": 9.0
+      "delta_pts": 12.5
     }
   },
   "trend": {
@@ -390,15 +390,15 @@
       },
       {
         "week": "2026-W19",
-        "all_mentions": 2764,
-        "complaints": 256,
-        "rate": 0.0926
+        "all_mentions": 2826,
+        "complaints": 259,
+        "rate": 0.0916
       },
       {
         "week": "2026-W20",
-        "all_mentions": 24,
-        "complaints": 7,
-        "rate": 0.2917
+        "all_mentions": 31,
+        "complaints": 8,
+        "rate": 0.2581
       }
     ],
     "openai": [
@@ -716,15 +716,15 @@
       },
       {
         "week": "2026-W19",
-        "all_mentions": 2342,
+        "all_mentions": 2385,
         "complaints": 180,
-        "rate": 0.0769
+        "rate": 0.0755
       },
       {
         "week": "2026-W20",
-        "all_mentions": 6,
-        "complaints": 1,
-        "rate": 0.1667
+        "all_mentions": 10,
+        "complaints": 2,
+        "rate": 0.2
       }
     ]
   },
@@ -815,6 +815,19 @@
               "_kind": "newest"
             }
           ]
+        },
+        {
+          "term": "regression",
+          "count": 1,
+          "examples": [
+            {
+              "permalink": "https://news.ycombinator.com/item?id=48090276",
+              "date": "2026-05-11T02:06:29+00:00",
+              "score": 24,
+              "source": "hn",
+              "_kind": "top_scored"
+            }
+          ]
         }
       ]
     },
@@ -830,6 +843,19 @@
               "score": 0,
               "source": "hn",
               "_kind": "newest"
+            }
+          ]
+        },
+        {
+          "term": "regression",
+          "count": 1,
+          "examples": [
+            {
+              "permalink": "https://news.ycombinator.com/item?id=48090276",
+              "date": "2026-05-11T02:06:29+00:00",
+              "score": 24,
+              "source": "hn",
+              "_kind": "top_scored"
             }
           ]
         }
@@ -1048,7 +1074,7 @@
       },
       {
         "week": "2026-W19",
-        "rate": 0.013
+        "rate": 0.0127
       },
       {
         "week": "2026-W20",
@@ -1266,7 +1292,7 @@
       },
       {
         "week": "2026-W19",
-        "rate": 0.0124
+        "rate": 0.0122
       },
       {
         "week": "2026-W20",
