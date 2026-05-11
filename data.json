@@ -2,22 +2,22 @@
   "version": "2.0",
   "schema_version": "v0",
   "classifier_version": "v0",
-  "generated_at": "2026-05-11T15:31:43.498722+00:00",
+  "generated_at": "2026-05-11T17:59:50.109701+00:00",
   "totals": {
-    "all_records": 355300
+    "all_records": 355328
   },
   "summary": {
     "claude": {
       "this_week_label": "2026-W20",
       "this_week": {
-        "all_mentions": 31,
+        "all_mentions": 33,
         "complaints": 8,
-        "rate": 0.2581,
+        "rate": 0.2424,
         "by_source": {
           "hn": {
-            "all_mentions": 31,
+            "all_mentions": 33,
             "complaints": 8,
-            "rate": 0.2581
+            "rate": 0.2424
           }
         }
       },
@@ -38,19 +38,19 @@
           }
         }
       },
-      "delta_pts": 16.7
+      "delta_pts": 15.1
     },
     "openai": {
       "this_week_label": "2026-W20",
       "this_week": {
-        "all_mentions": 10,
-        "complaints": 2,
-        "rate": 0.2,
+        "all_mentions": 36,
+        "complaints": 5,
+        "rate": 0.1389,
         "by_source": {
           "hn": {
-            "all_mentions": 10,
-            "complaints": 2,
-            "rate": 0.2
+            "all_mentions": 36,
+            "complaints": 5,
+            "rate": 0.1389
           }
         }
       },
@@ -71,7 +71,7 @@
           }
         }
       },
-      "delta_pts": 12.8
+      "delta_pts": 6.7
     }
   },
   "trend": {
@@ -396,9 +396,9 @@
       },
       {
         "week": "2026-W20",
-        "all_mentions": 31,
+        "all_mentions": 33,
         "complaints": 8,
-        "rate": 0.2581
+        "rate": 0.2424
       }
     ],
     "openai": [
@@ -722,9 +722,9 @@
       },
       {
         "week": "2026-W20",
-        "all_mentions": 10,
-        "complaints": 2,
-        "rate": 0.2
+        "all_mentions": 36,
+        "complaints": 5,
+        "rate": 0.1389
       }
     ]
   },
@@ -834,6 +834,26 @@
     "openai": {
       "this_week": [
         {
+          "term": "terrible",
+          "count": 2,
+          "examples": [
+            {
+              "permalink": "https://news.ycombinator.com/item?id=48096615",
+              "date": "2026-05-11T15:49:33+00:00",
+              "score": 0,
+              "source": "hn",
+              "_kind": "newest"
+            },
+            {
+              "permalink": "https://news.ycombinator.com/item?id=48096273",
+              "date": "2026-05-11T15:25:52+00:00",
+              "score": 0,
+              "source": "hn",
+              "_kind": "oldest"
+            }
+          ]
+        },
+        {
           "term": "lazy",
           "count": 1,
           "examples": [
@@ -856,6 +876,19 @@
               "score": 24,
               "source": "hn",
               "_kind": "top_scored"
+            }
+          ]
+        },
+        {
+          "term": "much worse",
+          "count": 1,
+          "examples": [
+            {
+              "permalink": "https://news.ycombinator.com/item?id=48096261",
+              "date": "2026-05-11T15:25:09+00:00",
+              "score": 0,
+              "source": "hn",
+              "_kind": "newest"
             }
           ]
         }
@@ -1296,7 +1329,7 @@
       },
       {
         "week": "2026-W20",
-        "rate": 0.0
+        "rate": 0.0278
       }
     ]
   },
