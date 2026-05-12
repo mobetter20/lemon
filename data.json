@@ -2,27 +2,27 @@
   "version": "2.0",
   "schema_version": "v0",
   "classifier_version": "v0",
-  "generated_at": "2026-05-11T21:29:33.890161+00:00",
+  "generated_at": "2026-05-12T03:47:46.707426+00:00",
   "totals": {
-    "all_records": 355440
+    "all_records": 355635
   },
   "summary": {
     "claude": {
       "this_week_label": "2026-W20",
       "this_week": {
-        "all_mentions": 37,
-        "complaints": 8,
-        "rate": 0.2162,
+        "all_mentions": 124,
+        "complaints": 14,
+        "rate": 0.1129,
         "by_source": {
           "hn": {
-            "all_mentions": 36,
-            "complaints": 8,
-            "rate": 0.2222
+            "all_mentions": 73,
+            "complaints": 10,
+            "rate": 0.137
           },
           "reddit": {
-            "all_mentions": 1,
-            "complaints": 0,
-            "rate": 0.0
+            "all_mentions": 51,
+            "complaints": 4,
+            "rate": 0.0784
           }
         }
       },
@@ -43,24 +43,24 @@
           }
         }
       },
-      "delta_pts": 12.4
+      "delta_pts": 2.1
     },
     "openai": {
       "this_week_label": "2026-W20",
       "this_week": {
-        "all_mentions": 37,
-        "complaints": 5,
-        "rate": 0.1351,
+        "all_mentions": 65,
+        "complaints": 9,
+        "rate": 0.1385,
         "by_source": {
           "hn": {
-            "all_mentions": 36,
-            "complaints": 5,
-            "rate": 0.1389
+            "all_mentions": 37,
+            "complaints": 6,
+            "rate": 0.1622
           },
           "reddit": {
-            "all_mentions": 1,
-            "complaints": 0,
-            "rate": 0.0
+            "all_mentions": 28,
+            "complaints": 3,
+            "rate": 0.1071
           }
         }
       },
@@ -81,7 +81,7 @@
           }
         }
       },
-      "delta_pts": 6.4
+      "delta_pts": 6.7
     }
   },
   "trend": {
@@ -406,9 +406,9 @@
       },
       {
         "week": "2026-W20",
-        "all_mentions": 37,
-        "complaints": 8,
-        "rate": 0.2162
+        "all_mentions": 124,
+        "complaints": 14,
+        "rate": 0.1129
       }
     ],
     "openai": [
@@ -732,9 +732,9 @@
       },
       {
         "week": "2026-W20",
-        "all_mentions": 37,
-        "complaints": 5,
-        "rate": 0.1351
+        "all_mentions": 65,
+        "complaints": 9,
+        "rate": 0.1385
       }
     ]
   },
@@ -743,14 +743,14 @@
       "this_week": [
         {
           "term": "buggy",
-          "count": 2,
+          "count": 3,
           "examples": [
             {
-              "permalink": "https://news.ycombinator.com/item?id=48090354",
-              "date": "2026-05-11T02:19:07+00:00",
-              "score": 0,
-              "source": "hn",
-              "_kind": "newest"
+              "permalink": "https://www.reddit.com/r/ClaudeAI/comments/1tad468/i_built_an_app_with_claude_code_that_converts_any/ol8o1af/",
+              "date": "2026-05-11T19:51:05+00:00",
+              "score": 3,
+              "source": "reddit",
+              "_kind": "top_scored"
             },
             {
               "permalink": "https://news.ycombinator.com/item?id=48089777",
@@ -758,6 +758,26 @@
               "score": 0,
               "source": "hn",
               "_kind": "oldest"
+            }
+          ]
+        },
+        {
+          "term": "hallucination",
+          "count": 2,
+          "examples": [
+            {
+              "permalink": "https://www.reddit.com/r/OpenAI/comments/1tae9d6/openai_cooked_this_week/",
+              "date": "2026-05-11T19:47:36+00:00",
+              "score": 8,
+              "source": "reddit",
+              "_kind": "top_scored"
+            },
+            {
+              "permalink": "https://www.reddit.com/r/ClaudeAI/comments/1tag1i9/new_in_claude_code_agent_view/ol96j34/",
+              "date": "2026-05-11T21:16:39+00:00",
+              "score": 4,
+              "source": "reddit",
+              "_kind": "newest"
             }
           ]
         },
@@ -838,6 +858,32 @@
               "_kind": "top_scored"
             }
           ]
+        },
+        {
+          "term": "slow",
+          "count": 1,
+          "examples": [
+            {
+              "permalink": "https://news.ycombinator.com/item?id=48103683",
+              "date": "2026-05-12T02:59:13+00:00",
+              "score": 0,
+              "source": "hn",
+              "_kind": "newest"
+            }
+          ]
+        },
+        {
+          "term": "frustrating",
+          "count": 1,
+          "examples": [
+            {
+              "permalink": "https://news.ycombinator.com/item?id=48101936",
+              "date": "2026-05-11T23:04:53+00:00",
+              "score": 0,
+              "source": "hn",
+              "_kind": "newest"
+            }
+          ]
         }
       ]
     },
@@ -899,6 +945,58 @@
               "score": 0,
               "source": "hn",
               "_kind": "newest"
+            }
+          ]
+        },
+        {
+          "term": "frustrating",
+          "count": 1,
+          "examples": [
+            {
+              "permalink": "https://news.ycombinator.com/item?id=48101936",
+              "date": "2026-05-11T23:04:53+00:00",
+              "score": 0,
+              "source": "hn",
+              "_kind": "newest"
+            }
+          ]
+        },
+        {
+          "term": "hallucination",
+          "count": 1,
+          "examples": [
+            {
+              "permalink": "https://www.reddit.com/r/OpenAI/comments/1tae9d6/openai_cooked_this_week/",
+              "date": "2026-05-11T19:47:36+00:00",
+              "score": 8,
+              "source": "reddit",
+              "_kind": "top_scored"
+            }
+          ]
+        },
+        {
+          "term": "tired of",
+          "count": 1,
+          "examples": [
+            {
+              "permalink": "https://www.reddit.com/r/OpenAI/comments/1tae9d6/openai_cooked_this_week/ol905tg/",
+              "date": "2026-05-11T20:46:29+00:00",
+              "score": 5,
+              "source": "reddit",
+              "_kind": "top_scored"
+            }
+          ]
+        },
+        {
+          "term": "annoying",
+          "count": 1,
+          "examples": [
+            {
+              "permalink": "https://www.reddit.com/r/OpenAI/comments/1tae9d6/openai_cooked_this_week/ol8o109/",
+              "date": "2026-05-11T19:51:03+00:00",
+              "score": 8,
+              "source": "reddit",
+              "_kind": "top_scored"
             }
           ]
         }
@@ -1121,7 +1219,7 @@
       },
       {
         "week": "2026-W20",
-        "rate": 0.0
+        "rate": 0.0081
       }
     ],
     "openai": [
@@ -1339,7 +1437,7 @@
       },
       {
         "week": "2026-W20",
-        "rate": 0.027
+        "rate": 0.0308
       }
     ]
   },
