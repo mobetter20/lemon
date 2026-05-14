@@ -2,27 +2,27 @@
   "version": "2.0",
   "schema_version": "v0",
   "classifier_version": "v0",
-  "generated_at": "2026-05-14T10:31:08.391434+00:00",
+  "generated_at": "2026-05-14T14:32:36.961555+00:00",
   "totals": {
-    "all_records": 357047
+    "all_records": 357351
   },
   "summary": {
     "claude": {
       "this_week_label": "2026-W20",
       "this_week": {
-        "all_mentions": 681,
-        "complaints": 58,
-        "rate": 0.0852,
+        "all_mentions": 800,
+        "complaints": 70,
+        "rate": 0.0875,
         "by_source": {
           "hn": {
-            "all_mentions": 429,
-            "complaints": 33,
-            "rate": 0.0769
+            "all_mentions": 521,
+            "complaints": 39,
+            "rate": 0.0749
           },
           "reddit": {
-            "all_mentions": 252,
-            "complaints": 25,
-            "rate": 0.0992
+            "all_mentions": 279,
+            "complaints": 31,
+            "rate": 0.1111
           }
         }
       },
@@ -43,24 +43,24 @@
           }
         }
       },
-      "delta_pts": -0.7
+      "delta_pts": -0.5
     },
     "openai": {
       "this_week_label": "2026-W20",
       "this_week": {
-        "all_mentions": 527,
-        "complaints": 41,
-        "rate": 0.0778,
+        "all_mentions": 594,
+        "complaints": 46,
+        "rate": 0.0774,
         "by_source": {
           "hn": {
-            "all_mentions": 302,
+            "all_mentions": 317,
             "complaints": 21,
-            "rate": 0.0695
+            "rate": 0.0662
           },
           "reddit": {
-            "all_mentions": 225,
-            "complaints": 20,
-            "rate": 0.0889
+            "all_mentions": 277,
+            "complaints": 25,
+            "rate": 0.0903
           }
         }
       },
@@ -406,9 +406,9 @@
       },
       {
         "week": "2026-W20",
-        "all_mentions": 681,
-        "complaints": 58,
-        "rate": 0.0852
+        "all_mentions": 800,
+        "complaints": 70,
+        "rate": 0.0875
       }
     ],
     "openai": [
@@ -732,9 +732,9 @@
       },
       {
         "week": "2026-W20",
-        "all_mentions": 527,
-        "complaints": 41,
-        "rate": 0.0778
+        "all_mentions": 594,
+        "complaints": 46,
+        "rate": 0.0774
       }
     ]
   },
@@ -743,18 +743,18 @@
       "this_week": [
         {
           "term": "slow",
-          "count": 9,
+          "count": 13,
           "examples": [
             {
-              "permalink": "https://www.reddit.com/r/ClaudeAI/comments/1taxfly/claude_has_crabs/",
-              "date": "2026-05-12T10:24:09+00:00",
-              "score": 72,
+              "permalink": "https://www.reddit.com/r/ClaudeAI/comments/1tbjp08/sonos_quit_supporting_their_mac_app_and_my_wife/",
+              "date": "2026-05-13T00:24:29+00:00",
+              "score": 208,
               "source": "reddit",
               "_kind": "top_scored"
             },
             {
-              "permalink": "https://news.ycombinator.com/item?id=48128256",
-              "date": "2026-05-13T22:08:18+00:00",
+              "permalink": "https://news.ycombinator.com/item?id=48135547",
+              "date": "2026-05-14T14:02:17+00:00",
               "score": 0,
               "source": "hn",
               "_kind": "newest"
@@ -796,6 +796,107 @@
           ]
         },
         {
+          "term": "regression",
+          "count": 4,
+          "examples": [
+            {
+              "permalink": "https://www.reddit.com/r/ClaudeAI/comments/1tbkzev/is_opus_47s_attention_degradation_a_training/",
+              "date": "2026-05-13T01:21:27+00:00",
+              "score": 36,
+              "source": "reddit",
+              "_kind": "top_scored"
+            },
+            {
+              "permalink": "https://news.ycombinator.com/item?id=48128998",
+              "date": "2026-05-13T23:24:26+00:00",
+              "score": 0,
+              "source": "hn",
+              "_kind": "newest"
+            },
+            {
+              "permalink": "https://news.ycombinator.com/item?id=48090276",
+              "date": "2026-05-11T02:06:29+00:00",
+              "score": 24,
+              "source": "hn",
+              "_kind": "oldest"
+            }
+          ]
+        },
+        {
+          "term": "rate limit",
+          "count": 4,
+          "examples": [
+            {
+              "permalink": "https://news.ycombinator.com/item?id=48128003",
+              "date": "2026-05-13T21:40:18+00:00",
+              "score": 215,
+              "source": "hn",
+              "_kind": "top_scored"
+            },
+            {
+              "permalink": "https://news.ycombinator.com/item?id=48129056",
+              "date": "2026-05-13T23:30:53+00:00",
+              "score": 0,
+              "source": "hn",
+              "_kind": "newest"
+            },
+            {
+              "permalink": "https://www.reddit.com/r/ClaudeAI/comments/1tax5rq/claude_code_21139_just_dropped_two_features_that/old6jsg/",
+              "date": "2026-05-12T13:11:26+00:00",
+              "score": 4,
+              "source": "reddit",
+              "_kind": "oldest"
+            }
+          ]
+        },
+        {
+          "term": "garbage",
+          "count": 3,
+          "examples": [
+            {
+              "permalink": "https://www.reddit.com/r/ClaudeAI/comments/1tbjr11/claude_roasting_rclaudeai/olh90y3/",
+              "date": "2026-05-13T00:46:31+00:00",
+              "score": 51,
+              "source": "reddit",
+              "_kind": "top_scored"
+            },
+            {
+              "permalink": "https://news.ycombinator.com/item?id=48128644",
+              "date": "2026-05-13T22:51:01+00:00",
+              "score": 0,
+              "source": "hn",
+              "_kind": "newest"
+            },
+            {
+              "permalink": "https://news.ycombinator.com/item?id=48090197",
+              "date": "2026-05-11T01:52:52+00:00",
+              "score": 0,
+              "source": "hn",
+              "_kind": "oldest"
+            }
+          ]
+        },
+        {
+          "term": "lazy",
+          "count": 3,
+          "examples": [
+            {
+              "permalink": "https://www.reddit.com/r/ClaudeAI/comments/1tbk2qv/claude_has_finally_begun_to_understand_how_lazy_i/",
+              "date": "2026-05-13T00:41:05+00:00",
+              "score": 940,
+              "source": "reddit",
+              "_kind": "top_scored"
+            },
+            {
+              "permalink": "https://news.ycombinator.com/item?id=48089997",
+              "date": "2026-05-11T01:18:41+00:00",
+              "score": 0,
+              "source": "hn",
+              "_kind": "oldest"
+            }
+          ]
+        },
+        {
           "term": "buggy",
           "count": 3,
           "examples": [
@@ -812,26 +913,6 @@
               "score": 0,
               "source": "hn",
               "_kind": "oldest"
-            }
-          ]
-        },
-        {
-          "term": "regression",
-          "count": 3,
-          "examples": [
-            {
-              "permalink": "https://news.ycombinator.com/item?id=48090276",
-              "date": "2026-05-11T02:06:29+00:00",
-              "score": 24,
-              "source": "hn",
-              "_kind": "top_scored"
-            },
-            {
-              "permalink": "https://news.ycombinator.com/item?id=48128998",
-              "date": "2026-05-13T23:24:26+00:00",
-              "score": 0,
-              "source": "hn",
-              "_kind": "newest"
             }
           ]
         },
@@ -863,33 +944,6 @@
           ]
         },
         {
-          "term": "rate limit",
-          "count": 3,
-          "examples": [
-            {
-              "permalink": "https://news.ycombinator.com/item?id=48128003",
-              "date": "2026-05-13T21:40:18+00:00",
-              "score": 215,
-              "source": "hn",
-              "_kind": "top_scored"
-            },
-            {
-              "permalink": "https://news.ycombinator.com/item?id=48129056",
-              "date": "2026-05-13T23:30:53+00:00",
-              "score": 0,
-              "source": "hn",
-              "_kind": "newest"
-            },
-            {
-              "permalink": "https://www.reddit.com/r/ClaudeAI/comments/1tax5rq/claude_code_21139_just_dropped_two_features_that/old6jsg/",
-              "date": "2026-05-12T13:11:26+00:00",
-              "score": 4,
-              "source": "reddit",
-              "_kind": "oldest"
-            }
-          ]
-        },
-        {
           "term": "downgrade",
           "count": 3,
           "examples": [
@@ -910,59 +964,19 @@
           ]
         },
         {
-          "term": "ridiculous",
+          "term": "unusable",
           "count": 3,
           "examples": [
             {
-              "permalink": "https://www.reddit.com/r/ClaudeAI/comments/1tambz7/curl_maintainer_utilized_anthropics_mythos_scan_1/olawh3g/",
-              "date": "2026-05-12T03:07:34+00:00",
-              "score": 6,
+              "permalink": "https://www.reddit.com/r/ClaudeAI/comments/1tbges5/i_used_claude_to_build_a_live_election_dashboard/",
+              "date": "2026-05-12T22:08:19+00:00",
+              "score": 60,
               "source": "reddit",
               "_kind": "top_scored"
             },
             {
-              "permalink": "https://news.ycombinator.com/item?id=48128464",
-              "date": "2026-05-13T22:32:19+00:00",
-              "score": 0,
-              "source": "hn",
-              "_kind": "newest"
-            }
-          ]
-        },
-        {
-          "term": "worse than",
-          "count": 3,
-          "examples": [
-            {
-              "permalink": "https://www.reddit.com/r/ClaudeAI/comments/1tanqiq/is_opus_47_still_worse_than_46/",
-              "date": "2026-05-12T02:02:56+00:00",
-              "score": 108,
-              "source": "reddit",
-              "_kind": "top_scored"
-            },
-            {
-              "permalink": "https://news.ycombinator.com/item?id=48127014",
-              "date": "2026-05-13T20:24:32+00:00",
-              "score": 0,
-              "source": "hn",
-              "_kind": "newest"
-            }
-          ]
-        },
-        {
-          "term": "terrible",
-          "count": 3,
-          "examples": [
-            {
-              "permalink": "https://www.reddit.com/r/ClaudeAI/comments/1tbaesy/20_claude_skills_for_marketing_launch_and_sales/",
-              "date": "2026-05-12T18:33:09+00:00",
-              "score": 10,
-              "source": "reddit",
-              "_kind": "top_scored"
-            },
-            {
-              "permalink": "https://news.ycombinator.com/item?id=48131771",
-              "date": "2026-05-14T06:20:06+00:00",
+              "permalink": "https://news.ycombinator.com/item?id=48135640",
+              "date": "2026-05-14T14:07:06+00:00",
               "score": 0,
               "source": "hn",
               "_kind": "newest"
@@ -973,6 +987,33 @@
     },
     "openai": {
       "this_week": [
+        {
+          "term": "slow",
+          "count": 8,
+          "examples": [
+            {
+              "permalink": "https://www.reddit.com/r/LocalLLaMA/comments/1tbi2n3/i_got_a_real_transformer_language_model_running/",
+              "date": "2026-05-12T23:15:42+00:00",
+              "score": 1279,
+              "source": "reddit",
+              "_kind": "top_scored"
+            },
+            {
+              "permalink": "https://news.ycombinator.com/item?id=48128256",
+              "date": "2026-05-13T22:08:18+00:00",
+              "score": 0,
+              "source": "hn",
+              "_kind": "newest"
+            },
+            {
+              "permalink": "https://www.reddit.com/r/ChatGPT/comments/1tau1lv/thinking_machines_interaction_models_inside_the/",
+              "date": "2026-05-12T07:14:41+00:00",
+              "score": 9,
+              "source": "reddit",
+              "_kind": "oldest"
+            }
+          ]
+        },
         {
           "term": "terrible",
           "count": 6,
@@ -989,33 +1030,6 @@
               "date": "2026-05-11T15:25:52+00:00",
               "score": 0,
               "source": "hn",
-              "_kind": "oldest"
-            }
-          ]
-        },
-        {
-          "term": "slow",
-          "count": 5,
-          "examples": [
-            {
-              "permalink": "https://www.reddit.com/r/ChatGPT/comments/1tb4li7/i_realized_chatgpt_has_become_a_record_of_how_i/",
-              "date": "2026-05-12T15:14:20+00:00",
-              "score": 13,
-              "source": "reddit",
-              "_kind": "top_scored"
-            },
-            {
-              "permalink": "https://news.ycombinator.com/item?id=48128256",
-              "date": "2026-05-13T22:08:18+00:00",
-              "score": 0,
-              "source": "hn",
-              "_kind": "newest"
-            },
-            {
-              "permalink": "https://www.reddit.com/r/ChatGPT/comments/1tau1lv/thinking_machines_interaction_models_inside_the/",
-              "date": "2026-05-12T07:14:41+00:00",
-              "score": 9,
-              "source": "reddit",
               "_kind": "oldest"
             }
           ]
@@ -1135,6 +1149,26 @@
           ]
         },
         {
+          "term": "rate limit",
+          "count": 2,
+          "examples": [
+            {
+              "permalink": "https://news.ycombinator.com/item?id=48128003",
+              "date": "2026-05-13T21:40:18+00:00",
+              "score": 215,
+              "source": "hn",
+              "_kind": "top_scored"
+            },
+            {
+              "permalink": "https://www.reddit.com/r/ClaudeAI/comments/1tbjp08/sonos_quit_supporting_their_mac_app_and_my_wife/",
+              "date": "2026-05-13T00:24:29+00:00",
+              "score": 208,
+              "source": "reddit",
+              "_kind": "oldest"
+            }
+          ]
+        },
+        {
           "term": "worse than",
           "count": 2,
           "examples": [
@@ -1168,26 +1202,6 @@
             {
               "permalink": "https://www.reddit.com/r/OpenAI/comments/1tae9d6/openai_cooked_this_week/ol905tg/",
               "date": "2026-05-11T20:46:29+00:00",
-              "score": 5,
-              "source": "reddit",
-              "_kind": "oldest"
-            }
-          ]
-        },
-        {
-          "term": "hit the limit",
-          "count": 2,
-          "examples": [
-            {
-              "permalink": "https://www.reddit.com/r/singularity/comments/1tb6kum/on_a_difficult_new_swe_benchmark_programbench/oleg7ie/",
-              "date": "2026-05-12T16:40:30+00:00",
-              "score": 25,
-              "source": "reddit",
-              "_kind": "top_scored"
-            },
-            {
-              "permalink": "https://www.reddit.com/r/OpenAI/comments/1ta6mtf/anyone_know_the_allowance_limits_for_the_55_pro/",
-              "date": "2026-05-11T15:26:57+00:00",
               "score": 5,
               "source": "reddit",
               "_kind": "oldest"
@@ -1413,7 +1427,7 @@
       },
       {
         "week": "2026-W20",
-        "rate": 0.0235
+        "rate": 0.0213
       }
     ],
     "openai": [
@@ -1631,7 +1645,7 @@
       },
       {
         "week": "2026-W20",
-        "rate": 0.0228
+        "rate": 0.0236
       }
     ]
   },
