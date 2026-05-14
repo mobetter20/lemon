@@ -2,27 +2,27 @@
   "version": "2.0",
   "schema_version": "v0",
   "classifier_version": "v0",
-  "generated_at": "2026-05-14T06:55:20.590112+00:00",
+  "generated_at": "2026-05-14T10:31:08.391434+00:00",
   "totals": {
-    "all_records": 356900
+    "all_records": 357047
   },
   "summary": {
     "claude": {
       "this_week_label": "2026-W20",
       "this_week": {
-        "all_mentions": 653,
-        "complaints": 57,
-        "rate": 0.0873,
+        "all_mentions": 681,
+        "complaints": 58,
+        "rate": 0.0852,
         "by_source": {
           "hn": {
-            "all_mentions": 416,
+            "all_mentions": 429,
             "complaints": 33,
-            "rate": 0.0793
+            "rate": 0.0769
           },
           "reddit": {
-            "all_mentions": 237,
-            "complaints": 24,
-            "rate": 0.1013
+            "all_mentions": 252,
+            "complaints": 25,
+            "rate": 0.0992
           }
         }
       },
@@ -43,24 +43,24 @@
           }
         }
       },
-      "delta_pts": -0.5
+      "delta_pts": -0.7
     },
     "openai": {
       "this_week_label": "2026-W20",
       "this_week": {
-        "all_mentions": 509,
+        "all_mentions": 527,
         "complaints": 41,
-        "rate": 0.0806,
+        "rate": 0.0778,
         "by_source": {
           "hn": {
-            "all_mentions": 292,
+            "all_mentions": 302,
             "complaints": 21,
-            "rate": 0.0719
+            "rate": 0.0695
           },
           "reddit": {
-            "all_mentions": 217,
+            "all_mentions": 225,
             "complaints": 20,
-            "rate": 0.0922
+            "rate": 0.0889
           }
         }
       },
@@ -81,7 +81,7 @@
           }
         }
       },
-      "delta_pts": 0.9
+      "delta_pts": 0.6
     }
   },
   "trend": {
@@ -406,9 +406,9 @@
       },
       {
         "week": "2026-W20",
-        "all_mentions": 653,
-        "complaints": 57,
-        "rate": 0.0873
+        "all_mentions": 681,
+        "complaints": 58,
+        "rate": 0.0852
       }
     ],
     "openai": [
@@ -732,9 +732,9 @@
       },
       {
         "week": "2026-W20",
-        "all_mentions": 509,
+        "all_mentions": 527,
         "complaints": 41,
-        "rate": 0.0806
+        "rate": 0.0778
       }
     ]
   },
@@ -743,7 +743,7 @@
       "this_week": [
         {
           "term": "slow",
-          "count": 8,
+          "count": 9,
           "examples": [
             {
               "permalink": "https://www.reddit.com/r/ClaudeAI/comments/1taxfly/claude_has_crabs/",
@@ -1413,7 +1413,7 @@
       },
       {
         "week": "2026-W20",
-        "rate": 0.0245
+        "rate": 0.0235
       }
     ],
     "openai": [
@@ -1631,7 +1631,7 @@
       },
       {
         "week": "2026-W20",
-        "rate": 0.0236
+        "rate": 0.0228
       }
     ]
   },
