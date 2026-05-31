@@ -1,8 +1,7 @@
 /**
  * lemon dashboard (v0) — single complaint-rate per model, weekly, with trend.
  *
- * Reads mock_data.json today; will read data.json once Phase 3 ships the
- * v0 classifier output. Same schema either way.
+ * Reads the cron-generated data.json (aggregate complaint rates per model).
  */
 
 const SVG_NS = "http://www.w3.org/2000/svg";
@@ -11,7 +10,7 @@ let DATA = null;
 let xMode = "wall";  // "wall" | "release"
 
 /* ----------------------------------------------------------
-   Data loading: prefer real data.json, fall back to mock.
+   Data loading: fetch the cron-generated data.json.
    The standalone build script defines EMBEDDED_DATA before this script,
    in which case we use it directly (no fetch).
 
@@ -44,7 +43,7 @@ async function loadData() {
   }
   let lastPayload = null;
   let anySucceeded = false;
-  for (const url of ["data.json", "mock_data.json"]) {
+  for (const url of ["data.json"]) {
     try {
       const r = await fetch(url);
       if (!r.ok) continue;
@@ -618,55 +617,13 @@ function renderTopTerms(hostId, top) {
     return { term, bar, fill, count };
   };
 
-  const KIND_LABEL = {
-    top_scored: "top-scored",
-    newest: "most recent",
-    oldest: "earliest",
-  };
-
   for (const it of items.slice(0, 10)) {
     const li = document.createElement("li");
-    const hasExamples = Array.isArray(it.examples) && it.examples.length > 0;
     const { term, bar, fill, count } = buildRow();
     term.textContent = it.term;
     fill.style.width = `${(it.count / max) * 100}%`;
     count.textContent = `${it.count}×`;
-
-    if (hasExamples) {
-      li.classList.add("has-examples");  // explicit fallback when :has() unsupported
-      // <details> gives free expand/collapse keyboard accessibility
-      const det = document.createElement("details");
-      det.className = "term-details";
-      const summary = document.createElement("summary");
-      summary.className = "term-summary";
-      bar.setAttribute("aria-hidden", "true");  // decorative; don't announce
-      summary.append(term, bar, count);
-      det.appendChild(summary);
-
-      const exUl = document.createElement("ul");
-      exUl.className = "term-examples";
-      for (const ex of it.examples) {
-        const exli = document.createElement("li");
-        const kind = document.createElement("span");
-        kind.className = "ex-kind";
-        kind.textContent = KIND_LABEL[ex._kind] || ex._kind || "example";
-        const a = document.createElement("a");
-        a.href = ex.permalink;
-        a.target = "_blank";
-        a.rel = "noopener noreferrer";
-        a.className = "ex-link";
-        const date = (ex.date || "").slice(0, 10);
-        const src = ex.source || "?";
-        const score = ex.score != null && ex.score > 0 ? ` · score ${ex.score}` : "";
-        a.textContent = `${date} · ${src}${score}`;
-        exli.append(kind, a);
-        exUl.appendChild(exli);
-      }
-      det.appendChild(exUl);
-      li.appendChild(det);
-    } else {
-      li.append(term, bar, count);
-    }
+    li.append(term, bar, count);
     host.appendChild(li);
   }
 }

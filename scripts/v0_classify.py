@@ -190,13 +190,6 @@ def main(
     mentions_by_source: dict[tuple[str, str, str], int] = defaultdict(int)
     complaints_by_source: dict[tuple[str, str, str], int] = defaultdict(int)
 
-    # Phrase examples — for each (family, week, phrase) we keep the oldest,
-    # newest, and top-scored matching record. Audit-friendly: clicking a top
-    # phrase on the dashboard reveals 3 actual permalinks the user can read.
-    phrase_examples: dict[tuple[str, str, str], dict[str, dict]] = defaultdict(
-        lambda: {"oldest": None, "newest": None, "top_scored": None}
-    )
-
     total_records = 0
     skipped_unknown = 0
     skipped_no_text = 0
@@ -222,9 +215,6 @@ def main(
         d_hits = match_defection(text_lower)
 
         source = rec.get("source") or "unknown"
-        rec_date = rec.get("date") or ""
-        rec_score = int(rec.get("score") or 0)
-        rec_permalink = rec.get("permalink") or ""
 
         for fam in fams:
             key = (fam, week)
@@ -235,32 +225,6 @@ def main(
                 complaints_by_source[(fam, week, source)] += 1
                 for h in c_hits:
                     phrase_counts[key][h] += 1
-                    # Track examples: keep oldest, newest, top-scored matches.
-                    # Skip if date is empty/missing — string comparison would
-                    # latch onto "" forever (plan-critic catch).
-                    if not rec_date or not rec_permalink:
-                        continue
-                    examples = phrase_examples[(fam, week, h)]
-                    candidate = {
-                        "permalink": rec_permalink,
-                        "date": rec_date,
-                        "score": rec_score,
-                        "source": source,
-                    }
-                    if examples["oldest"] is None or rec_date < examples["oldest"]["date"]:
-                        examples["oldest"] = candidate
-                    if examples["newest"] is None or rec_date > examples["newest"]["date"]:
-                        examples["newest"] = candidate
-                    # Top-scored: only consider records with positive score, so
-                    # an early score=0 HN comment doesn't win forever.
-                    if rec_score > 0:
-                        cur = examples["top_scored"]
-                        if (
-                            cur is None
-                            or rec_score > cur["score"]
-                            or (rec_score == cur["score"] and rec_date > cur["date"])
-                        ):
-                            examples["top_scored"] = candidate
             if d_hits:
                 defections[key] += 1
 
@@ -332,26 +296,6 @@ def main(
                 "delta_pts": 0,
             }
 
-    def _examples_for(fam: str, week: str, phrase: str) -> list[dict]:
-        """Return up to 3 distinct example records (oldest, newest, top-scored)
-        for a phrase. Dedupes by permalink so a single matching record doesn't
-        appear three times."""
-        slots = phrase_examples.get((fam, week, phrase))
-        if not slots:
-            return []
-        seen: set[str] = set()
-        out: list[dict] = []
-        for label in ("top_scored", "newest", "oldest"):
-            ex = slots.get(label)
-            if ex is None:
-                continue
-            pl = ex.get("permalink") or ""
-            if pl in seen:
-                continue
-            seen.add(pl)
-            out.append({**ex, "_kind": label})
-        return out
-
     top_terms: dict[str, dict] = {"claude": {"this_week": []}, "openai": {"this_week": []}}
     for fam in ("claude", "openai"):
         wk = summary[fam]["this_week_label"]
@@ -359,11 +303,7 @@ def main(
             continue
         cnt = phrase_counts.get((fam, wk), Counter())
         top_terms[fam]["this_week"] = [
-            {
-                "term": term,
-                "count": count,
-                "examples": _examples_for(fam, wk, term),
-            }
+            {"term": term, "count": count}
             for term, count in cnt.most_common(10)
         ]
 
