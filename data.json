@@ -2,27 +2,27 @@
   "version": "2.0",
   "schema_version": "v0",
   "classifier_version": "v0",
-  "generated_at": "2026-06-02T16:02:31.890262+00:00",
+  "generated_at": "2026-06-02T19:40:21.045365+00:00",
   "totals": {
-    "all_records": 368424
+    "all_records": 368612
   },
   "summary": {
     "claude": {
       "this_week_label": "2026-W23",
       "this_week": {
-        "all_mentions": 634,
-        "complaints": 63,
-        "rate": 0.0994,
+        "all_mentions": 698,
+        "complaints": 67,
+        "rate": 0.096,
         "by_source": {
           "hn": {
-            "all_mentions": 578,
-            "complaints": 54,
-            "rate": 0.0934
+            "all_mentions": 605,
+            "complaints": 56,
+            "rate": 0.0926
           },
           "reddit": {
-            "all_mentions": 56,
-            "complaints": 9,
-            "rate": 0.1607
+            "all_mentions": 93,
+            "complaints": 11,
+            "rate": 0.1183
           }
         }
       },
@@ -43,36 +43,36 @@
           }
         }
       },
-      "delta_pts": 1.0
+      "delta_pts": 0.6
     },
     "openai": {
       "this_week_label": "2026-W23",
       "this_week": {
-        "all_mentions": 395,
-        "complaints": 31,
-        "rate": 0.0785,
+        "all_mentions": 441,
+        "complaints": 37,
+        "rate": 0.0839,
         "by_source": {
           "hn": {
-            "all_mentions": 352,
-            "complaints": 27,
-            "rate": 0.0767
+            "all_mentions": 354,
+            "complaints": 29,
+            "rate": 0.0819
           },
           "reddit": {
-            "all_mentions": 43,
-            "complaints": 4,
-            "rate": 0.093
+            "all_mentions": 87,
+            "complaints": 8,
+            "rate": 0.092
           }
         }
       },
       "last_week": {
-        "all_mentions": 4467,
+        "all_mentions": 4472,
         "complaints": 353,
-        "rate": 0.079,
+        "rate": 0.0789,
         "by_source": {
           "hn": {
-            "all_mentions": 1971,
+            "all_mentions": 1976,
             "complaints": 167,
-            "rate": 0.0847
+            "rate": 0.0845
           },
           "reddit": {
             "all_mentions": 2496,
@@ -81,7 +81,7 @@
           }
         }
       },
-      "delta_pts": -0.1
+      "delta_pts": 0.5
     }
   },
   "trend": {
@@ -424,9 +424,9 @@
       },
       {
         "week": "2026-W23",
-        "all_mentions": 634,
-        "complaints": 63,
-        "rate": 0.0994
+        "all_mentions": 698,
+        "complaints": 67,
+        "rate": 0.096
       }
     ],
     "openai": [
@@ -762,15 +762,15 @@
       },
       {
         "week": "2026-W22",
-        "all_mentions": 4467,
+        "all_mentions": 4472,
         "complaints": 353,
-        "rate": 0.079
+        "rate": 0.0789
       },
       {
         "week": "2026-W23",
-        "all_mentions": 395,
-        "complaints": 31,
-        "rate": 0.0785
+        "all_mentions": 441,
+        "complaints": 37,
+        "rate": 0.0839
       }
     ]
   },
@@ -783,14 +783,14 @@
         },
         {
           "term": "slow",
-          "count": 8
-        },
-        {
-          "term": "frustrating",
-          "count": 4
+          "count": 11
         },
         {
           "term": "annoying",
+          "count": 5
+        },
+        {
+          "term": "frustrating",
           "count": 4
         },
         {
@@ -821,6 +821,10 @@
     },
     "openai": {
       "this_week": [
+        {
+          "term": "annoying",
+          "count": 6
+        },
         {
           "term": "ridiculous",
           "count": 4
@@ -855,10 +859,6 @@
         },
         {
           "term": "crashed",
-          "count": 2
-        },
-        {
-          "term": "annoying",
           "count": 2
         }
       ]
@@ -1092,7 +1092,7 @@
       },
       {
         "week": "2026-W23",
-        "rate": 0.0032
+        "rate": 0.0029
       }
     ],
     "openai": [
@@ -1322,7 +1322,7 @@
       },
       {
         "week": "2026-W23",
-        "rate": 0.0076
+        "rate": 0.0068
       }
     ]
   },
