@@ -165,7 +165,16 @@ def write_record(corpus_dir: Path, record: Record) -> None:
 class DedupIndex:
     """SQLite-backed dedup keyed on (source, permalink). Persists across scraper
     invocations within a single Phase 1 run. To re-scrape, delete corpus/.dedup.db
-    and corpus/* before running again."""
+    and corpus/* before running again.
+
+    Inserts are batched into transactions of _BATCH_SIZE rows to avoid
+    per-row fsyncs on cold-cache backfills. Call flush() (or close()) to
+    commit any buffered rows. Correctness is preserved: single-process /
+    single-writer; the in-memory pending set prevents false "not seen" answers
+    for rows buffered but not yet committed.
+    """
+
+    _BATCH_SIZE = 500
 
     def __init__(self, db_path: Path):
         db_path.parent.mkdir(parents=True, exist_ok=True)
@@ -181,21 +190,45 @@ class DedupIndex:
             """
         )
         self.conn.commit()
+        # Rows buffered since the last commit.
+        self._pending: list[tuple[str, str, int]] = []
+        # In-memory set of (source, permalink) for rows buffered but not yet
+        # committed, so should_write() answers correctly within a batch.
+        self._pending_keys: set[tuple[str, str]] = set()
+
+    def _flush_if_full(self) -> None:
+        if len(self._pending) >= self._BATCH_SIZE:
+            self.flush()
+
+    def flush(self) -> None:
+        """Commit all buffered inserts to the database."""
+        if not self._pending:
+            return
+        self.conn.executemany(
+            "INSERT OR IGNORE INTO seen (source, permalink, score) VALUES (?, ?, ?)",
+            self._pending,
+        )
+        self.conn.commit()
+        self._pending.clear()
+        self._pending_keys.clear()
 
     def should_write(self, source: str, permalink: str, score: int) -> bool:
+        key = (source, permalink)
+        # Check in-memory pending set first (rows buffered but not yet committed).
+        if key in self._pending_keys:
+            return False  # already seen this run — first write wins
         cur = self.conn.execute(
             "SELECT score FROM seen WHERE source = ? AND permalink = ?",
             (source, permalink),
         )
         row = cur.fetchone()
         if row is None:
-            self.conn.execute(
-                "INSERT INTO seen (source, permalink, score) VALUES (?, ?, ?)",
-                (source, permalink, score),
-            )
-            self.conn.commit()
+            self._pending.append((source, permalink, score))
+            self._pending_keys.add(key)
+            self._flush_if_full()
             return True
         return False  # already seen — first write wins
 
     def close(self) -> None:
+        self.flush()
         self.conn.close()

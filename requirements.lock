@@ -1,0 +1,13 @@
+# requirements.lock — generated via `pip freeze` in a clean venv (python3.14, macOS arm64)
+# Tool: pip freeze (uv not available at generation time)
+# To regenerate: python3 -m venv .venv && .venv/bin/pip install -e . && .venv/bin/pip freeze > requirements.lock
+certifi==2026.5.20
+charset-normalizer==3.4.7
+idna==3.18
+praw==7.8.1
+prawcore==2.4.0
+requests==2.34.2
+tenacity==9.1.4
+update-checker==0.18.0
+urllib3==2.7.0
+websocket-client==1.9.0
