@@ -98,9 +98,11 @@ jobs:
           fi
 
       - name: Incremental scrape
+        env:
+          MONTHS_BACK: ${{ github.event.inputs.months_back || '1' }}
         run: |
           python scripts/cron_refresh.py \
-            --months-back ${{ github.event.inputs.months_back || '1' }}
+            --months-back "$MONTHS_BACK"
 
       - name: Classify (strict)
         run: |
