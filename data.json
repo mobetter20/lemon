@@ -2,17 +2,17 @@
   "version": "2.0",
   "schema_version": "v0",
   "classifier_version": "v0",
-  "generated_at": "2026-06-18T18:28:14.495772+00:00",
+  "generated_at": "2026-06-18T22:03:43.154715+00:00",
   "totals": {
-    "all_records": 389832
+    "all_records": 389890
   },
   "summary": {
     "claude": {
       "this_week_label": "2026-W25",
       "this_week": {
-        "all_mentions": 1263,
-        "complaints": 144,
-        "rate": 0.114,
+        "all_mentions": 1284,
+        "complaints": 146,
+        "rate": 0.1137,
         "by_source": {
           "hn": {
             "all_mentions": 438,
@@ -20,9 +20,9 @@
             "rate": 0.1027
           },
           "reddit": {
-            "all_mentions": 825,
-            "complaints": 99,
-            "rate": 0.12
+            "all_mentions": 846,
+            "complaints": 101,
+            "rate": 0.1194
           }
         }
       },
@@ -48,9 +48,9 @@
     "openai": {
       "this_week_label": "2026-W25",
       "this_week": {
-        "all_mentions": 597,
+        "all_mentions": 599,
         "complaints": 45,
-        "rate": 0.0754,
+        "rate": 0.0751,
         "by_source": {
           "hn": {
             "all_mentions": 68,
@@ -58,9 +58,9 @@
             "rate": 0.1765
           },
           "reddit": {
-            "all_mentions": 529,
+            "all_mentions": 531,
             "complaints": 33,
-            "rate": 0.0624
+            "rate": 0.0621
           }
         }
       },
@@ -436,9 +436,9 @@
       },
       {
         "week": "2026-W25",
-        "all_mentions": 1263,
-        "complaints": 144,
-        "rate": 0.114
+        "all_mentions": 1284,
+        "complaints": 146,
+        "rate": 0.1137
       }
     ],
     "openai": [
@@ -792,9 +792,9 @@
       },
       {
         "week": "2026-W25",
-        "all_mentions": 597,
+        "all_mentions": 599,
         "complaints": 45,
-        "rate": 0.0754
+        "rate": 0.0751
       }
     ]
   },
@@ -803,7 +803,7 @@
       "this_week": [
         {
           "term": "slow",
-          "count": 17
+          "count": 18
         },
         {
           "term": "stupid",
