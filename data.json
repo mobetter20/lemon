@@ -2,22 +2,22 @@
   "version": "2.0",
   "schema_version": "v0",
   "classifier_version": "v0",
-  "generated_at": "2026-06-23T14:27:59.676585+00:00",
+  "generated_at": "2026-06-23T17:56:42.065386+00:00",
   "totals": {
-    "all_records": 394283
+    "all_records": 394323
   },
   "summary": {
     "claude": {
       "this_week_label": "2026-W26",
       "this_week": {
-        "all_mentions": 36,
-        "complaints": 5,
-        "rate": 0.1389,
+        "all_mentions": 54,
+        "complaints": 7,
+        "rate": 0.1296,
         "by_source": {
           "reddit": {
-            "all_mentions": 36,
-            "complaints": 5,
-            "rate": 0.1389
+            "all_mentions": 54,
+            "complaints": 7,
+            "rate": 0.1296
           }
         }
       },
@@ -38,19 +38,19 @@
           }
         }
       },
-      "delta_pts": 5.3
+      "delta_pts": 4.3
     },
     "openai": {
       "this_week_label": "2026-W26",
       "this_week": {
-        "all_mentions": 8,
+        "all_mentions": 10,
         "complaints": 1,
-        "rate": 0.125,
+        "rate": 0.1,
         "by_source": {
           "reddit": {
-            "all_mentions": 8,
+            "all_mentions": 10,
             "complaints": 1,
-            "rate": 0.125
+            "rate": 0.1
           }
         }
       },
@@ -71,7 +71,7 @@
           }
         }
       },
-      "delta_pts": 5.1
+      "delta_pts": 2.6
     }
   },
   "trend": {
@@ -432,9 +432,9 @@
       },
       {
         "week": "2026-W26",
-        "all_mentions": 36,
-        "complaints": 5,
-        "rate": 0.1389
+        "all_mentions": 54,
+        "complaints": 7,
+        "rate": 0.1296
       }
     ],
     "openai": [
@@ -794,9 +794,9 @@
       },
       {
         "week": "2026-W26",
-        "all_mentions": 8,
+        "all_mentions": 10,
         "complaints": 1,
-        "rate": 0.125
+        "rate": 0.1
       }
     ]
   },
@@ -808,6 +808,10 @@
           "count": 2
         },
         {
+          "term": "lazy",
+          "count": 2
+        },
+        {
           "term": "annoying",
           "count": 1
         },
@@ -816,7 +820,7 @@
           "count": 1
         },
         {
-          "term": "lazy",
+          "term": "not worth",
           "count": 1
         }
       ]
