@@ -2,17 +2,17 @@
   "version": "2.0",
   "schema_version": "v0",
   "classifier_version": "v0",
-  "generated_at": "2026-06-23T02:10:25.336033+00:00",
+  "generated_at": "2026-06-23T07:46:44.774696+00:00",
   "totals": {
-    "all_records": 393703
+    "all_records": 394084
   },
   "summary": {
     "claude": {
       "this_week_label": "2026-W25",
       "this_week": {
-        "all_mentions": 2784,
-        "complaints": 246,
-        "rate": 0.0884,
+        "all_mentions": 2910,
+        "complaints": 251,
+        "rate": 0.0863,
         "by_source": {
           "hn": {
             "all_mentions": 438,
@@ -20,9 +20,9 @@
             "rate": 0.1027
           },
           "reddit": {
-            "all_mentions": 2346,
-            "complaints": 201,
-            "rate": 0.0857
+            "all_mentions": 2472,
+            "complaints": 206,
+            "rate": 0.0833
           }
         }
       },
@@ -43,14 +43,14 @@
           }
         }
       },
-      "delta_pts": -1.8
+      "delta_pts": -2.0
     },
     "openai": {
       "this_week_label": "2026-W25",
       "this_week": {
-        "all_mentions": 1602,
-        "complaints": 111,
-        "rate": 0.0693,
+        "all_mentions": 1734,
+        "complaints": 123,
+        "rate": 0.0709,
         "by_source": {
           "hn": {
             "all_mentions": 68,
@@ -58,9 +58,9 @@
             "rate": 0.1765
           },
           "reddit": {
-            "all_mentions": 1534,
-            "complaints": 99,
-            "rate": 0.0645
+            "all_mentions": 1666,
+            "complaints": 111,
+            "rate": 0.0666
           }
         }
       },
@@ -81,7 +81,7 @@
           }
         }
       },
-      "delta_pts": -2.6
+      "delta_pts": -2.4
     }
   },
   "trend": {
@@ -436,9 +436,9 @@
       },
       {
         "week": "2026-W25",
-        "all_mentions": 2784,
-        "complaints": 246,
-        "rate": 0.0884
+        "all_mentions": 2910,
+        "complaints": 251,
+        "rate": 0.0863
       }
     ],
     "openai": [
@@ -792,9 +792,9 @@
       },
       {
         "week": "2026-W25",
-        "all_mentions": 1602,
-        "complaints": 111,
-        "rate": 0.0693
+        "all_mentions": 1734,
+        "complaints": 123,
+        "rate": 0.0709
       }
     ]
   },
@@ -807,7 +807,7 @@
         },
         {
           "term": "stupid",
-          "count": 20
+          "count": 22
         },
         {
           "term": "annoying",
@@ -822,11 +822,11 @@
           "count": 13
         },
         {
-          "term": "broken",
-          "count": 12
+          "term": "usage limit",
+          "count": 13
         },
         {
-          "term": "usage limit",
+          "term": "broken",
           "count": 12
         },
         {
@@ -847,10 +847,22 @@
       "this_week": [
         {
           "term": "slow",
-          "count": 14
+          "count": 15
         },
         {
           "term": "worse than",
+          "count": 9
+        },
+        {
+          "term": "stupid",
+          "count": 9
+        },
+        {
+          "term": "terrible",
+          "count": 8
+        },
+        {
+          "term": "annoying",
           "count": 8
         },
         {
@@ -858,15 +870,7 @@
           "count": 8
         },
         {
-          "term": "terrible",
-          "count": 7
-        },
-        {
-          "term": "annoying",
-          "count": 7
-        },
-        {
-          "term": "stupid",
+          "term": "ridiculous",
           "count": 6
         },
         {
@@ -878,12 +882,8 @@
           "count": 5
         },
         {
-          "term": "ridiculous",
+          "term": "frustrating",
           "count": 5
-        },
-        {
-          "term": "scam",
-          "count": 4
         }
       ]
     }
@@ -1124,7 +1124,7 @@
       },
       {
         "week": "2026-W25",
-        "rate": 0.0093
+        "rate": 0.01
       }
     ],
     "openai": [
@@ -1362,7 +1362,7 @@
       },
       {
         "week": "2026-W25",
-        "rate": 0.0119
+        "rate": 0.0121
       }
     ]
   },
