@@ -2,22 +2,22 @@
   "version": "2.0",
   "schema_version": "v0",
   "classifier_version": "v0",
-  "generated_at": "2026-06-24T21:24:33.425605+00:00",
+  "generated_at": "2026-06-25T02:12:30.894853+00:00",
   "totals": {
-    "all_records": 395160
+    "all_records": 395318
   },
   "summary": {
     "claude": {
       "this_week_label": "2026-W26",
       "this_week": {
-        "all_mentions": 337,
-        "complaints": 34,
-        "rate": 0.1009,
+        "all_mentions": 365,
+        "complaints": 37,
+        "rate": 0.1014,
         "by_source": {
           "reddit": {
-            "all_mentions": 337,
-            "complaints": 34,
-            "rate": 0.1009
+            "all_mentions": 365,
+            "complaints": 37,
+            "rate": 0.1014
           }
         }
       },
@@ -43,14 +43,14 @@
     "openai": {
       "this_week_label": "2026-W26",
       "this_week": {
-        "all_mentions": 180,
-        "complaints": 20,
-        "rate": 0.1111,
+        "all_mentions": 237,
+        "complaints": 26,
+        "rate": 0.1097,
         "by_source": {
           "reddit": {
-            "all_mentions": 180,
-            "complaints": 20,
-            "rate": 0.1111
+            "all_mentions": 237,
+            "complaints": 26,
+            "rate": 0.1097
           }
         }
       },
@@ -71,7 +71,7 @@
           }
         }
       },
-      "delta_pts": 3.7
+      "delta_pts": 3.6
     }
   },
   "trend": {
@@ -432,9 +432,9 @@
       },
       {
         "week": "2026-W26",
-        "all_mentions": 337,
-        "complaints": 34,
-        "rate": 0.1009
+        "all_mentions": 365,
+        "complaints": 37,
+        "rate": 0.1014
       }
     ],
     "openai": [
@@ -794,9 +794,9 @@
       },
       {
         "week": "2026-W26",
-        "all_mentions": 180,
-        "complaints": 20,
-        "rate": 0.1111
+        "all_mentions": 237,
+        "complaints": 26,
+        "rate": 0.1097
       }
     ]
   },
@@ -812,15 +812,19 @@
           "count": 3
         },
         {
-          "term": "nerf",
-          "count": 2
-        },
-        {
           "term": "useless",
-          "count": 2
+          "count": 3
         },
         {
           "term": "hallucination",
+          "count": 3
+        },
+        {
+          "term": "frustrating",
+          "count": 3
+        },
+        {
+          "term": "nerf",
           "count": 2
         },
         {
@@ -829,10 +833,6 @@
         },
         {
           "term": "forgot",
-          "count": 2
-        },
-        {
-          "term": "frustrating",
           "count": 2
         },
         {
@@ -848,6 +848,14 @@
     "openai": {
       "this_week": [
         {
+          "term": "slow",
+          "count": 3
+        },
+        {
+          "term": "useless",
+          "count": 3
+        },
+        {
           "term": "broken",
           "count": 3
         },
@@ -856,35 +864,27 @@
           "count": 3
         },
         {
-          "term": "ridiculous",
+          "term": "hallucination",
           "count": 3
         },
         {
-          "term": "slow",
-          "count": 2
+          "term": "ridiculous",
+          "count": 3
         },
         {
           "term": "stupid",
           "count": 2
         },
         {
-          "term": "hallucination",
+          "term": "hallucinating",
+          "count": 2
+        },
+        {
+          "term": "wrong answer",
           "count": 2
         },
         {
           "term": "gone downhill",
-          "count": 1
-        },
-        {
-          "term": "useless",
-          "count": 1
-        },
-        {
-          "term": "garbage",
-          "count": 1
-        },
-        {
-          "term": "hallucinating",
           "count": 1
         }
       ]
@@ -1130,7 +1130,7 @@
       },
       {
         "week": "2026-W26",
-        "rate": 0.0178
+        "rate": 0.0164
       }
     ],
     "openai": [
@@ -1372,7 +1372,7 @@
       },
       {
         "week": "2026-W26",
-        "rate": 0.0167
+        "rate": 0.0127
       }
     ]
   },
