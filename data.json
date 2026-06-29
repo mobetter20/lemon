@@ -2,22 +2,22 @@
   "version": "2.0",
   "schema_version": "v0",
   "classifier_version": "v0",
-  "generated_at": "2026-06-29T18:19:09.967351+00:00",
+  "generated_at": "2026-06-29T21:23:46.591949+00:00",
   "totals": {
-    "all_records": 399548
+    "all_records": 399576
   },
   "summary": {
     "claude": {
       "this_week_label": "2026-W26",
       "this_week": {
-        "all_mentions": 1999,
-        "complaints": 164,
-        "rate": 0.082,
+        "all_mentions": 2009,
+        "complaints": 166,
+        "rate": 0.0826,
         "by_source": {
           "reddit": {
-            "all_mentions": 1999,
-            "complaints": 164,
-            "rate": 0.082
+            "all_mentions": 2009,
+            "complaints": 166,
+            "rate": 0.0826
           }
         }
       },
@@ -55,14 +55,14 @@
         }
       },
       "last_week": {
-        "all_mentions": 1465,
-        "complaints": 109,
-        "rate": 0.0744,
+        "all_mentions": 1480,
+        "complaints": 110,
+        "rate": 0.0743,
         "by_source": {
           "reddit": {
-            "all_mentions": 1465,
-            "complaints": 109,
-            "rate": 0.0744
+            "all_mentions": 1480,
+            "complaints": 110,
+            "rate": 0.0743
           }
         }
       },
@@ -427,9 +427,9 @@
       },
       {
         "week": "2026-W26",
-        "all_mentions": 1999,
-        "complaints": 164,
-        "rate": 0.082
+        "all_mentions": 2009,
+        "complaints": 166,
+        "rate": 0.0826
       }
     ],
     "openai": [
@@ -789,9 +789,9 @@
       },
       {
         "week": "2026-W26",
-        "all_mentions": 1465,
-        "complaints": 109,
-        "rate": 0.0744
+        "all_mentions": 1480,
+        "complaints": 110,
+        "rate": 0.0743
       },
       {
         "week": "2026-W27",
@@ -833,15 +833,15 @@
           "count": 8
         },
         {
+          "term": "frustrating",
+          "count": 7
+        },
+        {
           "term": "usage limit",
           "count": 7
         },
         {
           "term": "nerf",
-          "count": 6
-        },
-        {
-          "term": "not worth",
           "count": 6
         }
       ]
@@ -1090,7 +1090,7 @@
       },
       {
         "week": "2026-W26",
-        "rate": 0.012
+        "rate": 0.0124
       }
     ],
     "openai": [
@@ -1332,7 +1332,7 @@
       },
       {
         "week": "2026-W26",
-        "rate": 0.0102
+        "rate": 0.0101
       },
       {
         "week": "2026-W27",
