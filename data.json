@@ -2,9 +2,9 @@
   "version": "2.0",
   "schema_version": "v0",
   "classifier_version": "v0",
-  "generated_at": "2026-07-20T10:52:23.569894+00:00",
+  "generated_at": "2026-07-20T13:54:41.125358+00:00",
   "totals": {
-    "all_records": 452983
+    "all_records": 453023
   },
   "summary": {
     "claude": {
@@ -55,9 +55,9 @@
         }
       },
       "last_week": {
-        "all_mentions": 2866,
-        "complaints": 265,
-        "rate": 0.0925,
+        "all_mentions": 2876,
+        "complaints": 269,
+        "rate": 0.0935,
         "by_source": {
           "hn": {
             "all_mentions": 975,
@@ -65,13 +65,13 @@
             "rate": 0.0605
           },
           "reddit": {
-            "all_mentions": 1891,
-            "complaints": 206,
-            "rate": 0.1089
+            "all_mentions": 1901,
+            "complaints": 210,
+            "rate": 0.1105
           }
         }
       },
-      "delta_pts": -7.4
+      "delta_pts": -7.5
     }
   },
   "trend": {
@@ -836,9 +836,9 @@
       },
       {
         "week": "2026-W29",
-        "all_mentions": 2866,
-        "complaints": 265,
-        "rate": 0.0925
+        "all_mentions": 2876,
+        "complaints": 269,
+        "rate": 0.0935
       },
       {
         "week": "2026-W30",
