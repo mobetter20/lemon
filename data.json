@@ -2,17 +2,17 @@
   "version": "2.0",
   "schema_version": "v0",
   "classifier_version": "v0",
-  "generated_at": "2026-07-29T06:31:49.638819+00:00",
+  "generated_at": "2026-07-29T10:31:33.606514+00:00",
   "totals": {
-    "all_records": 465727
+    "all_records": 465941
   },
   "summary": {
     "claude": {
       "this_week_label": "2026-W31",
       "this_week": {
-        "all_mentions": 568,
-        "complaints": 74,
-        "rate": 0.1303,
+        "all_mentions": 614,
+        "complaints": 82,
+        "rate": 0.1336,
         "by_source": {
           "hn": {
             "all_mentions": 365,
@@ -20,9 +20,9 @@
             "rate": 0.1315
           },
           "reddit": {
-            "all_mentions": 203,
-            "complaints": 26,
-            "rate": 0.1281
+            "all_mentions": 249,
+            "complaints": 34,
+            "rate": 0.1365
           }
         }
       },
@@ -43,14 +43,14 @@
           }
         }
       },
-      "delta_pts": 4.5
+      "delta_pts": 4.8
     },
     "openai": {
       "this_week_label": "2026-W31",
       "this_week": {
-        "all_mentions": 425,
-        "complaints": 37,
-        "rate": 0.0871,
+        "all_mentions": 497,
+        "complaints": 44,
+        "rate": 0.0885,
         "by_source": {
           "hn": {
             "all_mentions": 214,
@@ -58,9 +58,9 @@
             "rate": 0.0888
           },
           "reddit": {
-            "all_mentions": 211,
-            "complaints": 18,
-            "rate": 0.0853
+            "all_mentions": 283,
+            "complaints": 25,
+            "rate": 0.0883
           }
         }
       },
@@ -81,7 +81,7 @@
           }
         }
       },
-      "delta_pts": 0.3
+      "delta_pts": 0.5
     }
   },
   "trend": {
@@ -472,9 +472,9 @@
       },
       {
         "week": "2026-W31",
-        "all_mentions": 568,
-        "complaints": 74,
-        "rate": 0.1303
+        "all_mentions": 614,
+        "complaints": 82,
+        "rate": 0.1336
       }
     ],
     "openai": [
@@ -864,9 +864,9 @@
       },
       {
         "week": "2026-W31",
-        "all_mentions": 425,
-        "complaints": 37,
-        "rate": 0.0871
+        "all_mentions": 497,
+        "complaints": 44,
+        "rate": 0.0885
       }
     ]
   },
@@ -879,7 +879,7 @@
         },
         {
           "term": "slow",
-          "count": 8
+          "count": 10
         },
         {
           "term": "outage",
@@ -890,12 +890,12 @@
           "count": 5
         },
         {
-          "term": "ridiculous",
+          "term": "downgrade",
           "count": 4
         },
         {
-          "term": "downgrade",
-          "count": 3
+          "term": "ridiculous",
+          "count": 4
         },
         {
           "term": "stupid",
@@ -910,8 +910,8 @@
           "count": 3
         },
         {
-          "term": "invented",
-          "count": 2
+          "term": "garbage",
+          "count": 3
         }
       ]
     },
@@ -922,6 +922,10 @@
           "count": 7
         },
         {
+          "term": "outage",
+          "count": 4
+        },
+        {
           "term": "slow",
           "count": 4
         },
@@ -930,11 +934,11 @@
           "count": 3
         },
         {
-          "term": "outage",
+          "term": "rate limit",
           "count": 3
         },
         {
-          "term": "rate limit",
+          "term": "scam",
           "count": 3
         },
         {
@@ -951,10 +955,6 @@
         },
         {
           "term": "absurd",
-          "count": 2
-        },
-        {
-          "term": "crashed",
           "count": 2
         }
       ]
@@ -1220,7 +1220,7 @@
       },
       {
         "week": "2026-W31",
-        "rate": 0.0176
+        "rate": 0.0195
       }
     ],
     "openai": [
@@ -1482,7 +1482,7 @@
       },
       {
         "week": "2026-W31",
-        "rate": 0.0047
+        "rate": 0.004
       }
     ]
   },
