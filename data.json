@@ -2,27 +2,27 @@
   "version": "2.0",
   "schema_version": "v0",
   "classifier_version": "v0",
-  "generated_at": "2026-07-31T01:38:47.200271+00:00",
+  "generated_at": "2026-07-31T06:41:55.344383+00:00",
   "totals": {
-    "all_records": 468199
+    "all_records": 468414
   },
   "summary": {
     "claude": {
       "this_week_label": "2026-W31",
       "this_week": {
-        "all_mentions": 1416,
-        "complaints": 154,
-        "rate": 0.1088,
+        "all_mentions": 1527,
+        "complaints": 166,
+        "rate": 0.1087,
         "by_source": {
           "hn": {
-            "all_mentions": 759,
+            "all_mentions": 775,
             "complaints": 79,
-            "rate": 0.1041
+            "rate": 0.1019
           },
           "reddit": {
-            "all_mentions": 657,
-            "complaints": 75,
-            "rate": 0.1142
+            "all_mentions": 752,
+            "complaints": 87,
+            "rate": 0.1157
           }
         }
       },
@@ -48,19 +48,19 @@
     "openai": {
       "this_week_label": "2026-W31",
       "this_week": {
-        "all_mentions": 1289,
-        "complaints": 123,
-        "rate": 0.0954,
+        "all_mentions": 1347,
+        "complaints": 133,
+        "rate": 0.0987,
         "by_source": {
           "hn": {
-            "all_mentions": 596,
+            "all_mentions": 598,
             "complaints": 52,
-            "rate": 0.0872
+            "rate": 0.087
           },
           "reddit": {
-            "all_mentions": 693,
-            "complaints": 71,
-            "rate": 0.1025
+            "all_mentions": 749,
+            "complaints": 81,
+            "rate": 0.1081
           }
         }
       },
@@ -81,7 +81,7 @@
           }
         }
       },
-      "delta_pts": 1.2
+      "delta_pts": 1.5
     }
   },
   "trend": {
@@ -472,9 +472,9 @@
       },
       {
         "week": "2026-W31",
-        "all_mentions": 1416,
-        "complaints": 154,
-        "rate": 0.1088
+        "all_mentions": 1527,
+        "complaints": 166,
+        "rate": 0.1087
       }
     ],
     "openai": [
@@ -864,9 +864,9 @@
       },
       {
         "week": "2026-W31",
-        "all_mentions": 1289,
-        "complaints": 123,
-        "rate": 0.0954
+        "all_mentions": 1347,
+        "complaints": 133,
+        "rate": 0.0987
       }
     ]
   },
@@ -875,7 +875,7 @@
       "this_week": [
         {
           "term": "slow",
-          "count": 20
+          "count": 24
         },
         {
           "term": "regression",
@@ -883,14 +883,18 @@
         },
         {
           "term": "broken",
-          "count": 10
+          "count": 11
+        },
+        {
+          "term": "annoying",
+          "count": 9
         },
         {
           "term": "outage",
           "count": 9
         },
         {
-          "term": "annoying",
+          "term": "stupid",
           "count": 8
         },
         {
@@ -900,10 +904,6 @@
         {
           "term": "ridiculous",
           "count": 7
-        },
-        {
-          "term": "stupid",
-          "count": 6
         },
         {
           "term": "hallucination",
@@ -919,11 +919,11 @@
       "this_week": [
         {
           "term": "slow",
-          "count": 21
+          "count": 24
         },
         {
           "term": "ridiculous",
-          "count": 12
+          "count": 13
         },
         {
           "term": "stupid",
@@ -935,10 +935,14 @@
         },
         {
           "term": "annoying",
-          "count": 6
+          "count": 7
         },
         {
           "term": "useless",
+          "count": 7
+        },
+        {
+          "term": "broken",
           "count": 6
         },
         {
@@ -951,10 +955,6 @@
         },
         {
           "term": "frustrating",
-          "count": 4
-        },
-        {
-          "term": "rate limit",
           "count": 4
         }
       ]
@@ -1220,7 +1220,7 @@
       },
       {
         "week": "2026-W31",
-        "rate": 0.0155
+        "rate": 0.0157
       }
     ],
     "openai": [
@@ -1482,7 +1482,7 @@
       },
       {
         "week": "2026-W31",
-        "rate": 0.0101
+        "rate": 0.0119
       }
     ]
   },
