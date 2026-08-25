@@ -2,9 +2,9 @@
   "version": "2.0",
   "schema_version": "v0",
   "classifier_version": "v0",
-  "generated_at": "2026-08-25T00:41:25.007261+00:00",
+  "generated_at": "2026-08-25T04:31:44.775605+00:00",
   "totals": {
-    "all_records": 496296
+    "all_records": 496458
   },
   "summary": {
     "claude": {
@@ -22,8 +22,8 @@
         }
       },
       "last_week": {
-        "all_mentions": 2820,
-        "complaints": 308,
+        "all_mentions": 2840,
+        "complaints": 310,
         "rate": 0.1092,
         "by_source": {
           "hn": {
@@ -32,9 +32,9 @@
             "rate": 0.1043
           },
           "reddit": {
-            "all_mentions": 1545,
-            "complaints": 175,
-            "rate": 0.1133
+            "all_mentions": 1565,
+            "complaints": 177,
+            "rate": 0.1131
           }
         }
       },
@@ -55,9 +55,9 @@
         }
       },
       "last_week": {
-        "all_mentions": 2198,
-        "complaints": 244,
-        "rate": 0.111,
+        "all_mentions": 2269,
+        "complaints": 250,
+        "rate": 0.1102,
         "by_source": {
           "hn": {
             "all_mentions": 731,
@@ -65,13 +65,13 @@
             "rate": 0.0889
           },
           "reddit": {
-            "all_mentions": 1467,
-            "complaints": 179,
-            "rate": 0.122
+            "all_mentions": 1538,
+            "complaints": 185,
+            "rate": 0.1203
           }
         }
       },
-      "delta_pts": -3.8
+      "delta_pts": -3.7
     }
   },
   "trend": {
@@ -480,8 +480,8 @@
       },
       {
         "week": "2026-W34",
-        "all_mentions": 2820,
-        "complaints": 308,
+        "all_mentions": 2840,
+        "complaints": 310,
         "rate": 0.1092
       },
       {
@@ -896,9 +896,9 @@
       },
       {
         "week": "2026-W34",
-        "all_mentions": 2198,
-        "complaints": 244,
-        "rate": 0.111
+        "all_mentions": 2269,
+        "complaints": 250,
+        "rate": 0.1102
       },
       {
         "week": "2026-W35",
@@ -1270,7 +1270,7 @@
       },
       {
         "week": "2026-W34",
-        "rate": 0.0188
+        "rate": 0.0187
       },
       {
         "week": "2026-W35",
@@ -1548,7 +1548,7 @@
       },
       {
         "week": "2026-W34",
-        "rate": 0.0168
+        "rate": 0.0172
       },
       {
         "week": "2026-W35",
