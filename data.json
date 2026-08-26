@@ -2,27 +2,27 @@
   "version": "2.0",
   "schema_version": "v0",
   "classifier_version": "v0",
-  "generated_at": "2026-08-26T00:40:05.063705+00:00",
+  "generated_at": "2026-08-26T04:32:34.666946+00:00",
   "totals": {
-    "all_records": 497401
+    "all_records": 497563
   },
   "summary": {
     "claude": {
       "this_week_label": "2026-W35",
       "this_week": {
-        "all_mentions": 416,
-        "complaints": 46,
-        "rate": 0.1106,
+        "all_mentions": 468,
+        "complaints": 54,
+        "rate": 0.1154,
         "by_source": {
           "hn": {
-            "all_mentions": 303,
-            "complaints": 36,
-            "rate": 0.1188
+            "all_mentions": 332,
+            "complaints": 39,
+            "rate": 0.1175
           },
           "reddit": {
-            "all_mentions": 113,
-            "complaints": 10,
-            "rate": 0.0885
+            "all_mentions": 136,
+            "complaints": 15,
+            "rate": 0.1103
           }
         }
       },
@@ -43,24 +43,24 @@
           }
         }
       },
-      "delta_pts": 0.2
+      "delta_pts": 0.7
     },
     "openai": {
       "this_week_label": "2026-W35",
       "this_week": {
-        "all_mentions": 463,
-        "complaints": 31,
-        "rate": 0.067,
+        "all_mentions": 509,
+        "complaints": 33,
+        "rate": 0.0648,
         "by_source": {
           "hn": {
-            "all_mentions": 348,
-            "complaints": 22,
-            "rate": 0.0632
+            "all_mentions": 375,
+            "complaints": 23,
+            "rate": 0.0613
           },
           "reddit": {
-            "all_mentions": 115,
-            "complaints": 9,
-            "rate": 0.0783
+            "all_mentions": 134,
+            "complaints": 10,
+            "rate": 0.0746
           }
         }
       },
@@ -81,7 +81,7 @@
           }
         }
       },
-      "delta_pts": -4.5
+      "delta_pts": -4.7
     }
   },
   "trend": {
@@ -496,9 +496,9 @@
       },
       {
         "week": "2026-W35",
-        "all_mentions": 416,
-        "complaints": 46,
-        "rate": 0.1106
+        "all_mentions": 468,
+        "complaints": 54,
+        "rate": 0.1154
       }
     ],
     "openai": [
@@ -912,9 +912,9 @@
       },
       {
         "week": "2026-W35",
-        "all_mentions": 463,
-        "complaints": 31,
-        "rate": 0.067
+        "all_mentions": 509,
+        "complaints": 33,
+        "rate": 0.0648
       }
     ]
   },
@@ -927,11 +927,11 @@
         },
         {
           "term": "frustrating",
-          "count": 5
+          "count": 7
         },
         {
           "term": "slow",
-          "count": 5
+          "count": 6
         },
         {
           "term": "usage limit",
@@ -950,15 +950,15 @@
           "count": 2
         },
         {
+          "term": "garbage",
+          "count": 2
+        },
+        {
+          "term": "crashed",
+          "count": 2
+        },
+        {
           "term": "terrible",
-          "count": 2
-        },
-        {
-          "term": "refused to",
-          "count": 2
-        },
-        {
-          "term": "downgrade",
           "count": 2
         }
       ]
@@ -1284,7 +1284,7 @@
       },
       {
         "week": "2026-W35",
-        "rate": 0.0337
+        "rate": 0.0299
       }
     ],
     "openai": [
@@ -1562,7 +1562,7 @@
       },
       {
         "week": "2026-W35",
-        "rate": 0.0216
+        "rate": 0.0196
       }
     ]
   },
