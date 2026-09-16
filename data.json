@@ -2,27 +2,27 @@
   "version": "2.0",
   "schema_version": "v0",
   "classifier_version": "v0",
-  "generated_at": "2026-09-16T15:47:52.836812+00:00",
+  "generated_at": "2026-09-16T19:15:54.971033+00:00",
   "totals": {
-    "all_records": 533774
+    "all_records": 534011
   },
   "summary": {
     "claude": {
       "this_week_label": "2026-W38",
       "this_week": {
-        "all_mentions": 813,
-        "complaints": 79,
-        "rate": 0.0972,
+        "all_mentions": 959,
+        "complaints": 90,
+        "rate": 0.0938,
         "by_source": {
           "hn": {
-            "all_mentions": 416,
-            "complaints": 34,
-            "rate": 0.0817
+            "all_mentions": 544,
+            "complaints": 41,
+            "rate": 0.0754
           },
           "reddit": {
-            "all_mentions": 397,
-            "complaints": 45,
-            "rate": 0.1134
+            "all_mentions": 415,
+            "complaints": 49,
+            "rate": 0.1181
           }
         }
       },
@@ -43,24 +43,24 @@
           }
         }
       },
-      "delta_pts": 0.5
+      "delta_pts": 0.2
     },
     "openai": {
       "this_week_label": "2026-W38",
       "this_week": {
-        "all_mentions": 986,
-        "complaints": 72,
-        "rate": 0.073,
+        "all_mentions": 1039,
+        "complaints": 82,
+        "rate": 0.0789,
         "by_source": {
           "hn": {
-            "all_mentions": 695,
-            "complaints": 44,
-            "rate": 0.0633
+            "all_mentions": 728,
+            "complaints": 50,
+            "rate": 0.0687
           },
           "reddit": {
-            "all_mentions": 291,
-            "complaints": 28,
-            "rate": 0.0962
+            "all_mentions": 311,
+            "complaints": 32,
+            "rate": 0.1029
           }
         }
       },
@@ -81,7 +81,7 @@
           }
         }
       },
-      "delta_pts": -1.3
+      "delta_pts": -0.7
     }
   },
   "trend": {
@@ -514,9 +514,9 @@
       },
       {
         "week": "2026-W38",
-        "all_mentions": 813,
-        "complaints": 79,
-        "rate": 0.0972
+        "all_mentions": 959,
+        "complaints": 90,
+        "rate": 0.0938
       }
     ],
     "openai": [
@@ -948,9 +948,9 @@
       },
       {
         "week": "2026-W38",
-        "all_mentions": 986,
-        "complaints": 72,
-        "rate": 0.073
+        "all_mentions": 1039,
+        "complaints": 82,
+        "rate": 0.0789
       }
     ]
   },
@@ -959,7 +959,7 @@
       "this_week": [
         {
           "term": "slow",
-          "count": 12
+          "count": 15
         },
         {
           "term": "terrible",
@@ -971,6 +971,10 @@
         },
         {
           "term": "frustrating",
+          "count": 6
+        },
+        {
+          "term": "worse than",
           "count": 5
         },
         {
@@ -983,10 +987,6 @@
         },
         {
           "term": "annoying",
-          "count": 4
-        },
-        {
-          "term": "worse than",
           "count": 4
         },
         {
@@ -1003,7 +1003,7 @@
       "this_week": [
         {
           "term": "slow",
-          "count": 8
+          "count": 12
         },
         {
           "term": "terrible",
@@ -1015,6 +1015,10 @@
         },
         {
           "term": "annoying",
+          "count": 5
+        },
+        {
+          "term": "usage limit",
           "count": 5
         },
         {
@@ -1030,15 +1034,11 @@
           "count": 4
         },
         {
+          "term": "worse than",
+          "count": 3
+        },
+        {
           "term": "garbage",
-          "count": 3
-        },
-        {
-          "term": "nerf",
-          "count": 3
-        },
-        {
-          "term": "absurd",
           "count": 3
         }
       ]
@@ -1332,7 +1332,7 @@
       },
       {
         "week": "2026-W38",
-        "rate": 0.0098
+        "rate": 0.0104
       }
     ],
     "openai": [
@@ -1622,7 +1622,7 @@
       },
       {
         "week": "2026-W38",
-        "rate": 0.0071
+        "rate": 0.0067
       }
     ]
   },
