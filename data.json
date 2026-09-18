@@ -2,27 +2,27 @@
   "version": "2.0",
   "schema_version": "v0",
   "classifier_version": "v0",
-  "generated_at": "2026-09-18T08:42:56.836022+00:00",
+  "generated_at": "2026-09-18T15:26:32.457616+00:00",
   "totals": {
-    "all_records": 536610
+    "all_records": 536717
   },
   "summary": {
     "claude": {
       "this_week_label": "2026-W38",
       "this_week": {
-        "all_mentions": 1456,
+        "all_mentions": 1464,
         "complaints": 148,
-        "rate": 0.1016,
+        "rate": 0.1011,
         "by_source": {
           "hn": {
-            "all_mentions": 606,
+            "all_mentions": 610,
             "complaints": 47,
-            "rate": 0.0776
+            "rate": 0.077
           },
           "reddit": {
-            "all_mentions": 850,
+            "all_mentions": 854,
             "complaints": 101,
-            "rate": 0.1188
+            "rate": 0.1183
           }
         }
       },
@@ -43,24 +43,24 @@
           }
         }
       },
-      "delta_pts": 1.0
+      "delta_pts": 0.9
     },
     "openai": {
       "this_week_label": "2026-W38",
       "this_week": {
-        "all_mentions": 1911,
+        "all_mentions": 1914,
         "complaints": 161,
-        "rate": 0.0842,
+        "rate": 0.0841,
         "by_source": {
           "hn": {
-            "all_mentions": 1074,
+            "all_mentions": 1076,
             "complaints": 68,
-            "rate": 0.0633
+            "rate": 0.0632
           },
           "reddit": {
-            "all_mentions": 837,
+            "all_mentions": 838,
             "complaints": 93,
-            "rate": 0.1111
+            "rate": 0.111
           }
         }
       },
@@ -514,9 +514,9 @@
       },
       {
         "week": "2026-W38",
-        "all_mentions": 1456,
+        "all_mentions": 1464,
         "complaints": 148,
-        "rate": 0.1016
+        "rate": 0.1011
       }
     ],
     "openai": [
@@ -948,9 +948,9 @@
       },
       {
         "week": "2026-W38",
-        "all_mentions": 1911,
+        "all_mentions": 1914,
         "complaints": 161,
-        "rate": 0.0842
+        "rate": 0.0841
       }
     ]
   },
