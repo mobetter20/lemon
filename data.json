@@ -2,29 +2,29 @@
   "version": "2.0",
   "schema_version": "v0",
   "classifier_version": "v0",
-  "generated_at": "2026-09-21T17:27:58.785938+00:00",
+  "generated_at": "2026-09-21T23:02:28.412362+00:00",
   "totals": {
-    "all_records": 541229
+    "all_records": 541389
   },
   "summary": {
     "claude": {
       "this_week_label": "2026-W39",
       "this_week": {
-        "all_mentions": 93,
-        "complaints": 5,
-        "rate": 0.0538,
+        "all_mentions": 103,
+        "complaints": 8,
+        "rate": 0.0777,
         "by_source": {
           "hn": {
-            "all_mentions": 93,
-            "complaints": 5,
-            "rate": 0.0538
+            "all_mentions": 103,
+            "complaints": 8,
+            "rate": 0.0777
           }
         }
       },
       "last_week": {
-        "all_mentions": 2602,
-        "complaints": 259,
-        "rate": 0.0995,
+        "all_mentions": 2621,
+        "complaints": 261,
+        "rate": 0.0996,
         "by_source": {
           "hn": {
             "all_mentions": 825,
@@ -32,32 +32,32 @@
             "rate": 0.0824
           },
           "reddit": {
-            "all_mentions": 1777,
-            "complaints": 191,
+            "all_mentions": 1796,
+            "complaints": 193,
             "rate": 0.1075
           }
         }
       },
-      "delta_pts": -4.6
+      "delta_pts": -2.2
     },
     "openai": {
       "this_week_label": "2026-W39",
       "this_week": {
-        "all_mentions": 1,
-        "complaints": 0,
-        "rate": 0.0,
+        "all_mentions": 18,
+        "complaints": 3,
+        "rate": 0.1667,
         "by_source": {
           "hn": {
-            "all_mentions": 1,
-            "complaints": 0,
-            "rate": 0.0
+            "all_mentions": 18,
+            "complaints": 3,
+            "rate": 0.1667
           }
         }
       },
       "last_week": {
-        "all_mentions": 2969,
-        "complaints": 263,
-        "rate": 0.0886,
+        "all_mentions": 2984,
+        "complaints": 264,
+        "rate": 0.0885,
         "by_source": {
           "hn": {
             "all_mentions": 1263,
@@ -65,13 +65,13 @@
             "rate": 0.0602
           },
           "reddit": {
-            "all_mentions": 1706,
-            "complaints": 187,
-            "rate": 0.1096
+            "all_mentions": 1721,
+            "complaints": 188,
+            "rate": 0.1092
           }
         }
       },
-      "delta_pts": -8.9
+      "delta_pts": 7.8
     }
   },
   "trend": {
@@ -504,15 +504,15 @@
       },
       {
         "week": "2026-W38",
-        "all_mentions": 2602,
-        "complaints": 259,
-        "rate": 0.0995
+        "all_mentions": 2621,
+        "complaints": 261,
+        "rate": 0.0996
       },
       {
         "week": "2026-W39",
-        "all_mentions": 93,
-        "complaints": 5,
-        "rate": 0.0538
+        "all_mentions": 103,
+        "complaints": 8,
+        "rate": 0.0777
       }
     ],
     "openai": [
@@ -944,15 +944,15 @@
       },
       {
         "week": "2026-W38",
-        "all_mentions": 2969,
-        "complaints": 263,
-        "rate": 0.0886
+        "all_mentions": 2984,
+        "complaints": 264,
+        "rate": 0.0885
       },
       {
         "week": "2026-W39",
-        "all_mentions": 1,
-        "complaints": 0,
-        "rate": 0.0
+        "all_mentions": 18,
+        "complaints": 3,
+        "rate": 0.1667
       }
     ]
   },
@@ -961,7 +961,7 @@
       "this_week": [
         {
           "term": "slow",
-          "count": 1
+          "count": 4
         },
         {
           "term": "regression",
@@ -986,7 +986,12 @@
       ]
     },
     "openai": {
-      "this_week": []
+      "this_week": [
+        {
+          "term": "slow",
+          "count": 3
+        }
+      ]
     }
   },
   "defection_trend": {
@@ -1277,11 +1282,11 @@
       },
       {
         "week": "2026-W38",
-        "rate": 0.0181
+        "rate": 0.0179
       },
       {
         "week": "2026-W39",
-        "rate": 0.0108
+        "rate": 0.0097
       }
     ],
     "openai": [
