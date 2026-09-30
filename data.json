@@ -2,17 +2,17 @@
   "version": "2.0",
   "schema_version": "v0",
   "classifier_version": "v0",
-  "generated_at": "2026-09-30T10:15:27.101154+00:00",
+  "generated_at": "2026-09-30T17:22:07.663551+00:00",
   "totals": {
-    "all_records": 559193
+    "all_records": 559659
   },
   "summary": {
     "claude": {
       "this_week_label": "2026-W40",
       "this_week": {
-        "all_mentions": 1674,
-        "complaints": 206,
-        "rate": 0.1231,
+        "all_mentions": 1908,
+        "complaints": 224,
+        "rate": 0.1174,
         "by_source": {
           "hn": {
             "all_mentions": 906,
@@ -20,9 +20,9 @@
             "rate": 0.1413
           },
           "reddit": {
-            "all_mentions": 768,
-            "complaints": 78,
-            "rate": 0.1016
+            "all_mentions": 1002,
+            "complaints": 96,
+            "rate": 0.0958
           }
         }
       },
@@ -43,14 +43,14 @@
           }
         }
       },
-      "delta_pts": 2.8
+      "delta_pts": 2.3
     },
     "openai": {
       "this_week_label": "2026-W40",
       "this_week": {
-        "all_mentions": 1117,
-        "complaints": 133,
-        "rate": 0.1191,
+        "all_mentions": 1258,
+        "complaints": 143,
+        "rate": 0.1137,
         "by_source": {
           "hn": {
             "all_mentions": 659,
@@ -58,9 +58,9 @@
             "rate": 0.129
           },
           "reddit": {
-            "all_mentions": 458,
-            "complaints": 48,
-            "rate": 0.1048
+            "all_mentions": 599,
+            "complaints": 58,
+            "rate": 0.0968
           }
         }
       },
@@ -81,7 +81,7 @@
           }
         }
       },
-      "delta_pts": 2.5
+      "delta_pts": 1.9
     }
   },
   "trend": {
@@ -526,9 +526,9 @@
       },
       {
         "week": "2026-W40",
-        "all_mentions": 1674,
-        "complaints": 206,
-        "rate": 0.1231
+        "all_mentions": 1908,
+        "complaints": 224,
+        "rate": 0.1174
       }
     ],
     "openai": [
@@ -972,9 +972,9 @@
       },
       {
         "week": "2026-W40",
-        "all_mentions": 1117,
-        "complaints": 133,
-        "rate": 0.1191
+        "all_mentions": 1258,
+        "complaints": 143,
+        "rate": 0.1137
       }
     ]
   },
@@ -983,34 +983,34 @@
       "this_week": [
         {
           "term": "nerf",
-          "count": 47
+          "count": 49
         },
         {
           "term": "slow",
-          "count": 24
+          "count": 25
         },
         {
           "term": "stupid",
           "count": 14
         },
         {
-          "term": "regression",
-          "count": 12
+          "term": "ridiculous",
+          "count": 13
         },
         {
-          "term": "ridiculous",
-          "count": 11
+          "term": "regression",
+          "count": 12
         },
         {
           "term": "usage limit",
           "count": 11
         },
         {
-          "term": "outage",
-          "count": 10
+          "term": "useless",
+          "count": 11
         },
         {
-          "term": "useless",
+          "term": "outage",
           "count": 10
         },
         {
@@ -1039,7 +1039,7 @@
         },
         {
           "term": "stupid",
-          "count": 9
+          "count": 10
         },
         {
           "term": "tired of",
@@ -1051,19 +1051,19 @@
         },
         {
           "term": "downgrade",
-          "count": 6
+          "count": 7
         },
         {
           "term": "broken",
-          "count": 5
-        },
-        {
-          "term": "ridiculous",
-          "count": 4
+          "count": 6
         },
         {
           "term": "annoying",
-          "count": 4
+          "count": 5
+        },
+        {
+          "term": "absurd",
+          "count": 5
         }
       ]
     }
@@ -1364,7 +1364,7 @@
       },
       {
         "week": "2026-W40",
-        "rate": 0.0114
+        "rate": 0.0115
       }
     ],
     "openai": [
@@ -1662,7 +1662,7 @@
       },
       {
         "week": "2026-W40",
-        "rate": 0.0116
+        "rate": 0.0119
       }
     ]
   },
