@@ -2,9 +2,9 @@
   "version": "2.0",
   "schema_version": "v0",
   "classifier_version": "v0",
-  "generated_at": "2026-10-09T11:14:55.177949+00:00",
+  "generated_at": "2026-10-09T17:44:36.699164+00:00",
   "totals": {
-    "all_records": 578986
+    "all_records": 579133
   },
   "summary": {
     "claude": {
@@ -48,14 +48,14 @@
     "openai": {
       "this_week_label": "2026-W41",
       "this_week": {
-        "all_mentions": 2467,
-        "complaints": 210,
-        "rate": 0.0851,
+        "all_mentions": 2597,
+        "complaints": 224,
+        "rate": 0.0863,
         "by_source": {
           "hn": {
-            "all_mentions": 926,
-            "complaints": 62,
-            "rate": 0.067
+            "all_mentions": 1056,
+            "complaints": 76,
+            "rate": 0.072
           },
           "reddit": {
             "all_mentions": 1541,
@@ -81,7 +81,7 @@
           }
         }
       },
-      "delta_pts": -2.3
+      "delta_pts": -2.2
     }
   },
   "trend": {
@@ -984,9 +984,9 @@
       },
       {
         "week": "2026-W41",
-        "all_mentions": 2467,
-        "complaints": 210,
-        "rate": 0.0851
+        "all_mentions": 2597,
+        "complaints": 224,
+        "rate": 0.0863
       }
     ]
   },
@@ -1039,39 +1039,39 @@
       "this_week": [
         {
           "term": "scam",
-          "count": 21
+          "count": 23
         },
         {
           "term": "slow",
-          "count": 21
+          "count": 23
+        },
+        {
+          "term": "stupid",
+          "count": 16
         },
         {
           "term": "useless",
           "count": 14
         },
         {
-          "term": "stupid",
+          "term": "worse than",
           "count": 12
         },
         {
-          "term": "worse than",
-          "count": 11
-        },
-        {
           "term": "ridiculous",
-          "count": 10
+          "count": 12
         },
         {
           "term": "terrible",
-          "count": 8
+          "count": 9
         },
         {
           "term": "broken",
-          "count": 8
+          "count": 9
         },
         {
           "term": "garbage",
-          "count": 8
+          "count": 9
         },
         {
           "term": "made up",
