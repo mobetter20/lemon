@@ -2,22 +2,22 @@
   "version": "2.0",
   "schema_version": "v0",
   "classifier_version": "v0",
-  "generated_at": "2026-10-14T22:55:39.791240+00:00",
+  "generated_at": "2026-10-15T02:15:35.089210+00:00",
   "totals": {
-    "all_records": 590638
+    "all_records": 590660
   },
   "summary": {
     "claude": {
       "this_week_label": "2026-W42",
       "this_week": {
-        "all_mentions": 1763,
+        "all_mentions": 1773,
         "complaints": 134,
-        "rate": 0.076,
+        "rate": 0.0756,
         "by_source": {
           "hn": {
-            "all_mentions": 1048,
+            "all_mentions": 1058,
             "complaints": 65,
-            "rate": 0.062
+            "rate": 0.0614
           },
           "reddit": {
             "all_mentions": 715,
@@ -538,9 +538,9 @@
       },
       {
         "week": "2026-W42",
-        "all_mentions": 1763,
+        "all_mentions": 1773,
         "complaints": 134,
-        "rate": 0.076
+        "rate": 0.0756
       }
     ],
     "openai": [
