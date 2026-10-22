@@ -2,22 +2,22 @@
   "version": "2.0",
   "schema_version": "v0",
   "classifier_version": "v0",
-  "generated_at": "2026-10-21T23:05:23.912343+00:00",
+  "generated_at": "2026-10-22T02:12:48.437524+00:00",
   "totals": {
-    "all_records": 603723
+    "all_records": 603733
   },
   "summary": {
     "claude": {
       "this_week_label": "2026-W43",
       "this_week": {
-        "all_mentions": 1621,
+        "all_mentions": 1631,
         "complaints": 144,
-        "rate": 0.0888,
+        "rate": 0.0883,
         "by_source": {
           "hn": {
-            "all_mentions": 750,
+            "all_mentions": 760,
             "complaints": 57,
-            "rate": 0.076
+            "rate": 0.075
           },
           "reddit": {
             "all_mentions": 871,
@@ -48,14 +48,14 @@
     "openai": {
       "this_week_label": "2026-W43",
       "this_week": {
-        "all_mentions": 672,
+        "all_mentions": 681,
         "complaints": 80,
-        "rate": 0.119,
+        "rate": 0.1175,
         "by_source": {
           "hn": {
-            "all_mentions": 196,
+            "all_mentions": 205,
             "complaints": 11,
-            "rate": 0.0561
+            "rate": 0.0537
           },
           "reddit": {
             "all_mentions": 476,
@@ -81,7 +81,7 @@
           }
         }
       },
-      "delta_pts": 3.1
+      "delta_pts": 2.9
     }
   },
   "trend": {
@@ -544,9 +544,9 @@
       },
       {
         "week": "2026-W43",
-        "all_mentions": 1621,
+        "all_mentions": 1631,
         "complaints": 144,
-        "rate": 0.0888
+        "rate": 0.0883
       }
     ],
     "openai": [
@@ -1008,9 +1008,9 @@
       },
       {
         "week": "2026-W43",
-        "all_mentions": 672,
+        "all_mentions": 681,
         "complaints": 80,
-        "rate": 0.119
+        "rate": 0.1175
       }
     ]
   },
@@ -1412,7 +1412,7 @@
       },
       {
         "week": "2026-W43",
-        "rate": 0.0099
+        "rate": 0.0098
       }
     ],
     "openai": [
@@ -1722,7 +1722,7 @@
       },
       {
         "week": "2026-W43",
-        "rate": 0.0089
+        "rate": 0.0088
       }
     ]
   },
